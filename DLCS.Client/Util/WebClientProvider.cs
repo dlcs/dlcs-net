@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using DLCS.Client.Config;
 
 namespace DLCS.Client.Util
 {

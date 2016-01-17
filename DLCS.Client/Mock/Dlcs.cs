@@ -8,7 +8,7 @@ using DLCS.Client.PDFs;
 
 namespace DLCS.Client.Mock
 {
-    public class Dlcs : ILibraryCloudServices
+    public class Dlcs : IDlcs
     {
         private readonly string imageRegistrationUri;
         public Dlcs(string imageRegistrationUri)

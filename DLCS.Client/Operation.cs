@@ -1,5 +1,5 @@
 ﻿
-namespace DLCS.Client.Images
+namespace DLCS.Client
 {
     public class Operation<TRequest, TResponse>
     {
@@ -8,6 +8,7 @@ namespace DLCS.Client.Images
         public string RequestJson { get; set; }
         public string ResponseJson { get; set; }
         public Error Error { get; internal set; }
+        public string HttpMethod { get; internal set; }
 
     }
 }

@@ -45,9 +45,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\DlcsConfig.cs" />
     <Compile Include="Dlcs\Dlcs.cs" />
     <Compile Include="Error.cs" />
-    <Compile Include="ILibraryCloudServices.cs" />
+    <Compile Include="IDlcs.cs" />
     <Compile Include="Images\Image.cs" />
     <Compile Include="Images\ImageBatchRegistrationResponse.cs" />
     <Compile Include="Images\ImageQuery.cs" />
@@ -55,15 +56,15 @@
     <Compile Include="Images\ImageState.cs" />
     <Compile Include="Images\ImageStateEnum.cs" />
     <Compile Include="Images\ImageStateQueryResponse.cs" />
-    <Compile Include="Images\Operation.cs" />
+    <Compile Include="Operation.cs" />
     <Compile Include="Mock\Dlcs.cs" />
     <Compile Include="PDFs\MakePdfRequest.cs" />
     <Compile Include="PDFs\MakePdfResponse.cs" />
     <Compile Include="ProcessingStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="test.cs" />
-    <Compile Include="Util\ProxyConfig.cs" />
-    <Compile Include="Util\WebClientConfig.cs" />
+    <Compile Include="Config\ProxyConfig.cs" />
+    <Compile Include="Config\WebClientConfig.cs" />
     <Compile Include="Util\WebClientProvider.cs" />
   </ItemGroup>
   <ItemGroup>

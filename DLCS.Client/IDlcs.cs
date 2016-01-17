@@ -3,7 +3,7 @@ using DLCS.Client.PDFs;
 
 namespace DLCS.Client
 {
-    public interface ILibraryCloudServices
+    public interface IDlcs
     {
         Operation<Image[], ImageBatchRegistration> RegisterImages(Image[] images);
 
