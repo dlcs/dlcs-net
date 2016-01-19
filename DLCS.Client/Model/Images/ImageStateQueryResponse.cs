@@ -1,5 +1,5 @@
 ﻿
-namespace DLCS.Client.Images
+namespace DLCS.Client.Model.Images
 {
     public class ImageStateQueryResponse
     {

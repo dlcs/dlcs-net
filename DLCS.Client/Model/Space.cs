@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DLCS.Client
+namespace DLCS.Client.Model
 {
-    class test
+    public class Space
     {
     }
 }

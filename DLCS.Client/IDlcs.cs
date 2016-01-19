@@ -1,15 +1,15 @@
-﻿using DLCS.Client.Images;
+﻿using DLCS.Client.Interface;
+using DLCS.Client.Model;
+using DLCS.Client.Model.Images;
 using DLCS.Client.PDFs;
 
 namespace DLCS.Client
 {
     public interface IDlcs
     {
-        Operation<Image[], ImageBatchRegistration> RegisterImages(Image[] images);
+        IQueue Queue { get; }
+        ICustomer Customer { get; }
 
-        Operation<ImageQuery, ImageStateQueryResponse> GetImageStates(ImageQuery query);
-
-        Operation<ImageQuery, Image[]> GetImages(ImageQuery query);
 
         MakePdfResponse MakePdf(MakePdfRequest pdfRequest);
     }
