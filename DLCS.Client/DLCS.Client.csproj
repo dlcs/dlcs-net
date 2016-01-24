@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\Constants.cs" />
     <Compile Include="Config\DlcsConfig.cs" />
     <Compile Include="Dlcs\Dlcs.cs" />
     <Compile Include="Dlcs\Queue.cs" />
@@ -52,6 +53,23 @@
     <Compile Include="IDlcs.cs" />
     <Compile Include="Interface\ICustomer.cs" />
     <Compile Include="Dlcs\Customer.cs" />
+    <Compile Include="Hydra\ApiDocumentation.cs" />
+    <Compile Include="Hydra\HydraAttribute.cs" />
+    <Compile Include="Hydra\HydraClassContext.cs" />
+    <Compile Include="Hydra\Model\Class.cs" />
+    <Compile Include="Hydra\Collections\Collection.cs" />
+    <Compile Include="Hydra\JSONLDBaseWithHydraContext.cs" />
+    <Compile Include="Hydra\Link.cs" />
+    <Compile Include="Hydra\Names.cs" />
+    <Compile Include="Hydra\Collections\PartialCollectionView.cs" />
+    <Compile Include="Hydra\Model\Property.cs" />
+    <Compile Include="Hydra\Model\Status.cs" />
+    <Compile Include="Hydra\Model\Operation.cs" />
+    <Compile Include="Hydra\Model\SupportedProperty.cs" />
+    <Compile Include="Hydra\JSONLDBase.cs" />
+    <Compile Include="Model\Customer.cs" />
+    <Compile Include="Model\DlcsClassContext.cs" />
+    <Compile Include="Model\EntryPoint.cs" />
     <Compile Include="Model\Images\Image.cs" />
     <Compile Include="Model\Images\ImageBatchRegistrationResponse.cs" />
     <Compile Include="Model\Images\ImageQuery.cs" />
@@ -60,6 +78,7 @@
     <Compile Include="Model\Images\ImageStateEnum.cs" />
     <Compile Include="Model\Images\ImageStateQueryResponse.cs" />
     <Compile Include="Interface\IQueue.cs" />
+    <Compile Include="Model\DlcsResource.cs" />
     <Compile Include="Model\Space.cs" />
     <Compile Include="Operation.cs" />
     <Compile Include="PDFs\MakePdfRequest.cs" />
