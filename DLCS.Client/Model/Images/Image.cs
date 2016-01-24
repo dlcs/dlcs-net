@@ -2,6 +2,11 @@
 {
     public class Image
     {
+        /**
+  
+
+            THIS IS THE OLD IMAGE...
+    */
         public string Id { get; set; }
         public int Space { get; set; }
         public string Origin { get; set; }
@@ -19,7 +24,7 @@
         public int MaxUnauthorised { get; set; }
 
         public string[] Tags { get; set; }
-        public string[] Roles { get; set; }
+        public string[] Roles { get; set; } // need to be URIs
 
     }
 }

@@ -8,7 +8,7 @@ namespace DLCS.Client.Hydra
     public class JSONLDBaseWithHydraContext : JSONLDBase
     {
         [JsonIgnore]
-        protected bool IncludeContext { get; set; }
+        public bool IncludeContext { get; set; }
 
         public override string Context
         {

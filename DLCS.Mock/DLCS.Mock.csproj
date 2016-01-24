@@ -122,12 +122,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiApp\AttributeUtil.cs" />
+    <Compile Include="ApiApp\MockModel.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ContextsController.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\DlcsApiController.cs" />
     <Compile Include="Controllers\DocumentationController.cs" />
+    <Compile Include="Controllers\MockController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

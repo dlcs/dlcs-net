@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using DLCS.Client.Config;
+﻿using System.Web.Http;
 using DLCS.Client.Model;
 
 namespace DLCS.Mock.Controllers
@@ -14,11 +8,9 @@ namespace DLCS.Mock.Controllers
         [HttpGet]
         public EntryPoint EntryPoint()
         {
-            return new EntryPoint
-            {
-                Id = Constants.BaseUrl + "/",
-                Customers = Constants.BaseUrl + "/customers"
-            };
+            var ep = new EntryPoint();
+            ep.Init(true);
+            return ep;
         }
     }
 }

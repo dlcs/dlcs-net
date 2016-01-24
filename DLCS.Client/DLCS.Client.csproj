@@ -54,7 +54,7 @@
     <Compile Include="Interface\ICustomer.cs" />
     <Compile Include="Dlcs\Customer.cs" />
     <Compile Include="Hydra\ApiDocumentation.cs" />
-    <Compile Include="Hydra\HydraAttribute.cs" />
+    <Compile Include="Hydra\Attributes.cs" />
     <Compile Include="Hydra\HydraClassContext.cs" />
     <Compile Include="Hydra\Model\Class.cs" />
     <Compile Include="Hydra\Collections\Collection.cs" />
@@ -79,6 +79,7 @@
     <Compile Include="Model\Images\ImageStateQueryResponse.cs" />
     <Compile Include="Interface\IQueue.cs" />
     <Compile Include="Model\DlcsResource.cs" />
+    <Compile Include="Model\PortalUser.cs" />
     <Compile Include="Model\Space.cs" />
     <Compile Include="Operation.cs" />
     <Compile Include="PDFs\MakePdfRequest.cs" />

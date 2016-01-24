@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,9 @@ namespace DLCS.Client.Config
         public static string BaseUrl = AppSettings["BaseUrl"];
         public static string Vocab = AppSettings["Vocab"];
 
-
+        public static string GetCustomerId(int internalId)
+        {
+            return $"{BaseUrl}/customer/{internalId}";
+        }
     }
 }

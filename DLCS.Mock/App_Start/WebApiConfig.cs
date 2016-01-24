@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Web.Http;
 using Newtonsoft.Json;
 
@@ -32,6 +29,24 @@ namespace DLCS.Mock
                 routeTemplate: "vocab",
                 defaults: new { controller = "Documentation", action = "Vocab" }
             );
+
+            // Routing for customer and its operations
+            config.Routes.MapHttpRoute(
+                name: "Customers",
+                routeTemplate: "customers/{customerId}",
+                defaults: new { controller = "Customers", action = "Index", customerId = RouteParameter.Optional }
+            );
+
+            // Routing for customer and its operations
+            config.Routes.MapHttpRoute(
+                name: "CustomerProperties",
+                routeTemplate: "customers/{customerId}/{action}/{propertyId}",
+                defaults: new
+                    {
+                        controller = "Customers",
+                        propertyId = RouteParameter.Optional
+                    }
+                );
 
             config.Routes.MapHttpRoute(
                 name: "DlcsApiRoot",

@@ -10,9 +10,9 @@ namespace DLCS.Mock.ApiApp
     {
         public static Dictionary<string, object> GetAttributeMap(string assemblyName, Type attributeType)
         {
-            if (!(typeof (HydraAttribute)).IsAssignableFrom(attributeType))
+            if (!(typeof (TypeReferencingAttribute)).IsAssignableFrom(attributeType))
             {
-                throw new ArgumentException("attributeType must extend HydraAttribute", "attributeType");
+                throw new ArgumentException("attributeType must extend TypeReferencingAttribute", "attributeType");
             }
 
             var assembly = AppDomain.CurrentDomain.GetAssemblies()
@@ -29,7 +29,7 @@ namespace DLCS.Mock.ApiApp
                 var attributes = type.GetCustomAttributes(attributeType, true);
                 if (attributes.Length == 1)
                 {
-                    var hydraAttr = (HydraAttribute) attributes[0];
+                    var hydraAttr = (TypeReferencingAttribute) attributes[0];
                     var typeAttrIsPointingAt = hydraAttr.ReferencedType;
                     var instanceOfThatType = Activator.CreateInstance(typeAttrIsPointingAt);
                     dict.Add(type.Name, instanceOfThatType);
