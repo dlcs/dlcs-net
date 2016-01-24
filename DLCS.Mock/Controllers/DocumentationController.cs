@@ -24,7 +24,6 @@ namespace DLCS.Mock.Controllers
             return vocab;
         }
 
-
         private static readonly object InitLock = new object();
 
         private void EnsureClasses()
