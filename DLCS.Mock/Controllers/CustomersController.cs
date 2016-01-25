@@ -66,5 +66,16 @@ namespace DLCS.Mock.Controllers
             }
             return Ok(user);
         }
+
+        [HttpGet]
+        public IHttpActionResult Queue(int customerId)
+        {
+            var queue = GetModel().Queues.SingleOrDefault(q => q.ModelId == customerId);
+            if (queue == null)
+            {
+                return NotFound();
+            }
+            return Ok(queue);
+        }
     }
 }

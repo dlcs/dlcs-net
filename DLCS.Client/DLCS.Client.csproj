@@ -80,6 +80,7 @@
     <Compile Include="Interface\IQueue.cs" />
     <Compile Include="Model\DlcsResource.cs" />
     <Compile Include="Model\PortalUser.cs" />
+    <Compile Include="Model\Queue.cs" />
     <Compile Include="Model\Space.cs" />
     <Compile Include="Operation.cs" />
     <Compile Include="PDFs\MakePdfRequest.cs" />

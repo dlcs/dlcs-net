@@ -18,10 +18,11 @@ namespace DLCS.Client.Hydra
 
         public static class XmlSchema
         {
-            public const string Base        = "http://www.w3.org/2001/XMLSchema#";
-            public const string String      = "http://www.w3.org/2001/XMLSchema#string";
-            public const string Boolean     = "http://www.w3.org/2001/XMLSchema#boolean";
-            public const string DateTime    = "http://www.w3.org/2001/XMLSchema#dateTime";
+            public const string Base                = "http://www.w3.org/2001/XMLSchema#";
+            public const string String              = "http://www.w3.org/2001/XMLSchema#string";
+            public const string Boolean             = "http://www.w3.org/2001/XMLSchema#boolean";
+            public const string DateTime            = "http://www.w3.org/2001/XMLSchema#dateTime";
+            public const string NonNegativeInteger  = "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"; 
         }
     }
 }

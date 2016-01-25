@@ -12,18 +12,20 @@ namespace DLCS.Mock.ApiApp
         public List<Customer> Customers { get; set; }
         public List<PortalUser> PortalUsers { get; set; }
         public List<Space> Spaces { get; set; }
+        public List<Queue> Queues { get; set; }
 
         public static MockModel Build()
         {
             var model = new MockModel
             {
                 Customers = CreateCustomers(),
+                Queues = CreateQueues(),
                 PortalUsers = CreatePortalUsers(),
-                Spaces = CreateSpaces()
+                Spaces = CreateSpaces(),
+
             };
             return model;
         }
-
 
 
         private static List<Customer> CreateCustomers()
@@ -36,7 +38,18 @@ namespace DLCS.Mock.ApiApp
                 new Customer(4, "test", "Testing")
             };
         }
-        
+
+        private static List<Queue> CreateQueues()
+        {
+            return new List<Queue>
+            {
+                new Queue(1, 0),
+                new Queue(2, 0),
+                new Queue(3, 0),
+                new Queue(4, 10)
+            };
+        }
+
         private static List<PortalUser> CreatePortalUsers()
         {
             return new List<PortalUser>()

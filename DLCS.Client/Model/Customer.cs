@@ -63,7 +63,7 @@ namespace DLCS.Client.Model
         public string Roles { get; set; }
 
         [HydraLink(Description = "The Customer's view on the DLCS ingest queue",
-            Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]
+            Range = "vocab:Queue", ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 17, PropertyName = "queue")]
         public string Queue { get; set; }
 

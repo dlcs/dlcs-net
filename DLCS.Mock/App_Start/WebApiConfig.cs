@@ -39,6 +39,16 @@ namespace DLCS.Mock
 
             // Routing for customer and its operations
             config.Routes.MapHttpRoute(
+                name: "Queue",
+                routeTemplate: "customers/{customerId}/queue/{action}",
+                defaults: new
+                {
+                    controller = "Queue"
+                }
+                );
+
+            // Routing for customer and its operations
+            config.Routes.MapHttpRoute(
                 name: "CustomerProperties",
                 routeTemplate: "customers/{customerId}/{action}/{propertyId}",
                 defaults: new
