@@ -22,6 +22,7 @@ namespace DLCS.Client.Hydra
             public const string String              = "http://www.w3.org/2001/XMLSchema#string";
             public const string Boolean             = "http://www.w3.org/2001/XMLSchema#boolean";
             public const string DateTime            = "http://www.w3.org/2001/XMLSchema#dateTime";
+            public const string Integer             = "http://www.w3.org/2001/XMLSchema#integer";
             public const string NonNegativeInteger  = "http://www.w3.org/2001/XMLSchema#nonNegativeInteger"; 
         }
     }

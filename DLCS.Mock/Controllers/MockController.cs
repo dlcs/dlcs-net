@@ -13,6 +13,9 @@ namespace DLCS.Mock.Controllers
         private static MockModel _model;
         private static readonly object ModelLock = new object();
 
+
+
+
         public MockModel GetModel()
         {
             if (_model == null)
@@ -33,6 +36,15 @@ namespace DLCS.Mock.Controllers
             lock (ModelLock)
             {
                 _model = MockModel.Build();
+            }
+            return _model;
+        }
+
+        public MockModel RecalculateCounters()
+        {
+            lock (ModelLock)
+            {
+                MockModel.RecalculateCounters(_model);
             }
             return _model;
         }

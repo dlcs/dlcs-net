@@ -13,6 +13,7 @@ namespace DLCS.Mock.ApiApp
         public List<PortalUser> PortalUsers { get; set; }
         public List<Space> Spaces { get; set; }
         public List<Queue> Queues { get; set; }
+        public List<Batch> Batches { get; set; }
 
         public static MockModel Build()
         {
@@ -22,11 +23,17 @@ namespace DLCS.Mock.ApiApp
                 Queues = CreateQueues(),
                 PortalUsers = CreatePortalUsers(),
                 Spaces = CreateSpaces(),
-
+                Batches = CreateBatches()
             };
+            RecalculateCounters(model);
             return model;
         }
 
+        public static void RecalculateCounters(MockModel model)
+        {
+            model.SetBatchCounts();
+            model.SetQueueSize();
+        }
 
         private static List<Customer> CreateCustomers()
         {
@@ -43,10 +50,21 @@ namespace DLCS.Mock.ApiApp
         {
             return new List<Queue>
             {
-                new Queue(1, 0),
-                new Queue(2, 0),
-                new Queue(3, 0),
-                new Queue(4, 10)
+                new Queue(1),
+                new Queue(2),
+                new Queue(3),
+                new Queue(4)
+            };
+        }
+
+        private static List<Batch> CreateBatches()
+        {
+            return new List<Batch>
+            {
+                new Batch(1),
+                new Batch(2),
+                new Batch(3),
+                new Batch(4)
             };
         }
 

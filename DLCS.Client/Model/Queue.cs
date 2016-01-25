@@ -21,10 +21,9 @@ namespace DLCS.Client.Model
         {
         }
 
-        public Queue(int customerId, int size)
+        public Queue(int customerId)
         {
             ModelId = customerId;
-            Size = size;
             Init(true, customerId);
         }
 

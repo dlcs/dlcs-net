@@ -67,9 +67,11 @@
     <Compile Include="Hydra\Model\Operation.cs" />
     <Compile Include="Hydra\Model\SupportedProperty.cs" />
     <Compile Include="Hydra\JSONLDBase.cs" />
+    <Compile Include="Model\Batch.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\DlcsClassContext.cs" />
     <Compile Include="Model\EntryPoint.cs" />
+    <Compile Include="Model\Image.cs" />
     <Compile Include="Model\Images\Image.cs" />
     <Compile Include="Model\Images\ImageBatchRegistrationResponse.cs" />
     <Compile Include="Model\Images\ImageQuery.cs" />
