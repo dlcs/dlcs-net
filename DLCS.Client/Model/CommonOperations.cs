@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DLCS.Client.Hydra;
 using DLCS.Client.Hydra.Model;
 
 namespace DLCS.Client.Model
 {
-    public class CommonOperations
+    public static class CommonOperations
     {
         // TODO - in general, add statusCode hints everywhere
 
 
         public static Operation[] GetStandardResourceOperations(
             string idPrefix,
-            string displayNameOfCollectionType,
-            string vocabNameofCollectionType,
+            string displayNameOfType,
+            string vocabNameofType,
             params string[] methods)
         {
             var ops = new List<Operation>();
@@ -26,9 +27,9 @@ namespace DLCS.Client.Model
                         {
                             Id = idPrefix + "_retrieve",
                             Method = method,
-                            Label = "Retrieve a " + displayNameOfCollectionType,
-                            Returns = vocabNameofCollectionType,
-                            StatusCodes = GetStandardGetResourceStatusCodes(displayNameOfCollectionType)
+                            Label = "Retrieve a " + displayNameOfType,
+                            Returns = vocabNameofType,
+                            StatusCodes = GetStandardGetResourceStatusCodes(displayNameOfType)
                         });
                         break;
 
@@ -37,10 +38,10 @@ namespace DLCS.Client.Model
                         {
                             Id = idPrefix + "_upsert",
                             Method = method,
-                            Label = "create or replace a " + displayNameOfCollectionType,
-                            Expects = vocabNameofCollectionType,
-                            Returns = vocabNameofCollectionType,
-                            StatusCodes = GetStandardPutResourceStatusCodes(displayNameOfCollectionType)
+                            Label = "create or replace a " + displayNameOfType,
+                            Expects = vocabNameofType,
+                            Returns = vocabNameofType,
+                            StatusCodes = GetStandardPutResourceStatusCodes(displayNameOfType)
                         });
                         break;
 
@@ -49,10 +50,10 @@ namespace DLCS.Client.Model
                         {
                             Id = idPrefix + "_update",
                             Method = method,
-                            Label = "Update the supplied fields of the " + displayNameOfCollectionType,
-                            Expects = vocabNameofCollectionType,
-                            Returns = vocabNameofCollectionType,
-                            StatusCodes = GetStandardPatchResourceStatusCodes(displayNameOfCollectionType)
+                            Label = "Update the supplied fields of the " + displayNameOfType,
+                            Expects = vocabNameofType,
+                            Returns = vocabNameofType,
+                            StatusCodes = GetStandardPatchResourceStatusCodes(displayNameOfType)
                         });
                         break;
 
@@ -61,10 +62,10 @@ namespace DLCS.Client.Model
                         {
                             Id = idPrefix + "_delete",
                             Method = method,
-                            Label = "Delete the " + displayNameOfCollectionType,
+                            Label = "Delete the " + displayNameOfType,
                             Expects = null,
                             Returns = Names.Owl.Nothing,
-                            StatusCodes = GetStandardDeleteResourceStatusCodes(displayNameOfCollectionType)
+                            StatusCodes = GetStandardDeleteResourceStatusCodes(displayNameOfType)
                         });
                         break;
 
@@ -81,11 +82,12 @@ namespace DLCS.Client.Model
         public static Operation[] GetStandardCollectionOperations(
             string idPrefix, 
             string displayNameOfCollectionType,
-            string vocabNameofCollectionType)
+            string vocabNameofCollectionType,
+            string description = null)
         {
             return new[]
             {
-                StandardCollectionGet(idPrefix + "_collection_retrieve", "Retrieves all " + displayNameOfCollectionType, null),
+                StandardCollectionGet(idPrefix + "_collection_retrieve", "Retrieves all " + displayNameOfCollectionType, description),
                 StandardCollectionPost(idPrefix + "_create", "Creates a new " + displayNameOfCollectionType, 
                     null, vocabNameofCollectionType, displayNameOfCollectionType)
             };
@@ -158,5 +160,10 @@ namespace DLCS.Client.Model
             // TODO - GetStandardPutResourceStatusCodes
             return null;
         }
+
+        public static Operation WithMethod(this Operation[] operations, string method)
+        {
+            return operations.FirstOrDefault(op => op.Method == method);
+        } 
     }
 }

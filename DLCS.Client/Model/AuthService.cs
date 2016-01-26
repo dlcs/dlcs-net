@@ -93,16 +93,18 @@ namespace DLCS.Client.Model
 
         public override void DefineOperations()
         {
+            string operationId = "_:customer_authService_";
+
             SupportedOperations = CommonOperations.GetStandardResourceOperations(
-                "_:customer_authService_", "Auth Service", Id,
+                operationId, "Auth Service", Id,
                 "GET", "PUT", "PATCH", "DELETE");
 
             GetHydraLinkProperty("nestedServices").SupportedOperations = CommonOperations
-                .GetStandardCollectionOperations("_:customer_authService_nestedServices_", "Nested Auth Service", "vocab:AuthService");
+                .GetStandardCollectionOperations(operationId + "nestedService_", "Nested Auth Service", "vocab:AuthService");
    
             GetHydraLinkProperty("roleProvider").SupportedOperations = CommonOperations
-                .GetStandardResourceOperations("_:customer_authService_roleProvider_", "Role Provider", Id,
-                "GET", "PUT", "PATCH", "DELETE");
+                .GetStandardResourceOperations(operationId + "roleProvider_", "Role Provider", "vocab:Role",
+                "GET");
         }
     }
 }

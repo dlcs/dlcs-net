@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using DLCS.Client.Hydra;
 using DLCS.Client.Hydra.Model;
 using Newtonsoft.Json;
@@ -27,7 +28,7 @@ namespace DLCS.Client.Model
             Created = created;
             DefaultTags = defaultTags;
             DefaultMaxUnauthorised = defaultMaxUnauthorised;
-            Init(true, customerId, modelId);
+            Init(true, customerId, ModelId);
         }
 
         [RdfProperty(Description = "Space name",
@@ -70,66 +71,18 @@ namespace DLCS.Client.Model
 
         public override void DefineOperations()
         {
-            SupportedOperations = new[]
-            {
-                new Operation
-                {
-                    Id = "_:customer_space_retrieve",
-                    Method = "GET",
-                    Label = "Obtain a space",
-                    Returns = Id
-                },
-                new Operation
-                {
-                    Id = "_:customer_space_update",
-                    Method = "PATCH",
-                    Label = "change fields of space",
-                    Returns = Id
-                }
-            };
-            
+            SupportedOperations = CommonOperations.GetStandardResourceOperations(
+                "_:customer_space_", "Space", Id,
+                "GET", "PUT", "PATCH", "DELETE");
+
             var images = GetHydraLinkProperty("images");
-            images.SupportedOperations = new[]
-            {
-                new Operation
-                {
-                    Id = "_:customer_space_images_collection_retrieve",
-                    Method = "GET",
-                    Label = "Retrieves all images in space",
-                    Returns = Names.Hydra.Collection
-                },
-                new Operation
-                {
-                    Id = "_:customer_space_images_create",
-                    Method = "POST",
-                    Label = "Push an image for immediate processing, asynchronously. Might fail or timeout. This operation is rate-limited.",
-                    Description = "(doc here)",
-                    Expects = "vocab:Image",
-                    Returns = "vocab:Image",
-                    StatusCodes = new[]
-                    {
-                        new Status
-                        {
-                            StatusCode = 201,
-                            Description = "Image is ready..."
-                        }
-                    }
-                }
-            };
+            images.SupportedOperations = CommonOperations
+                .GetStandardCollectionOperations("_:customer_space_image_", "Image", "vocab:Image");
+            images.SupportedOperations.WithMethod("POST").Description =
+                "Push an image for immediate processing, asynchronously. Might fail or timeout. This operation is rate-limited.";
 
-
-            var defaultRoles = GetHydraLinkProperty("defaultRoles");
-            defaultRoles.SupportedOperations = new[]
-            {
-                new Operation
-                {
-                    Id = "_:customer_space_defaultRoles_collection_retrieve",
-                    Method = "GET",
-                    Label = "Retrieves all default roles for this space (fully populated)",
-                    Returns = Names.Hydra.Collection
-                } // you can't POST to this link?? How 
-                // TODO How do you update default roles for a space?
-            };
+            GetHydraLinkProperty("defaultRoles").SupportedOperations = CommonOperations
+                .GetStandardCollectionOperations("_:customer_space_defaultRole_", "Role", "vocab:Role");
         }
     }
 }

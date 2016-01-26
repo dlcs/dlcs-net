@@ -28,7 +28,7 @@ namespace DLCS.Client.Model
             Completed = completed;
             Errors = errors;
             EstCompletion = estCompletion;
-            Init(true, customerId, modelId);
+            Init(true, customerId, ModelId);
         }
 
 
@@ -82,53 +82,36 @@ namespace DLCS.Client.Model
 
         public override void DefineOperations()
         {
-            SupportedOperations = new[]
+            string operationId = "_:customer_queue_batch_";
+            SupportedOperations = CommonOperations.GetStandardResourceOperations(
+                operationId, "Batch", Id,
+                "GET", "DELETE"); // do we allow this?
+
+            // These collections are read only
+
+            GetHydraLinkProperty("images").SupportedOperations = new[]
             {
-                new Operation
-                {
-                    Id = "_:customer_queue_batch_retrieve",
-                    Method = "GET",
-                    Label = "Obtain a batch",
-                    Returns = Id
-                }
+                CommonOperations.StandardCollectionGet(
+                    operationId + "image_collection_retrieve",
+                    "Retrieves all images in batch regardless of state",
+                    null)
             };
 
-            var images = GetHydraLinkProperty("images");
-            images.SupportedOperations = new[]
+            GetHydraLinkProperty("completedImages").SupportedOperations = new[]
             {
-                new Operation
-                {
-                    Id = "_:customer_queue_batch_images_collection_retrieve",
-                    Method = "GET",
-                    Label = "Retrieves all images in batch",
-                    Returns = Names.Hydra.Collection
-                }
+                CommonOperations.StandardCollectionGet(
+                    operationId + "completedImage_collection_retrieve",
+                    "Retrieves all COMPLETED images in batch",
+                    null)
             };
 
-            var completedImages = GetHydraLinkProperty("completedImages");
-            completedImages.SupportedOperations = new[]
+            GetHydraLinkProperty("errorImages").SupportedOperations = new[]
             {
-                new Operation
-                {
-                    Id = "_:customer_queue_batch_completedImages_collection_retrieve",
-                    Method = "GET",
-                    Label = "Retrieves all COMPLETED images in batch",
-                    Returns = Names.Hydra.Collection
-                }
+                CommonOperations.StandardCollectionGet(
+                    operationId + "errorImage_collection_retrieve",
+                    "Retrieves all ERROR images in batch",
+                    null)
             };
-
-            var errorImages = GetHydraLinkProperty("errorImages");
-            errorImages.SupportedOperations = new[]
-            {
-                new Operation
-                {
-                    Id = "_:customer_queue_batch_errorImages_collection_retrieve",
-                    Method = "GET",
-                    Label = "Retrieves all ERROR images in batch",
-                    Returns = Names.Hydra.Collection
-                }
-            };
-
         }
     }
 }

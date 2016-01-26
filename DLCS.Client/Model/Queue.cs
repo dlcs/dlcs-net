@@ -57,7 +57,7 @@ namespace DLCS.Client.Model
             {
                 new Operation
                 {
-                    Id = "_:customer_queue_batches_collection_retrieve",
+                    Id = "_:customer_queue_batch_collection_retrieve",
                     Method = "GET",
                     Label = "Retrieves all batches for customer",
                     Returns = Names.Hydra.Collection

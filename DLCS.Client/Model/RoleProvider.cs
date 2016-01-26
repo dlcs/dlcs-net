@@ -13,7 +13,7 @@ namespace DLCS.Client.Model
     public class RoleProvider : DlcsResource
     {
         [JsonIgnore]
-        public string AuthServiceId { get; set; }
+        public string ModelId { get; set; }
         [JsonIgnore]
         public int CustomerId { get; set; }
 
@@ -22,10 +22,10 @@ namespace DLCS.Client.Model
         public RoleProvider(int customerId, string authServiceId, string configuration, string credentials)
         {
             CustomerId = customerId;
-            AuthServiceId = authServiceId;
+            ModelId = authServiceId;
             Configuration = configuration;
             Credentials = credentials;
-            Init(true, customerId, AuthServiceId);
+            Init(true, customerId, ModelId);
         }
 
         [RdfProperty(Description = "JSON configuration blob for this particular service",

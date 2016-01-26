@@ -81,62 +81,34 @@ namespace DLCS.Client.Model
 
         public override void DefineOperations()
         {
-            SupportedOperations = new[]
-            {
-                // No PUT or DELETE - admin functionality on customer. Can't delete yourself!
-                new Operation
-                {
-                    Id = "_:customer_retrieve",
-                    Method = "GET",
-                    Label = "Obtain a customer",
-                    Returns = Id
-                },
-                new Operation
-                {
-                    Id = "_:customer_update",
-                    Method = "PATCH",
-                    Label = "update the supplied fields of the customer",
-                    Expects = Id,
-                    Returns = Id
-                }
-            };
+            string operationId = "_:customer_";
+
+            SupportedOperations = CommonOperations.GetStandardResourceOperations(
+                operationId, "Customer", Id,
+                "GET", "PATCH");
 
             // Hydra link properties - i.e., a link to another resource, rather than a field of the current resource.
 
             GetHydraLinkProperty("portalUsers").SupportedOperations = CommonOperations
-                .GetStandardCollectionOperations("_:customer_portalUser", "Portal User", "vocab:PortalUser");
+                .GetStandardCollectionOperations(operationId + "portalUser_", "Portal User", "vocab:PortalUser");
+
+            GetHydraLinkProperty("namedQueries").SupportedOperations = CommonOperations
+                .GetStandardCollectionOperations(operationId + "namedQuery_", "Named Query", "vocab:NamedQuery");
+
+            GetHydraLinkProperty("originStrategies").SupportedOperations = CommonOperations
+                .GetStandardCollectionOperations(operationId + "originStrategy_", "Origin Strategy", "vocab:OriginStrategy");
+
+            GetHydraLinkProperty("authServices").SupportedOperations = CommonOperations
+                .GetStandardCollectionOperations(operationId + "authService_", "Auth Service", "vocab:AuthService");
+
+            GetHydraLinkProperty("roles").SupportedOperations = CommonOperations
+                .GetStandardCollectionOperations(operationId + "role_", "Role", "vocab:Role");
 
             GetHydraLinkProperty("queue").SupportedOperations = QueueClass.GetSpecialQueueOperations();
 
+            GetHydraLinkProperty("roles").SupportedOperations = CommonOperations
+                .GetStandardCollectionOperations(operationId + "space_", "Space", "vocab:Space");
 
-            var spaces = GetHydraLinkProperty("spaces");
-            spaces.SupportedOperations = new[]
-            {
-                new Operation
-                {
-                    Id = "_:customer_space_collection_retrieve",
-                    Method = "GET",
-                    Label = "Retrieves all of the customer's spaces",
-                    Returns = Names.Hydra.Collection
-                },
-                new Operation
-                {
-                    Id = "_:customer_space_create",
-                    Method = "POST",
-                    Label = "Creates a new Space for this customer",
-                    Description = "(doc here)",
-                    Expects = "vocab:Space",
-                    Returns = "vocab:Space",
-                    StatusCodes = new[]
-                    {
-                        new Status
-                        {
-                            StatusCode = 201,
-                            Description = "Space is ready..."
-                        }
-                    }
-                }
-            };
         }
     }
 }
