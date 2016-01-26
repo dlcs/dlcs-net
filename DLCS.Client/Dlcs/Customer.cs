@@ -1,6 +1,7 @@
 ﻿using DLCS.Client.Interface;
 using DLCS.Client.Model;
 using DLCS.Client.Model.Images;
+using Image = DLCS.Client.Model.Images.Image;
 
 namespace DLCS.Client.Dlcs
 {

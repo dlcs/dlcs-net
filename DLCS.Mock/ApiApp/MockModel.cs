@@ -31,8 +31,8 @@ namespace DLCS.Mock.ApiApp
 
         public static void RecalculateCounters(MockModel model)
         {
-            model.SetBatchCounts();
-            model.SetQueueSize();
+            //model.SetBatchCounts();
+            //model.SetQueueSize();
         }
 
         private static List<Customer> CreateCustomers()
@@ -59,13 +59,7 @@ namespace DLCS.Mock.ApiApp
 
         private static List<Batch> CreateBatches()
         {
-            return new List<Batch>
-            {
-                new Batch(1),
-                new Batch(2),
-                new Batch(3),
-                new Batch(4)
-            };
+            return new List<Batch>();
         }
 
         private static List<PortalUser> CreatePortalUsers()

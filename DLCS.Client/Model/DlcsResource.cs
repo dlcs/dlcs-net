@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using DLCS.Client.Config;
 using DLCS.Client.Hydra;
+using DLCS.Client.Hydra.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -8,7 +9,7 @@ namespace DLCS.Client.Model
 {
     public class DlcsResource : JSONLDBase
     {
-        public virtual void Init(bool setLinks, params object[] urlParams)
+        public void Init(bool setLinks, params object[] urlParams)
         {
             var hydraClassAttr = GetType().GetCustomAttributes(true).OfType<HydraClassAttribute>().Single();
             Id = BaseUrl + string.Format(hydraClassAttr.UriTemplate, urlParams);
@@ -64,5 +65,6 @@ namespace DLCS.Client.Model
         {
             get { return Constants.BaseUrl; }
         }
+
     }
 }

@@ -14,18 +14,19 @@ namespace DLCS.Mock.Controllers
         [HttpGet]
         public Collection<JObject> Images(int customerId)
         {
-            var queueImages = GetModel().Queues
-                .Where(cq => cq.CustomerId == customerId)
-                In memory model - store list of pointers to batches and images
-                .Select(cq => cqp.GetCollectionForm()).ToArray();
+            return null;
+            //var queueImages = GetModel().Queues
+            //    .Where(cq => cq.CustomerId == customerId)
+            //    In memory model - store list of pointers to batches and images
+            //    .Select(cq => cqp.GetCollectionForm()).ToArray();
 
-            return new Collection<JObject>
-            {
-                IncludeContext = true,
-                Members = portalUsers,
-                TotalItems = portalUsers.Length,
-                Id = Request.RequestUri.ToString()
-            };
+            //return new Collection<JObject>
+            //{
+            //    IncludeContext = true,
+            //    Members = portalUsers,
+            //    TotalItems = portalUsers.Length,
+            //    Id = Request.RequestUri.ToString()
+            //};
         }
     }
 }

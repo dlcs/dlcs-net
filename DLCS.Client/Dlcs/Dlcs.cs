@@ -10,6 +10,7 @@ using DLCS.Client.Model;
 using DLCS.Client.Model.Images;
 using DLCS.Client.PDFs;
 using DLCS.Client.Util;
+using Image = DLCS.Client.Model.Images.Image;
 
 namespace DLCS.Client.Dlcs
 {

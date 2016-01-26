@@ -1,8 +1,6 @@
-﻿using DLCS.Client.Config;
-using DLCS.Client.Hydra;
+﻿using DLCS.Client.Hydra;
 using DLCS.Client.Hydra.Model;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace DLCS.Client.Model
 {
@@ -36,7 +34,8 @@ namespace DLCS.Client.Model
         [JsonProperty(Order = 12, PropertyName = "displayName")]
         public string DisplayName { get; set; }
 
-        // hydra links:
+
+        // Hydra link properties - i.e., a link to another resource, rather than a field of the current resource.
         [HydraLink(Description = "Accounts that can log into the portal",
             Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 12, PropertyName = "portalUsers")]
@@ -84,83 +83,31 @@ namespace DLCS.Client.Model
         {
             SupportedOperations = new[]
             {
+                // No PUT or DELETE - admin functionality on customer. Can't delete yourself!
                 new Operation
                 {
                     Id = "_:customer_retrieve",
                     Method = "GET",
                     Label = "Obtain a customer",
                     Returns = Id
-                }
-            };
-
-            var portalUsers = GetHydraLinkProperty("portalUsers");
-            portalUsers.SupportedOperations = new[]
-            {
-                new Operation
-                {
-                    Id = "_:customer_portalUser_collection_retrieve",
-                    Method = "GET",
-                    Label = "Retrieves all portal users",
-                    Returns = Names.Hydra.Collection
                 },
                 new Operation
                 {
-                    Id = "_:customer_portalUser_create",
-                    Method = "POST",
-                    Label = "Creates a new Portal user for this customer",
-                    Description = "(doc here)",
-                    Expects = "vocab:PortalUser",
-                    Returns = "vocab:PortalUser",
-                    StatusCodes = new[]
-                    {
-                        new Status
-                        {
-                            StatusCode = 201,
-                            Description = "User is ready..."
-                        }
-                    }
+                    Id = "_:customer_update",
+                    Method = "PATCH",
+                    Label = "update the supplied fields of the customer",
+                    Expects = Id,
+                    Returns = Id
                 }
             };
 
+            // Hydra link properties - i.e., a link to another resource, rather than a field of the current resource.
 
-            var queue = GetHydraLinkProperty("queue");
-            queue.SupportedOperations = new[]
-            {
-                new Operation
-                {
-                    Id = "_:customer_queue_collection_retrieve",
-                    Method = "GET",
-                    Label = "Retrieves a view of the top of the queue",
-                    Returns = Names.Hydra.Collection
-                },
-                new Operation
-                {
-                    Id = "_:customer_queue_create_batch",
-                    Method = "POST",
-                    Label = "Submit an array of Image and get a batch back",
-                    Description = "(doc here)",
-                    // TODO: I want to say Expects: vocab:Image[] - but how do we do that?
-                    // We've lost information here - how does a client know how to send a collection of images? How do we declare that?
-                    // When we say that something returns a Collection that's OK, because the client can inspect the members of the collection.
-                    // but how do we declare that the API user should POST a collection?
-                    Expects = Names.Hydra.Collection, // 
-                    // maybe it's something else - like:
-                    // Expects = "vocab:ImageList"
-                    // where we define another Class in the documentation, and ImageList just has an Images property []
-                    // but that is no different from the members of a collection.
-                    // see http://lists.w3.org/Archives/Public/public-hydra/2016Jan/0087.html
-                    // From that I'll leave as Collection and rely on out-of-band knowledge until Hydra catches up.
-                    Returns = "vocab:Batch",
-                    StatusCodes = new[]
-                    {
-                        new Status
-                        {
-                            StatusCode = 202,
-                            Description = "Job has been accepted"
-                        }
-                    }
-                }
-            };
+            GetHydraLinkProperty("portalUsers").SupportedOperations = CommonOperations
+                .GetStandardCollectionOperations("_:customer_portalUser", "Portal User", "vocab:PortalUser");
+
+            GetHydraLinkProperty("queue").SupportedOperations = QueueClass.GetSpecialQueueOperations();
+
 
             var spaces = GetHydraLinkProperty("spaces");
             spaces.SupportedOperations = new[]

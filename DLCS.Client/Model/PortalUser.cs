@@ -59,16 +59,9 @@ namespace DLCS.Client.Model
 
         public override void DefineOperations()
         {
-            SupportedOperations = new[]
-            {
-                new Operation
-                {
-                    Id = "_:portalUser_retrieve",
-                    Method = "GET",
-                    Label = "Obtain a portal user",
-                    Returns = Id
-                }
-            };
+            SupportedOperations = CommonOperations.GetStandardResourceOperations(
+                "_:customer_portalUser_", "Portal User", Id, 
+                "GET", "PUT", "PATCH", "DELETE");
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DLCS.Client.Model;
 using DLCS.Client.Model.Images;
+using Image = DLCS.Client.Model.Images.Image;
 
 namespace DLCS.Client.Interface
 {

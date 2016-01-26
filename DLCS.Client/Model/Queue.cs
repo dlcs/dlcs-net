@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DLCS.Client.Hydra;
+﻿using DLCS.Client.Hydra;
 using DLCS.Client.Hydra.Model;
 using Newtonsoft.Json;
 
@@ -54,21 +49,11 @@ namespace DLCS.Client.Model
 
         public override void DefineOperations()
         {
-            SupportedOperations = new[]
-            {
-                new Operation
-                {
-                    Id = "_:customer_queue_retrieve",
-                    Method = "GET",
-                    Label = "Get the Queue object for a given customer",
-                    Returns = Id
-                }
-            };
+            SupportedOperations = GetSpecialQueueOperations();
 
             // you can't POST a batch - you do this by posting Image[] to Queue.
             // Or do you?
-            var batches = GetHydraLinkProperty("batches");
-            batches.SupportedOperations = new[]
+            GetHydraLinkProperty("batches").SupportedOperations = new[]
             {
                 new Operation
                 {
@@ -79,5 +64,46 @@ namespace DLCS.Client.Model
                 }
             };
         }
+
+        public static Operation[] GetSpecialQueueOperations()
+        {
+            return new[]
+            {
+                new Operation
+                {
+                    Id = "_:customer_queue_retrieve",
+                    Method = "GET",
+                    Label = "Returns the queue resource",
+                    Returns = "vocab:Queue"
+                },
+                new Operation
+                {
+                    Id = "_:customer_queue_create_batch",
+                    Method = "POST",
+                    Label = "Submit an array of Image and get a batch back",
+                    Description = "(doc here)",
+                    // TODO: I want to say Expects: vocab:Image[] - but how do we do that?
+                    // We've lost information here - how does a client know how to send a collection of images? How do we declare that?
+                    // When we say that something returns a Collection that's OK, because the client can inspect the members of the collection.
+                    // but how do we declare that the API user should POST a collection?
+                    Expects = Names.Hydra.Collection, // 
+                    // maybe it's something else - like:
+                    // Expects = "vocab:ImageList"
+                    // where we define another Class in the documentation, and ImageList just has an Images property []
+                    // but that is no different from the members of a collection.
+                    // see http://lists.w3.org/Archives/Public/public-hydra/2016Jan/0087.html
+                    // From that I'll leave as Collection and rely on out-of-band knowledge until Hydra catches up.
+                    Returns = "vocab:Batch",
+                    StatusCodes = new[]
+                    {
+                        new Status
+                        {
+                            StatusCode = 202,
+                            Description = "Job has been accepted"
+                        }
+                    }
+                }
+            };
+        } 
     }
 }
