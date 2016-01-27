@@ -1,4 +1,5 @@
-﻿using DLCS.Client.Hydra;
+﻿using System.Collections.Generic;
+using DLCS.Client.Hydra;
 using DLCS.Client.Hydra.Model;
 using Newtonsoft.Json;
 
@@ -10,10 +11,14 @@ namespace DLCS.Client.Model
         UriTemplate = "/customers/{0}/authServices/{1}")]
     public class AuthService : DlcsResource
     {
+        // Mock Model fields
         [JsonIgnore]
         public string ModelId { get; set; }
         [JsonIgnore]
         public int CustomerId { get; set; }
+        [JsonIgnore]
+        public List<AuthService> ModelNestedServices { get; set; } // provides the nestedServices collection
+        
 
         public AuthService() { }
 

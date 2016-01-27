@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DLCS.Client.Hydra;
 using DLCS.Client.Hydra.Model;
@@ -11,15 +12,17 @@ namespace DLCS.Client.Model
            UriTemplate = "/customers/{0}/spaces/{1}")]
     public class Space : DlcsResource
     {
+        // Mock Model fields
         [JsonIgnore]
-        public string ModelId { get; set; }
+        public int ModelId { get; set; }
         [JsonIgnore]
         public int CustomerId { get; set; }
 
 
+
         public Space() { }
 
-        public Space(string modelId, int customerId, string name, DateTime created, string[] defaultTags, int defaultMaxUnauthorised)
+        public Space(int modelId, int customerId, string name, DateTime created, string[] defaultTags, int defaultMaxUnauthorised)
         {
 
             ModelId = modelId;

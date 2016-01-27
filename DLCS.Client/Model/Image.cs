@@ -101,7 +101,12 @@ namespace DLCS.Client.Model
             Range = Names.XmlSchema.Boolean, ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 33, PropertyName = "ingesting")]
         public DateTime Ingesting { get; set; }
-        
+
+        [RdfProperty(Description = "Reported errors with this image",
+            Range = Names.XmlSchema.String, ReadOnly = false, WriteOnly = false)]
+        [JsonProperty(Order = 40, PropertyName = "error")]
+        public string Error { get; set; }
+
         // metadata
 
         [RdfProperty(Description = "Image tags",

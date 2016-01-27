@@ -122,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiApp\AttributeUtil.cs" />
+    <Compile Include="ApiApp\MockHelp.cs" />
     <Compile Include="ApiApp\MockModel.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
