@@ -8,6 +8,10 @@ namespace iiifly.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        public string DisplayName { get; set; }
+        public string Affiliation { get; set; }
+
     }
 
     public class ExternalLoginListViewModel
@@ -79,6 +83,16 @@ namespace iiifly.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [StringLength(60, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 3)]
+        [Display(Name = "Display name")]
+        public string DisplayName { get; set; }
+        
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 3)]
+        [Display(Name = "Affiliation")]
+        public string Affiliation { get; set; }
     }
 
     public class ResetPasswordViewModel

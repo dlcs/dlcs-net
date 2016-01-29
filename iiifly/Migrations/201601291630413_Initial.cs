@@ -31,20 +31,13 @@ namespace iiifly.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
-                "dbo.SpaceMappings",
-                c => new
-                    {
-                        SpaceMappingId = c.Guid(nullable: false),
-                        DlcsSpace = c.String(),
-                        SpaceId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.SpaceMappingId);
-            
-            CreateTable(
                 "dbo.AspNetUsers",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        DisplayName = c.String(),
+                        Affiliation = c.String(),
+                        DlcsSpace = c.String(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -102,7 +95,6 @@ namespace iiifly.Migrations
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.SpaceMappings");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
         }

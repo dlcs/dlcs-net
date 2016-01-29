@@ -1,11 +1,12 @@
+using System.Configuration;
 using iiifly.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace iiifly.Migrations
 {
     using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<iiifly.Models.ApplicationDbContext>
     {
@@ -14,30 +15,30 @@ namespace iiifly.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
+        bool AddUserAndRoles(iiifly.Models.ApplicationDbContext context)
+        {
+            var rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            rm.Create(new IdentityRole("canCallDlcs"));
+            rm.Create(new IdentityRole("canApproveUsers"));
+
+            IdentityResult ir;
+            var um = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var user = new ApplicationUser()
+            {
+                UserName = ConfigurationManager.AppSettings["admin-user-name"]
+            };
+            ir = um.Create(user, ConfigurationManager.AppSettings["admin-user-password"]);
+            if (ir.Succeeded == false)
+                return ir.Succeeded;
+            ir = um.AddToRole(user.Id, "canEdit");
+            ir = um.AddToRole(user.Id, "canApproveUsers");
+            return ir.Succeeded;
+
+        }
+
         protected override void Seed(iiifly.Models.ApplicationDbContext context)
         {
-            string spaceFormat = "https://api-hydra.dlcs.io/customers/{0}/spaces/{1}";
-            int spaceSeed = 100;
-
-            //context.SpaceMappings.AddOrUpdate(p => p.SpaceMappingId, 
-            //    new SpaceMapping
-            //    {
-            //        DlcsSpace = string.Format(spaceFormat, SpaceMapping.CustomerId, ++spaceSeed),
-            //        SpaceId = spaceSeed,
-            //        SpaceMappingId = Guid.NewGuid()
-            //    },
-            //    new SpaceMapping
-            //    {
-            //        DlcsSpace = string.Format(spaceFormat, SpaceMapping.CustomerId, ++spaceSeed),
-            //        SpaceId = spaceSeed,
-            //        SpaceMappingId = Guid.NewGuid()
-            //    },
-            //    new SpaceMapping
-            //    {
-            //        DlcsSpace = string.Format(spaceFormat, SpaceMapping.CustomerId, ++spaceSeed),
-            //        SpaceId = spaceSeed,
-            //        SpaceMappingId = Guid.NewGuid()
-            //    });
+            AddUserAndRoles(context);
         }
     }
 }

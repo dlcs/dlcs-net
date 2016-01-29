@@ -35,6 +35,7 @@ namespace DLCS.Client.Model
             InfoJson = "http://mock.dlcs.io" + Id;
             DegradedInfoJson = "http://mock.degraded.dlcs.io" + Id;
             ThumbnailInfoJson = "http://mock.thumbs.dlcs.io" + Id;
+            Thumbnail400 = "http://mock.thumbs.dlcs.io" + Id + "/full/400,/0/default.jpg";
             Created = created;
             Origin = origin;
             InitialOrigin = initialOrigin;
@@ -70,6 +71,11 @@ namespace DLCS.Client.Model
             Range = Names.XmlSchema.String, ReadOnly = false, WriteOnly = false)]
         [JsonProperty(Order = 13, PropertyName = "thumbnailInfoJson")]
         public string ThumbnailInfoJson { get; set; }
+
+        [RdfProperty(Description = "Direct URI of the 400 pixel thumbnail",
+            Range = Names.XmlSchema.String, ReadOnly = true, WriteOnly = false)]
+        [JsonProperty(Order = 13, PropertyName = "thumbnail400")]
+        public string Thumbnail400 { get; set; }
 
         [RdfProperty(Description = "Date the image was added",
             Range = Names.XmlSchema.DateTime, ReadOnly = true, WriteOnly = false)]

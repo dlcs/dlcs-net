@@ -25,7 +25,8 @@ namespace iiifly
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-theme-paper.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/zocial.css"));
         }
     }
 }
