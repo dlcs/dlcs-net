@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -50,18 +51,18 @@ namespace iiifly
             //    clientId: "",
             //    clientSecret: "");
 
-            app.UseTwitterAuthentication(
-               consumerKey: "",
-               consumerSecret: "");
+            //app.UseTwitterAuthentication(
+            //   consumerKey: ConfigurationManager.AppSettings["twitter-consumerkey"],
+            //   consumerSecret: ConfigurationManager.AppSettings["twitter-consumersecret"]);
 
-            app.UseFacebookAuthentication(
-               appId: "",
-               appSecret: "");
+            //app.UseFacebookAuthentication(
+            //   appId: ConfigurationManager.AppSettings["facebook-appid"],
+            //   appSecret: ConfigurationManager.AppSettings["facebook-appsecret"]);
 
-            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions
             {
-                ClientId = "",
-                ClientSecret = ""
+                ClientId = ConfigurationManager.AppSettings["google-clientid"],
+                ClientSecret = ConfigurationManager.AppSettings["google-clientsecret"]
             });
         }
     }

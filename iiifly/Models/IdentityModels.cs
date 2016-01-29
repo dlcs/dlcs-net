@@ -29,5 +29,7 @@ namespace iiifly.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<iiifly.Models.SpaceMapping> SpaceMappings { get; set; }
     }
 }
