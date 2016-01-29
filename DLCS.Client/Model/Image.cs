@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DLCS.Client.Hydra;
 using DLCS.Client.Hydra.Model;
 using Newtonsoft.Json;
@@ -25,12 +21,38 @@ namespace DLCS.Client.Model
         {
         }
 
-        public Image(int customerId, int spaceId, string imageId, string name, string displayName)
+        public Image(int customerId, int spaceId, string imageId, 
+            DateTime created, string origin, string initialOrigin,
+            int width, int height, int maxUnauthorised,
+            DateTime? queued, DateTime? dequeued, DateTime? finished, bool ingesting, string error,
+            string[] tags, string string1, string string2, string string3,
+            long number1, long number2, long number3)
         {
             ModelId = imageId;
             CustomerId = customerId;
             SpaceId = spaceId;
             Init(true, customerId, spaceId, ModelId);
+            InfoJson = "http://mock.dlcs.io" + Id;
+            DegradedInfoJson = "http://mock.degraded.dlcs.io" + Id;
+            ThumbnailInfoJson = "http://mock.thumbs.dlcs.io" + Id;
+            Created = created;
+            Origin = origin;
+            InitialOrigin = initialOrigin;
+            Width = width;
+            Height = height;
+            MaxUnauthorised = maxUnauthorised;
+            Queued = queued;
+            Dequeued = dequeued;
+            Finished = finished;
+            Ingesting = ingesting;
+            Error = error;
+            Tags = tags;
+            String1 = string1;
+            String2 = string2;
+            String3 = string3;
+            Number1 = number1;
+            Number2 = number2;
+            Number3 = number3;
         }
 
 
@@ -85,22 +107,22 @@ namespace DLCS.Client.Model
         [RdfProperty(Description = "When the image was added to the queue",
             Range = Names.XmlSchema.DateTime, ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 30, PropertyName = "queued")]
-        public DateTime Queued { get; set; }
+        public DateTime? Queued { get; set; }
 
         [RdfProperty(Description = "When the image was taken off the queue",
             Range = Names.XmlSchema.DateTime, ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 31, PropertyName = "dequeued")]
-        public DateTime Dequeued { get; set; }
+        public DateTime? Dequeued { get; set; }
 
         [RdfProperty(Description = "When the image processing finished (image ready)",
             Range = Names.XmlSchema.DateTime, ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 32, PropertyName = "finished")]
-        public DateTime Finished { get; set; }
+        public DateTime? Finished { get; set; }
 
         [RdfProperty(Description = "Is the image currently being ingested?",
             Range = Names.XmlSchema.Boolean, ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 33, PropertyName = "ingesting")]
-        public DateTime Ingesting { get; set; }
+        public bool Ingesting { get; set; }
 
         [RdfProperty(Description = "Reported errors with this image",
             Range = Names.XmlSchema.String, ReadOnly = false, WriteOnly = false)]
@@ -170,8 +192,7 @@ namespace DLCS.Client.Model
         {
             SupportedOperations = CommonOperations.GetStandardResourceOperations(
                 operationId, "Image", Id,
-                "GET", "PUT", "PATCH", "DELETE"); // TODO - what is and is not allwoed here...?
-
+                "GET", "PUT", "PATCH", "DELETE"); // TODO - what is and is not allowed here...?
 
             GetHydraLinkProperty("roles").SupportedOperations = CommonOperations
                 .GetStandardCollectionOperations(operationId + "_role_", "Role", "vocab:Role");

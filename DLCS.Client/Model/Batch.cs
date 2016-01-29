@@ -17,17 +17,16 @@ namespace DLCS.Client.Model
 
         public Batch() { }
 
-        public Batch(string modelId, int customerId, DateTime submitted, int count, DateTime completed, int errors,
-            DateTime estCompletion)
+        public Batch(string modelId, int customerId, DateTime submitted)
         {
 
             ModelId = modelId;
             CustomerId = customerId;
             Submitted = submitted;
-            Count = count;
-            Completed = completed;
-            Errors = errors;
-            EstCompletion = estCompletion;
+            //Count = count;
+            //Finished = finished;
+            //Errors = errors;
+            //EstCompletion = estCompletion;
             Init(true, customerId, ModelId);
         }
 
@@ -41,11 +40,16 @@ namespace DLCS.Client.Model
             Range = Names.XmlSchema.NonNegativeInteger, ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 12, PropertyName = "count")]
         public int Count { get; set; }
+        
+        [RdfProperty(Description = "Total number of completed images in the batch",
+            Range = Names.XmlSchema.NonNegativeInteger, ReadOnly = true, WriteOnly = false)]
+        [JsonProperty(Order = 12, PropertyName = "count")]
+        public int Completed { get; set; }
 
-        [RdfProperty(Description = "Date the batch was completed (may still have errors)",
+        [RdfProperty(Description = "Date the batch was finished (may still have errors)",
             Range = Names.XmlSchema.DateTime, ReadOnly = true, WriteOnly = false)]
-        [JsonProperty(Order = 13, PropertyName = "completed")]
-        public DateTime Completed { get; set; }
+        [JsonProperty(Order = 13, PropertyName = "finished")]
+        public DateTime? Finished { get; set; }
 
         [RdfProperty(Description = "Total number of error images in the batch",
             Range = Names.XmlSchema.NonNegativeInteger, ReadOnly = true, WriteOnly = false)]
@@ -55,7 +59,7 @@ namespace DLCS.Client.Model
         [RdfProperty(Description = "Estimated Completion (best guess as to when this batch might get done)",
             Range = Names.XmlSchema.DateTime, ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 15, PropertyName = "estCompletion")]
-        public DateTime EstCompletion { get; set; }
+        public DateTime? EstCompletion { get; set; }
 
         [HydraLink(Description = "All the images in the batch",
             Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DLCS.Client.Model;
 
 namespace DLCS.Mock.ApiApp
@@ -51,12 +49,87 @@ namespace DLCS.Mock.ApiApp
             model.Spaces = spaces;
             model.Queues = CreateQueues(customers);
             model.ImageRoles = new Dictionary<string, List<string>>();
-            var images = CreateImages(spaces, model.ImageRoles);
+            var images = CreateImages(spaces, model.SpaceDefaultRoles, model.ImageRoles);
             model.Images = images;
             model.BatchImages = new Dictionary<string, List<string>>();
-            model.Batches = CreateBatches(customers, model.BatchImages);
+            model.Batches = CreateBatches(images, model.BatchImages);
             RecalculateCounters(model);
             return model;
+        }
+
+        private static List<Batch> CreateBatches(List<Image> images, Dictionary<string, List<string>> batchImages)
+        {
+            var r = new Random();
+            var batches = new List<Batch>();
+            int batchId = 100001;
+            Batch currentBatch = null;
+            int batchSize = -1;
+            int counter = -1;
+            int currentCustomer = -1;
+            List<string> imagesInBatch = null;
+            foreach (var image in images)
+            {
+                if (counter++ > batchSize || image.CustomerId != currentCustomer)
+                {
+                    // save the old batch
+                    if (currentBatch != null)
+                    {
+                        batches.Add(currentBatch);
+                        batchImages.Add(currentBatch.Id, imagesInBatch);
+                    }
+                    // start a new batch
+                    currentCustomer = image.CustomerId;
+                    counter = 1;
+                    batchSize = r.Next(3, 10);
+                    currentBatch = new Batch(batchId++.ToString(), image.CustomerId, image.Created.AddSeconds(-1));
+                    imagesInBatch = new List<string>();
+                }
+                imagesInBatch.Add(image.Id);
+            }
+            batches.Add(currentBatch);
+            batchImages.Add(currentBatch.Id, imagesInBatch);
+            return batches;
+        }
+        
+        private static List<Image> CreateImages(List<Space> spaces, Dictionary<string, List<string>> spaceDefaultRoles, Dictionary<string, List<string>> imageRoles)
+        {
+            var images = new List<Image>();
+            foreach (var space in spaces)
+            {
+                images.AddRange(MakeImagesForSpace(20, space, spaceDefaultRoles, imageRoles));
+            }
+            return images;
+        }
+
+        private static List<Image> MakeImagesForSpace(int howMany, Space space, Dictionary<string, List<string>> spaceDefaultRoles, Dictionary<string, List<string>> imageRoles)
+        {
+            Random r = new Random();
+            var images = new List<Image>();
+            var ongoing = space.ModelId%2 == 0;
+            var queued = ongoing ? DateTime.Now.AddHours(-4) : new DateTime(2015, 11, 30); 
+            for (int i = 0; i < howMany; i++)
+            {
+                DateTime? dequeued = ongoing ? (DateTime?) null : queued.AddHours(1).AddSeconds(i * 5);
+                if (ongoing && i < 6) dequeued = DateTime.Now.AddSeconds(-80 + 9*i);
+                DateTime? finished = ongoing ? (DateTime?)null : queued.AddSeconds(3608).AddSeconds(i * 7);
+                if (ongoing && i < 4) finished = DateTime.Now.AddSeconds(-60 + 9 * i);
+                var id = Guid.NewGuid().ToString().Substring(0, 8) + i.ToString().PadLeft(5, '0');
+                var image = new Image(space.CustomerId, space.ModelId, id,
+                    DateTime.Now, "https://customer.com/images/" + id + ".tiff", null,
+                    r.Next(2000,11000), r.Next(3000,11000), space.DefaultMaxUnauthorised,
+                    queued, dequeued, finished, !finished.HasValue, null,
+                    space.DefaultTags, "b12345678", null, null, i, 0, 0);
+                images.Add(image);
+                if (spaceDefaultRoles.ContainsKey(space.Id))
+                {
+                    var roles = spaceDefaultRoles[space.Id];
+                    if (roles.Any())
+                    {
+                        imageRoles.Add(image.Id, roles);
+                    }
+                }
+            }
+            return images;
         }
 
 
@@ -206,10 +279,9 @@ namespace DLCS.Mock.ApiApp
             {
                 new Space(1, wellcome, "wellcome1", DateTime.Now, null, -1),
                 new Space(2, wellcome, "wellcome2", DateTime.Now, null, -1),
-                new Space(11, test, "test1", DateTime.Now, null, -1),
-                new Space(21, test, "test2", DateTime.Now, null, -1)
+                new Space(11, test, "test1", DateTime.Now, null, 400),
+                new Space(12, test, "test2", DateTime.Now, new [] {"tag1", "tag2"}, -1)
             };
-
              
             spaceDefaultRoles.Add(
                     spaces[1].Id,
@@ -223,8 +295,50 @@ namespace DLCS.Mock.ApiApp
 
         public static void RecalculateCounters(MockModel model)
         {
-            //model.SetBatchCounts();
-            //model.SetQueueSize();
+            model.SetBatchCounts();
+            model.SetQueueSizes();
+        }
+
+        private void SetBatchCounts()
+        {
+            foreach (var batch in Batches)
+            {
+                var imageIds = BatchImages[batch.Id];
+                var images = Images.Where(i => imageIds.Contains(i.Id)).ToList();
+                batch.Count = images.Count;
+                batch.Completed = images.Count(i => i.Finished.HasValue);
+                if (images.All(i => i.Finished.HasValue))
+                {
+                    batch.Finished = images.Select(i => i.Finished).Max();
+                }
+                else
+                {
+                    batch.EstCompletion = DateTime.Now.AddMinutes(3);
+                }
+            }
+        }
+
+        private void SetQueueSizes()
+        {
+            var totalByCustomer = new Dictionary<int, int>();
+            foreach (var image in Images)
+            {
+                if (!totalByCustomer.ContainsKey(image.CustomerId))
+                {
+                    totalByCustomer[image.CustomerId] = 0;
+                }
+                if (!image.Finished.HasValue)
+                {
+                    totalByCustomer[image.CustomerId] += 1;
+                }
+            }
+            foreach (var queue in Queues)
+            {
+                if (totalByCustomer.ContainsKey(queue.ModelId))
+                {
+                    queue.Size = totalByCustomer[queue.ModelId];
+                }
+            }
         }
 
 
@@ -238,12 +352,5 @@ namespace DLCS.Mock.ApiApp
                 new Queue(4)
             };
         }
-
-        private static List<Batch> CreateBatches()
-        {
-            return new List<Batch>();
-        }
-
-        
     }
 }
