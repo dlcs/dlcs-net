@@ -1,0 +1,1 @@
+﻿This is where images get dropped to be picked up by the DLCS

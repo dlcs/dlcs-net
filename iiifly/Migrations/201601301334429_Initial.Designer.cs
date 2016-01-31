@@ -13,7 +13,7 @@ namespace iiifly.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201601291630413_Initial"; }
+            get { return "201601301334429_Initial"; }
         }
         
         string IMigrationMetadata.Source

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<iiifly.Models.UserRoleModel>
+
+@{
+    ViewBag.Title = "User admin";
+}
+
+<h2>User admin</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            User
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Affiliation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            Can upload images
+        </th>
+        <th>
+            Can use this page
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Affiliation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.CheckBoxFor(modelItem => item.CanCallDlcs, new { data_role = "canCallDlcs", onclick = "toggleRoleState(this)", data_user = item.UserId })
+            </td>
+            <td>
+                @Html.CheckBoxFor(modelItem => item.CanApproveUsers, new { data_role = "canApproveUsers", onclick = "toggleRoleState(this)", data_user = item.UserId })
+            </td>
+        </tr>
+    }
+    
+</table>
+
+<script type="text/javascript">
+    
+    function toggleRoleState(cbox) {
+        var $cbox = $(cbox);
+        var checked = $cbox.is(':checked');
+        var user = $cbox.attr('data-user');
+        var role = $cbox.attr('data-role');
+        alert('TODO: Will set user ' + user + ',\nrole ' + role + ' to ' + checked);
+    }
+
+</script>

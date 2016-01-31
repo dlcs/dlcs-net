@@ -27,6 +27,13 @@ namespace iiifly
                       "~/Content/bootstrap-theme-paper.css",
                       "~/Content/site.css",
                       "~/Content/zocial.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/dropzonescripts").Include(
+                     "~/Scripts/dropzone/dropzone.js"));
+
+            bundles.Add(new StyleBundle("~/Content/dropzonecss").Include(
+                     "~/Scripts/dropzone/basic.css",
+                     "~/Scripts/dropzone/dropzone.css"));
         }
     }
 }

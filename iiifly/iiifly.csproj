@@ -169,26 +169,36 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImagesController.cs" />
+    <Compile Include="Controllers\ImageSetsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UserAdminController.cs" />
+    <Compile Include="Dlcs\Batch.cs" />
+    <Compile Include="Dlcs\Dlcs.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601291630413_Initial.cs" />
-    <Compile Include="Migrations\201601291630413_Initial.Designer.cs">
-      <DependentUpon>201601291630413_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201601301334429_Initial.cs" />
+    <Compile Include="Migrations\201601301334429_Initial.Designer.cs">
+      <DependentUpon>201601301334429_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ImageSetModel.cs" />
     <Compile Include="Models\DlcsImage.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\GlobalData.cs" />
+    <Compile Include="Models\UserRoleModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Util\SimpleAES.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme-paper.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\external_link.png" />
     <Content Include="Content\zocial.css" />
     <Content Include="Content\zocial.svg" />
     <Content Include="favicon.ico" />
@@ -196,6 +206,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="notes.txt" />
+    <Content Include="Origin\readme.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="AppSettingsSecrets.config" />
@@ -204,6 +215,14 @@
     <Content Include="Content\zocial.woff" />
     <None Include="Properties\PublishProfiles\iiifly.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\dropzone\basic.css" />
+    <Content Include="Scripts\dropzone\basic.min.css" />
+    <Content Include="Scripts\dropzone\dropzone-amd-module.js" />
+    <Content Include="Scripts\dropzone\dropzone-amd-module.min.js" />
+    <Content Include="Scripts\dropzone\dropzone.css" />
+    <Content Include="Scripts\dropzone\dropzone.js" />
+    <Content Include="Scripts\dropzone\dropzone.min.css" />
+    <Content Include="Scripts\dropzone\dropzone.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -249,9 +268,16 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\UserAdmin\Index.cshtml" />
+    <Content Include="Views\ImageSets\Create.cshtml" />
+    <Content Include="Views\ImageSets\Delete.cshtml" />
+    <Content Include="Views\ImageSets\Details.cshtml" />
+    <Content Include="Views\ImageSets\Edit.cshtml" />
+    <Content Include="Views\ImageSets\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -262,8 +288,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601291630413_Initial.resx">
-      <DependentUpon>201601291630413_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601301334429_Initial.resx">
+      <DependentUpon>201601301334429_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

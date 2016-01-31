@@ -1,31 +1,141 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    ViewBag.ImageSet = Guid.NewGuid().ToString().Substring(0, 8);
 }
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <h1>iiif.ly</h1>
+    <p class="lead">This site turns any image into a deep-zoom capable endpoint that conforms to the International Image Interoperability Framework Image API.</p>
+    <p><a href="@Url.Action("About", "Home")" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+<div class="jumbotron">
+    @using (Html.BeginForm("Upload", "Images", FormMethod.Post, new
+    {
+        enctype = "multipart/form-data",
+        id = "dropzoneForm",
+        @class = "dropzone"
+    }))
+    {
+        <input type="hidden" name="imageSet" value="@ViewBag.ImageSet"/>
+        <div class="fallback">
+            <p>Sorry, you need a more modern browser to play with this.</p>
+        </div>
+    }
 </div>
+
+<div class="jumbotron" id="nextBox">
+    <p><a href="@Url.Action("CreateImageSet", "Images", new {id = ViewBag.ImageSet })" class="btn btn-primary btn-lg disabled" id="iiifify">IIIF-ify this image... &raquo;</a></p>
+    <p class="lead">Add some metadata and iiif-ify!</p>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+
+        $('#nextBox').hide();
+        Dropzone.options.dropzoneForm = {
+            paramName: "file", // The name that will be used to transfer the file
+            maxFilesize: 2, // MB,
+            maxFiles: 32,
+            init: function() {
+                this.on("success", fileSuccess);
+                this.on("error", fileSuccess);
+                this.on("queuecomplete", queuecomplete);
+                this.on("drop", drop);
+                window.pDropZone = this;
+            }
+        };
+
+        function fileSuccess(file, response) {
+            log(response.message);
+        }
+
+        function queuecomplete() {
+            log("queuecomplete");
+            setNext(true);
+        }
+
+        function drop(e) {
+
+            setNext(false);
+            if (e.dataTransfer.files.length > 0) {
+                // dropzone 
+            } else {
+                //Find the url embedded in the dataTransfer data
+                var data = e.dataTransfer.getData("text/html");
+                var matches = data.match(/http:\/\/[^"]+/gi);
+                var url = (matches || [false])[0]; //returns the url or false if no match found
+                if (url) {
+                    pseudoUpload(url);
+                }
+            }
+        }
+
+        function pseudoUpload(url) {
+            // Create the mock file:
+            var mockFile = { name: "External: " + url, size: 0 };
+
+            // Call the default addedfile event handler
+            window.pDropZone.emit("addedfile", mockFile);
+
+            // And optionally show the thumbnail of the file:
+            //window.pDropZone.emit("thumbnail", mockFile, url);
+            // Or if the file on your server is not yet in the right
+            // size, you can let Dropzone download and resize it
+            // callback and crossOrigin are optional.
+            window.pDropZone.createThumbnailFromUrl(mockFile, "/Content/external_link.png"); //, callback, crossOrigin);
+
+            // Make sure that there is no progress bar, etc...
+            window.pDropZone.emit("complete", mockFile);
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ExternalImage", "Images")',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ externalUrl: url, imageSet: '@ViewBag.ImageSet' }),
+                dataType: "json",
+                success: function() {
+                    log("uploaded external url " + url);
+                    if (window.pDropZone.getQueuedFiles().length === 0 && window.pDropZone.getUploadingFiles().length === 0) {
+                        setNext(true);
+                    } else {
+                        setNext(false);
+                    }
+                },
+                error: function() {
+                    log("FAILED to upload external url " + url);
+                }
+            });
+        }
+
+        function log(s) {
+            $('#logoutput').append(s + "<br/>");
+            console.log(s);
+        }
+
+        function setNext(available) {
+            log("available: " + available);
+            var link = $('#iiifify');
+            if (window.pDropZone.getAcceptedFiles().length > 1) {
+                link.text('IIIF-ify these images »');
+            } else {
+                link.text('IIIF-ify this image »');
+            }
+            if (available) {
+                $('#nextBox').show();
+                link.unbind('click');
+                link.attr('class', 'btn btn-primary btn-lg');
+            } else {
+                link.bind('click', function (e) {
+                    e.preventDefault();
+                });
+                link.attr('class', 'btn btn-primary btn-lg disabled');
+            }
+        }
+    </script>
+}
+
+<section class="log">
+    <div class="row" id="logoutput">
+        
+    </div>
+</section>

@@ -23,14 +23,16 @@ namespace iiifly.Migrations
 
             IdentityResult ir;
             var um = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            var user = new ApplicationUser()
+            var user = new ApplicationUser
             {
-                UserName = ConfigurationManager.AppSettings["admin-user-name"]
+                UserName = ConfigurationManager.AppSettings["admin-user-name"],
+                DisplayName = "Tom Crane",
+                Affiliation = "Digirati"
             };
             ir = um.Create(user, ConfigurationManager.AppSettings["admin-user-password"]);
             if (ir.Succeeded == false)
                 return ir.Succeeded;
-            ir = um.AddToRole(user.Id, "canEdit");
+            ir = um.AddToRole(user.Id, "canCallDlcs");
             ir = um.AddToRole(user.Id, "canApproveUsers");
             return ir.Succeeded;
 

@@ -46,23 +46,32 @@ namespace iiifly
             // This is similar to the RememberMe option when you log in.
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
-            // Uncomment the following lines to enable logging in with third party login providers
-            //app.UseMicrosoftAccountAuthentication(
-            //    clientId: "",
-            //    clientSecret: "");
+            // DO NOT PUT THESE CONFIG SETTINGS INTO VCS..
 
-            //app.UseTwitterAuthentication(
-            //   consumerKey: ConfigurationManager.AppSettings["twitter-consumerkey"],
-            //   consumerSecret: ConfigurationManager.AppSettings["twitter-consumersecret"]);
+            var twitterKey = ConfigurationManager.AppSettings["twitter-consumerkey"];
+            var twitterSecret = ConfigurationManager.AppSettings["twitter-consumersecret"];
+            if (!string.IsNullOrWhiteSpace(twitterKey) && !string.IsNullOrWhiteSpace(twitterSecret))
+            {
+                app.UseTwitterAuthentication(
+                   consumerKey: twitterKey,
+                   consumerSecret: twitterSecret);
+            }
 
-            //app.UseFacebookAuthentication(
-            //   appId: ConfigurationManager.AppSettings["facebook-appid"],
-            //   appSecret: ConfigurationManager.AppSettings["facebook-appsecret"]);
+            var facebookId = ConfigurationManager.AppSettings["facebook-appid"];
+            var facebookSecret = ConfigurationManager.AppSettings["facebook-appsecret"];
+            if (!string.IsNullOrWhiteSpace(facebookId) && !string.IsNullOrWhiteSpace(facebookSecret))
+            {
+                app.UseFacebookAuthentication(
+                    appId: facebookId,
+                    appSecret: facebookSecret);
+            }
 
+            var googleClientId = ConfigurationManager.AppSettings["google-clientid"];
+            var googleClientSecret = ConfigurationManager.AppSettings["google-clientsecret"];
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions
             {
-                ClientId = ConfigurationManager.AppSettings["google-clientid"],
-                ClientSecret = ConfigurationManager.AppSettings["google-clientsecret"]
+                ClientId = googleClientId,
+                ClientSecret = googleClientSecret
             });
         }
     }

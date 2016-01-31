@@ -34,6 +34,7 @@ namespace iiifly.Models
         {
             return new ApplicationDbContext();
         }
-        
+
+        public DbSet<ImageSet> ImageSets { get; set; }
     }
 }
