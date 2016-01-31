@@ -235,3 +235,5 @@ _Pvt_Extensions
 AppSettingsSecrets.config
 ConnectionStrings.config
 
+iiifly/Origin/**/
+
