@@ -182,6 +182,10 @@
     <Compile Include="Migrations\201601301334429_Initial.Designer.cs">
       <DependentUpon>201601301334429_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601311543513_ImageSet.cs" />
+    <Compile Include="Migrations\201601311543513_ImageSet.Designer.cs">
+      <DependentUpon>201601311543513_ImageSet.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ImageSetModel.cs" />
@@ -290,6 +294,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201601301334429_Initial.resx">
       <DependentUpon>201601301334429_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601311543513_ImageSet.resx">
+      <DependentUpon>201601311543513_ImageSet.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
