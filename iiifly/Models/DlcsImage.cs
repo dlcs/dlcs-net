@@ -32,6 +32,7 @@ namespace iiifly.Models
     public class ExternalImage
     {
         public string ExternalUrl { get; set; }
+        public string HashCode { get; set; }
         public string ImageSet { get; set; }
     }
 }

@@ -56,6 +56,36 @@ namespace DLCS.Mock.Controllers
 
         }
 
+
+        [HttpGet]
+        public Collection<JObject> Spaces(int customerId)
+        {
+            var spaces = GetModel().Spaces
+                .Where(p => p.CustomerId == customerId)
+                .Select(p => p.GetCollectionForm()).ToArray();
+
+            return new Collection<JObject>
+            {
+                IncludeContext = true,
+                Members = portalUsers,
+                TotalItems = portalUsers.Length,
+                Id = Request.RequestUri.ToString()
+            };
+
+        }
+
+        [HttpGet]
+        public IHttpActionResult PortalUsers(int customerId, string propertyId)
+        {
+            var user = GetModel().PortalUsers.SingleOrDefault(u => u.CustomerId == customerId && u.ModelId == propertyId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
+        }
+
+        
         [HttpGet]
         public IHttpActionResult PortalUsers(int customerId, string propertyId)
         {

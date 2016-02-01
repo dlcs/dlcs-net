@@ -102,8 +102,9 @@ namespace iiifly.Controllers
             {
                 return Json(new { error = "No recognisable file in request" });
             }
-
-            var target = Path.Combine(GetTargetDirectory(image.ImageSet).ToString(), filename + ".external.json");
+            image.HashCode = string.Format("{0:X}", image.ExternalUrl.GetHashCode());
+            string diskFilename = string.Format("{0}.{1}.external.json", filename, image.HashCode);
+            var target = Path.Combine(GetTargetDirectory(image.ImageSet).ToString(), diskFilename);
             System.IO.File.WriteAllText(target, JsonConvert.SerializeObject(image));
 
             return Json(new { message = "external: " + filename });
@@ -156,7 +157,7 @@ namespace iiifly.Controllers
                 // enqueue a batch
                 var dlcsBatch = Dlcs.Dlcs.Enqueue(ingestImages);
                 using (var db = new ApplicationDbContext())
-                {
+                { 
                     var imageSet = db.ImageSets.Find(id);
                     imageSet.DlcsBatch = dlcsBatch.Id;
                     db.SaveChanges();
@@ -170,29 +171,33 @@ namespace iiifly.Controllers
             int counter = 0;
             return GetTargetDirectory(imageSet).GetFiles()
                 .OrderBy(fi => fi.LastWriteTime)
-                .Select(fi => new IngestImage
-                {
-                    Id = string.Format("{0}_{1}", imageSet, fi.Name),
-                    Space = GetSpaceId(space),
-                    Origin = GetOrigin(fi, applicationUser, imageSet),
-                    String1 = imageSet,
-                    Number1 = counter++
-                })
+                .Select(fi => GetIngestImage(fi, imageSet, space, applicationUser, counter++))
                 .ToList();
         }
 
-        private string GetOrigin(FileInfo fi, ApplicationUser applicationUser, string imageSet)
+        private IngestImage GetIngestImage(FileInfo fi, string imageSet, string space, ApplicationUser applicationUser, int index)
         {
+            var img = new IngestImage
+            {
+                Id = string.Format("{0}_{1}", imageSet, fi.Name),
+                Space = GetSpaceId(space),
+                String1 = imageSet,
+                Number1 = index
+            };
             if (fi.Name.EndsWith(".external.json"))
             {
                 var json = System.IO.File.ReadAllText(fi.FullName);
                 var ext = JsonConvert.DeserializeObject<ExternalImage>(json);
-                return ext.ExternalUrl;
+                img.Origin = ext.ExternalUrl;
             }
-            var leftPart = Request.Url.GetLeftPart(UriPartial.Authority);
-            return string.Format("{0}/origin/{1}/{2}/{3}", leftPart, applicationUser.Id, imageSet, fi.Name);
+            else
+            {
+                var leftPart = Request.Url.GetLeftPart(UriPartial.Authority);
+                img.Origin = string.Format("{0}/origin/{1}/{2}/{3}", leftPart, applicationUser.Id, imageSet, fi.Name);
+            }
+            return img;
         }
-
+        
         private int GetSpaceId(string space)
         {
             // er, this is not very RESTful...
@@ -204,7 +209,8 @@ namespace iiifly.Controllers
             if (string.IsNullOrWhiteSpace(applicationUser.DlcsSpace))
             {
                 // they haven't yet got a space...
-                applicationUser.DlcsSpace = Dlcs.Dlcs.CreateSpace(applicationUser.Id);
+                var spaceTask = Dlcs.Dlcs.CreateSpace(applicationUser.Id);
+                applicationUser.DlcsSpace = spaceTask.Result;
                 UserManager.Update(applicationUser);
             }
             return applicationUser.DlcsSpace;

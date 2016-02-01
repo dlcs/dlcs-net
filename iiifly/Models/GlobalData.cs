@@ -19,7 +19,12 @@ namespace iiifly.Models
 
         public static string GetPublicPath(this IPrincipal user)
         {
-            return GetEntry(_userIdToPublicPath, user.Identity.GetUserId(), true);
+            return GetPublicPath(user.Identity.GetUserId());
+        }
+
+        public static string GetPublicPath(string userId)
+        {
+            return GetEntry(_userIdToPublicPath, userId, true);
         }
 
         public static string GetUserIdFromPublicPath(string publicPath)
