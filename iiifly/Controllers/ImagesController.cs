@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using iiifly.Dlcs;
 using iiifly.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -11,45 +12,21 @@ using Newtonsoft.Json;
 
 namespace iiifly.Controllers
 {
-    public class ImagesController : Controller
+    public class ImagesController : UserBaseController
     {
-        private ApplicationUserManager _userManager;
-
-        public ImagesController()
-        {
-        }
+        public ImagesController() { }
 
         public ImagesController(ApplicationUserManager userManager)
         {
             UserManager = userManager;
         }
-
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
-
-
-        // GET: Images
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-
+        
         [Authorize(Roles = "canCallDlcs")]
         public ActionResult Upload()
         {
             string errorMessage = null;
             string imageSet = Request.Form["imageSet"];
-            if (string.IsNullOrWhiteSpace(imageSet) || imageSet.Length != 8)
+            if (!GlobalData.IsValidImageSetId(imageSet))
             {
                 return Json(new { error = "No imageSet in request" });
             }
@@ -64,7 +41,7 @@ namespace iiifly.Controllers
 
                     //Save file content goes here
                     filename = Path.GetFileName(file.FileName) ?? file.FileName;
-                    file.SaveAs(Path.Combine(GetTargetDirectory(imageSet).ToString(), filename));
+                    file.SaveAs(Path.Combine(GetOriginDirectory(imageSet).ToString(), filename));
                 }
 
             }
@@ -88,7 +65,7 @@ namespace iiifly.Controllers
             {
                 return Json(new { error = "No external image supplied" });
             }
-            if (string.IsNullOrWhiteSpace(image.ImageSet) || image.ImageSet.Length != 8)
+            if (!GlobalData.IsValidImageSetId(image.ImageSet))
             {
                 return Json(new { error = "No imageSet in request" });
             }
@@ -104,16 +81,16 @@ namespace iiifly.Controllers
             }
             image.HashCode = string.Format("{0:X}", image.ExternalUrl.GetHashCode());
             string diskFilename = string.Format("{0}.{1}.external.json", filename, image.HashCode);
-            var target = Path.Combine(GetTargetDirectory(image.ImageSet).ToString(), diskFilename);
+            var target = Path.Combine(GetOriginDirectory(image.ImageSet).ToString(), diskFilename);
             System.IO.File.WriteAllText(target, JsonConvert.SerializeObject(image));
 
             return Json(new { message = "external: " + filename });
         }
 
-        private DirectoryInfo GetTargetDirectory(string imageSet)
+        private DirectoryInfo GetOriginDirectory(string imageSet)
         {
             var originDirectory = new DirectoryInfo(string.Format("{0}origin\\{1}\\{2}",
-                Server.MapPath(@"\"), User.Identity.GetUserId(), imageSet));
+                Server.MapPath(@"\"), User.GetPublicPath(), imageSet));
             originDirectory.Create();
             return originDirectory;
         }
@@ -128,7 +105,7 @@ namespace iiifly.Controllers
         {
             var userId = User.Identity.GetUserId();
             var applicationUser = UserManager.FindById(userId);
-            string space = GetSpaceForUser(applicationUser);
+            var space = GetSpaceForUser(applicationUser);
             var ingestImages = GetImagesFromDisk(id, space, applicationUser);
             if (ingestImages.Count == 0)
             {
@@ -148,14 +125,12 @@ namespace iiifly.Controllers
             if (ingestImages.Count == 1)
             {
                 // process immediately, synchronously
-                var result = Dlcs.Dlcs.PutImage(ingestImages[0], space);
-
-                // inspect result... error out etc
+                var result = Dlcs.Dlcs.PutImage(ingestImages[0]);
             } 
             if (ingestImages.Count > 1)
             {
                 // enqueue a batch
-                var dlcsBatch = Dlcs.Dlcs.Enqueue(ingestImages);
+                var dlcsBatch = Dlcs.Dlcs.Enqueue(ingestImages).Result;
                 using (var db = new ApplicationDbContext())
                 { 
                     var imageSet = db.ImageSets.Find(id);
@@ -166,21 +141,21 @@ namespace iiifly.Controllers
             return RedirectToAction("ImageSet", "Display", new { user = User.GetPublicPath(), imageSet = id });
         }
 
-        private List<IngestImage> GetImagesFromDisk(string imageSet, string space, ApplicationUser applicationUser)
+        private List<Image> GetImagesFromDisk(string imageSet, Space space, ApplicationUser applicationUser)
         {
             int counter = 0;
-            return GetTargetDirectory(imageSet).GetFiles()
+            return GetOriginDirectory(imageSet).GetFiles()
                 .OrderBy(fi => fi.LastWriteTime)
-                .Select(fi => GetIngestImage(fi, imageSet, space, applicationUser, counter++))
+                .Select(fi => GetIngestImage(fi, imageSet, space.ModelId, applicationUser, counter++))
                 .ToList();
         }
 
-        private IngestImage GetIngestImage(FileInfo fi, string imageSet, string space, ApplicationUser applicationUser, int index)
+        private Image GetIngestImage(FileInfo fi, string imageSet, int spaceModelId, ApplicationUser applicationUser, int index)
         {
-            var img = new IngestImage
+            var img = new Image
             {
-                Id = string.Format("{0}_{1}", imageSet, fi.Name),
-                Space = GetSpaceId(space),
+                ModelId = string.Format("{0}_{1}", imageSet, fi.Name),
+                Space = spaceModelId,
                 String1 = imageSet,
                 Number1 = index
             };
@@ -204,16 +179,21 @@ namespace iiifly.Controllers
             return int.Parse(space.Split('/').Last());
         }
 
-        private string GetSpaceForUser(ApplicationUser applicationUser)
+        private Space GetSpaceForUser(ApplicationUser applicationUser)
         {
             if (string.IsNullOrWhiteSpace(applicationUser.DlcsSpace))
             {
                 // they haven't yet got a space...
                 var spaceTask = Dlcs.Dlcs.CreateSpace(applicationUser.Id);
-                applicationUser.DlcsSpace = spaceTask.Result;
+                applicationUser.DlcsSpace = spaceTask; //.Result;
                 UserManager.Update(applicationUser);
             }
-            return applicationUser.DlcsSpace;
+            return new Space
+            {
+                Id = applicationUser.DlcsSpace,
+                ModelId = GetSpaceId(applicationUser.DlcsSpace),
+                Name = GlobalData.GetPublicPath(applicationUser.Id)
+            };
         }
         
     }

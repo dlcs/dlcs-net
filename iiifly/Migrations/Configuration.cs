@@ -38,9 +38,16 @@ namespace iiifly.Migrations
 
         }
 
+        private void DeleteImageSets(ApplicationDbContext context)
+        {
+            context.ImageSets.RemoveRange(context.ImageSets);
+        }
+
         protected override void Seed(iiifly.Models.ApplicationDbContext context)
         {
+            DeleteImageSets(context);
             AddUserAndRoles(context);
         }
+
     }
 }

@@ -5,9 +5,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using DLCS.Client.Config;
-using DLCS.Client.Hydra;
-using DLCS.Client.Hydra.Model;
+using Hydra;
 using DLCS.Mock.ApiApp;
+using Hydra.Model;
 
 namespace DLCS.Mock.Controllers
 {

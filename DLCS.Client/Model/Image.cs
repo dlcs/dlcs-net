@@ -1,6 +1,6 @@
 ﻿using System;
-using DLCS.Client.Hydra;
-using DLCS.Client.Hydra.Model;
+using Hydra;
+using Hydra.Model;
 using Newtonsoft.Json;
 
 namespace DLCS.Client.Model
@@ -10,8 +10,6 @@ namespace DLCS.Client.Model
         UriTemplate = "/customers/{0}/spaces/{1}/images/{2}")]
     public class Image : DlcsResource
     {
-        [JsonIgnore]
-        public string ModelId { get; set; }
         [JsonIgnore]
         public int CustomerId { get; set; }
         [JsonIgnore]
@@ -56,6 +54,11 @@ namespace DLCS.Client.Model
             Number3 = number3;
         }
 
+
+        [RdfProperty(Description = "The identifier for the image within the space - its URI component",
+            Range = Names.XmlSchema.String, ReadOnly = false, WriteOnly = false)]
+        [JsonProperty(Order = 10, PropertyName = "modelId")]
+        public string ModelId { get; set; }
 
         [RdfProperty(Description = "info.json URI",
             Range = Names.XmlSchema.String, ReadOnly = false, WriteOnly = false)]

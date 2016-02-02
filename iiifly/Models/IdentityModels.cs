@@ -13,6 +13,7 @@ namespace iiifly.Models
         public string DisplayName { get; set; }
         public string Affiliation { get; set; }
         public string DlcsSpace { get; set; }
+        public string PublicPathName { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

@@ -1,6 +1,7 @@
-﻿@{
+﻿@using iiifly.Models
+@{
     ViewBag.Title = "Home Page";
-    ViewBag.ImageSet = Guid.NewGuid().ToString().Substring(0, 8);
+    ViewBag.ImageSet = GlobalData.GenerateImageSetId();
 }
 
 <div class="jumbotron">
@@ -9,18 +10,26 @@
     <p><a href="@Url.Action("About", "Home")" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
+
 <div class="jumbotron">
-    @using (Html.BeginForm("Upload", "Images", FormMethod.Post, new
+    @if (User.IsInRole("canCallDlcs"))
     {
-        enctype = "multipart/form-data",
-        id = "dropzoneForm",
-        @class = "dropzone"
-    }))
+        using (Html.BeginForm("Upload", "Images", FormMethod.Post, new
+         {
+             enctype = "multipart/form-data",
+             id = "dropzoneForm",
+             @class = "dropzone"
+         }))
+         {
+             <input type="hidden" name="imageSet" value="@ViewBag.ImageSet"/>
+             <div class="fallback">
+                 <p>Sorry, you need a more modern browser to play with this.</p>
+             </div>
+         }
+    }
+    else
     {
-        <input type="hidden" name="imageSet" value="@ViewBag.ImageSet"/>
-        <div class="fallback">
-            <p>Sorry, you need a more modern browser to play with this.</p>
-        </div>
+        <p>You're not logged in. latest image here.</p>
     }
 </div>
 

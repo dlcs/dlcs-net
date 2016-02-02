@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using DLCS.Client.Config;
-using DLCS.Client.Hydra;
-using DLCS.Client.Hydra.Model;
+using Hydra;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 

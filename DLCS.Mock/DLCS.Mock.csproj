@@ -119,6 +119,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\SpaceImages\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiApp\AttributeUtil.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Controllers\DocumentationController.cs" />
     <Compile Include="Controllers\MockController.cs" />
     <Compile Include="Controllers\QueueController.cs" />
+    <Compile Include="Controllers\SpaceImagesController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -155,6 +157,10 @@
     <ProjectReference Include="..\DLCS.Client\DLCS.Client.csproj">
       <Project>{D51BC7FE-0F4E-4DC0-9E36-70E88271B6C4}</Project>
       <Name>DLCS.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hydra\Hydra.csproj">
+      <Project>{38882B8A-B0D2-4795-A62F-D099B905E2F2}</Project>
+      <Name>Hydra</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

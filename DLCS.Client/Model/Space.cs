@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using DLCS.Client.Hydra;
-using DLCS.Client.Hydra.Model;
+using Hydra;
+using Hydra.Model;
 using Newtonsoft.Json;
 
 namespace DLCS.Client.Model
@@ -12,9 +10,6 @@ namespace DLCS.Client.Model
            UriTemplate = "/customers/{0}/spaces/{1}")]
     public class Space : DlcsResource
     {
-        // Mock Model fields
-        [JsonIgnore]
-        public int ModelId { get; set; }
         [JsonIgnore]
         public int CustomerId { get; set; }
 
@@ -24,7 +19,6 @@ namespace DLCS.Client.Model
 
         public Space(int modelId, int customerId, string name, DateTime created, string[] defaultTags, int defaultMaxUnauthorised)
         {
-
             ModelId = modelId;
             CustomerId = customerId;
             Name = name;
@@ -33,6 +27,13 @@ namespace DLCS.Client.Model
             DefaultMaxUnauthorised = defaultMaxUnauthorised;
             Init(true, customerId, ModelId);
         }
+
+
+        
+        [RdfProperty(Description = "The internal identifier for the space within the customer (uri component)",
+            Range = Names.XmlSchema.Integer, ReadOnly = false, WriteOnly = false)]
+        [JsonProperty(Order = 10, PropertyName = "modelId")]
+        public int ModelId { get; set; }
 
         [RdfProperty(Description = "Space name",
             Range = Names.XmlSchema.String, ReadOnly = false, WriteOnly = false)]

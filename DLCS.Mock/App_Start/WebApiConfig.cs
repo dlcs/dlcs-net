@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using System.Web.Http;
+using System.Web.Mvc;
 using Newtonsoft.Json;
 
 namespace DLCS.Mock
@@ -41,10 +42,13 @@ namespace DLCS.Mock
             config.Routes.MapHttpRoute(
                 name: "Queue",
                 routeTemplate: "customers/{customerId}/queue/{action}",
-                defaults: new
-                {
-                    controller = "Queue"
-                }
+                defaults: new { controller = "Queue", action = "Index" }
+                );
+
+            config.Routes.MapHttpRoute(
+                name: "SpaceImages",
+                routeTemplate: "customers/{customerId}/spaces/{spaceId}/images/{id}",
+                defaults: new {controller = "SpaceImages", action = "Image", id = UrlParameter.Optional}
                 );
 
             // Routing for customer and its operations
@@ -57,6 +61,7 @@ namespace DLCS.Mock
                         propertyId = RouteParameter.Optional
                     }
                 );
+
 
             config.Routes.MapHttpRoute(
                 name: "DlcsApiRoot",

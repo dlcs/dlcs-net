@@ -185,14 +185,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DisplayController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\ImageSetsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
+    <Compile Include="Controllers\UserBaseController.cs" />
     <Compile Include="Dlcs\Batch.cs" />
+    <Compile Include="Dlcs\HttpClientBuilder.cs" />
     <Compile Include="Dlcs\Dlcs.cs" />
-    <Compile Include="Dlcs\JSONLDBase.cs" />
     <Compile Include="Dlcs\Space.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -205,10 +207,14 @@
     <Compile Include="Migrations\201601311543513_ImageSet.Designer.cs">
       <DependentUpon>201601311543513_ImageSet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602022003334_PublicPath.cs" />
+    <Compile Include="Migrations\201602022003334_PublicPath.Designer.cs">
+      <DependentUpon>201602022003334_PublicPath.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ImageSetModel.cs" />
-    <Compile Include="Models\DlcsImage.cs" />
+    <Compile Include="Dlcs\Image.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\GlobalData.cs" />
@@ -222,6 +228,40 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\external_link.png" />
+    <Content Include="Scripts\openseadragon\images\fullpage_grouphover.png" />
+    <Content Include="Scripts\openseadragon\images\fullpage_hover.png" />
+    <Content Include="Scripts\openseadragon\images\fullpage_pressed.png" />
+    <Content Include="Scripts\openseadragon\images\fullpage_rest.png" />
+    <Content Include="Scripts\openseadragon\images\home_grouphover.png" />
+    <Content Include="Scripts\openseadragon\images\home_hover.png" />
+    <Content Include="Scripts\openseadragon\images\home_pressed.png" />
+    <Content Include="Scripts\openseadragon\images\home_rest.png" />
+    <Content Include="Scripts\openseadragon\images\next_grouphover.png" />
+    <Content Include="Scripts\openseadragon\images\next_hover.png" />
+    <Content Include="Scripts\openseadragon\images\next_pressed.png" />
+    <Content Include="Scripts\openseadragon\images\next_rest.png" />
+    <Content Include="Scripts\openseadragon\images\previous_grouphover.png" />
+    <Content Include="Scripts\openseadragon\images\previous_hover.png" />
+    <Content Include="Scripts\openseadragon\images\previous_pressed.png" />
+    <Content Include="Scripts\openseadragon\images\previous_rest.png" />
+    <Content Include="Scripts\openseadragon\images\rotateleft_grouphover.png" />
+    <Content Include="Scripts\openseadragon\images\rotateleft_hover.png" />
+    <Content Include="Scripts\openseadragon\images\rotateleft_pressed.png" />
+    <Content Include="Scripts\openseadragon\images\rotateleft_rest.png" />
+    <Content Include="Scripts\openseadragon\images\rotateright_grouphover.png" />
+    <Content Include="Scripts\openseadragon\images\rotateright_hover.png" />
+    <Content Include="Scripts\openseadragon\images\rotateright_pressed.png" />
+    <Content Include="Scripts\openseadragon\images\rotateright_rest.png" />
+    <Content Include="Scripts\openseadragon\images\zoomin_grouphover.png" />
+    <Content Include="Scripts\openseadragon\images\zoomin_hover.png" />
+    <Content Include="Scripts\openseadragon\images\zoomin_pressed.png" />
+    <Content Include="Scripts\openseadragon\images\zoomin_rest.png" />
+    <Content Include="Scripts\openseadragon\images\zoomout_grouphover.png" />
+    <Content Include="Scripts\openseadragon\images\zoomout_hover.png" />
+    <Content Include="Scripts\openseadragon\images\zoomout_pressed.png" />
+    <Content Include="Scripts\openseadragon\images\zoomout_rest.png" />
+    <Content Include="Scripts\openseadragon\openseadragon.js" />
+    <Content Include="Scripts\openseadragon\openseadragon.min.js" />
     <Content Include="Content\zocial.css" />
     <Content Include="Content\zocial.svg" />
     <Content Include="favicon.ico" />
@@ -236,6 +276,7 @@
     <Content Include="Content\zocial.eot" />
     <Content Include="Content\zocial.ttf" />
     <Content Include="Content\zocial.woff" />
+    <Content Include="Scripts\openseadragon\openseadragon.min.js.map" />
     <None Include="Properties\PublishProfiles\iiifly.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dropzone\basic.css" />
@@ -297,10 +338,11 @@
     <Content Include="Views\ImageSets\Details.cshtml" />
     <Content Include="Views\ImageSets\Edit.cshtml" />
     <Content Include="Views\ImageSets\Index.cshtml" />
+    <Content Include="Views\Images\noimages.cshtml" />
+    <Content Include="Views\Display\ImageSet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -317,6 +359,15 @@
     <EmbeddedResource Include="Migrations\201601311543513_ImageSet.resx">
       <DependentUpon>201601311543513_ImageSet.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602022003334_PublicPath.resx">
+      <DependentUpon>201602022003334_PublicPath.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hydra\Hydra.csproj">
+      <Project>{38882B8A-B0D2-4795-A62F-D099B905E2F2}</Project>
+      <Name>Hydra</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

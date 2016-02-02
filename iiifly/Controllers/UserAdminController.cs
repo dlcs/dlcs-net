@@ -1,52 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using iiifly.Models;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace iiifly.Controllers
 {
     [Authorize(Roles = "canApproveUsers")]
-    public class UserAdminController : Controller
+    public class UserAdminController : UserBaseController
     {
-        //private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
+        public UserAdminController(){ }
 
-
-        public UserAdminController()
-        {
-        }
-
-        public UserAdminController(ApplicationUserManager userManager) //, ApplicationSignInManager signInManager)
+        public UserAdminController(ApplicationUserManager userManager)
         {
             UserManager = userManager;
-            //SignInManager = signInManager;
         }
-
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
-        //public ApplicationSignInManager SignInManager
-        //{
-        //    get
-        //    {
-        //        return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-        //    }
-        //    private set
-        //    {
-        //        _signInManager = value;
-        //    }
-        //}
 
         // GET: UserAdmin; TODO: paging
         public ActionResult Index()
@@ -72,34 +39,6 @@ namespace iiifly.Controllers
 
             return View(users);
         }
-
-      //  // GET: UserAdmin/Details/5
-      //  public ActionResult Details(int id)
-      //  {
-      //      return View();
-      //  }
-
-      //// GET: UserAdmin/Edit/5
-      //  public ActionResult Edit(int id)
-      //  {
-      //      return View();
-      //  }
-
-      //  // POST: UserAdmin/Edit/5
-      //  [HttpPost]
-      //  public ActionResult Edit(int id, FormCollection collection)
-      //  {
-      //      try
-      //      {
-      //          // TODO: Add update logic here
-
-      //          return RedirectToAction("Index");
-      //      }
-      //      catch
-      //      {
-      //          return View();
-      //      }
-      //  }
-        
+   
     }
 }

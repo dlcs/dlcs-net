@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using iiifly.Util;
 using Microsoft.AspNet.Identity;
 
 namespace iiifly.Models
@@ -24,15 +20,40 @@ namespace iiifly.Models
 
         public static string GetPublicPath(string userId)
         {
-            return GetEntry(_userIdToPublicPath, userId, true);
+            return GetEntry(_userIdToPublicPath, userId, GetPublicPathInternal);
+        }
+
+        private static string GetPublicPathInternal(string userId)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var user = db.Users.Find(userId);
+                if (string.IsNullOrWhiteSpace(user.PublicPathName))
+                {
+                    var s = "7wteja" + userId + "85ghgl";
+                    user.PublicPathName = string.Format("{0:X}", s.GetHashCode());
+                    db.SaveChanges();
+                }
+                return user.PublicPathName;
+            }
         }
 
         public static string GetUserIdFromPublicPath(string publicPath)
         {
-            return GetEntry(_publicPathToUserId, publicPath, false);
+            return GetEntry(_publicPathToUserId, publicPath, GetUserIdInternal);
         }
 
-        private static string GetEntry(Dictionary<string, string> dict, string key, bool encrypt)
+        private static string GetUserIdInternal(string publicPath)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var user = db.Users.SingleOrDefault(u => u.PublicPathName == publicPath);
+                if (user == null) return null;
+                return user.Id;
+            }
+        }
+
+        private static string GetEntry(Dictionary<string, string> dict, string key, Func<string, string> makeValue)
         {
             if (dict.ContainsKey(key))
             {
@@ -44,11 +65,30 @@ namespace iiifly.Models
                 {
                     return dict[key];
                 }
-                var aes = new SimpleAES();
-                string value = encrypt ? aes.EncryptToString(key) : aes.DecryptString(key);
+                var value = makeValue(key);
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    return null;
+                }
                 dict[key] = value;
             }
             return dict[key];
+        }
+
+        private const int ImageSetIdLength = 8;
+
+        public static bool IsValidImageSetId(string isid)
+        {
+            if (string.IsNullOrWhiteSpace(isid))
+            {
+                return false;
+            }
+            return isid.Length == ImageSetIdLength;
+        }
+
+        public static string GenerateImageSetId()
+        {
+            return Guid.NewGuid().ToString().Substring(0, ImageSetIdLength);
         }
     }
 }

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DLCS.Client.Hydra;
-using DLCS.Client.Model;
+using Hydra;
 
 namespace DLCS.Mock.ApiApp
 {

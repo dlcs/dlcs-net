@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DLCS.Client.Hydra;
-using DLCS.Client.Hydra.Model;
+using Hydra;
+using Hydra.Model;
 
 namespace DLCS.Client.Model
 {

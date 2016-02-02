@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using DLCS.Client.Config;
-using DLCS.Client.Hydra;
+using Hydra;
 using Newtonsoft.Json;
 
 namespace DLCS.Client.Model

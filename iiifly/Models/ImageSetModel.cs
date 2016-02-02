@@ -5,6 +5,7 @@ using System.EnterpriseServices.Internal;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using iiifly.Dlcs;
 
 namespace iiifly.Models
 {
@@ -40,6 +41,11 @@ namespace iiifly.Models
     {
         public ImageSet ImageSet { get; set; }
         public string ProxyManifest { get; set; }
-        public List<DlcsImage> Images { get; set; } 
+        public List<Image> Images { get; set; }
+
+        public bool IsFinished()
+        {
+            return Images.All(im => im.Finished.HasValue);
+        }
     }
 }

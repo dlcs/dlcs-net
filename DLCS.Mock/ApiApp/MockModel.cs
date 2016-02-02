@@ -81,7 +81,7 @@ namespace DLCS.Mock.ApiApp
                     currentCustomer = image.CustomerId;
                     counter = 1;
                     batchSize = r.Next(3, 10);
-                    currentBatch = new Batch(batchId++.ToString(), image.CustomerId, image.Created.AddSeconds(-1));
+                    currentBatch = new Batch(batchId++, image.CustomerId, image.Created.AddSeconds(-1));
                     imagesInBatch = new List<string>();
                 }
                 imagesInBatch.Add(image.Id);
@@ -140,7 +140,7 @@ namespace DLCS.Mock.ApiApp
                 new Customer(1, "admin", "Administrator"),
                 new Customer(2, "wellcome", "Wellcome"),
                 new Customer(3, "crane", "Crane"),
-                new Customer(4, "test", "Testing")
+                new Customer(4, "iiifly", "IIIF.ly")
             };
         }
 
@@ -154,7 +154,7 @@ namespace DLCS.Mock.ApiApp
                     "e3afdce8", "admin@dlcs.io", new DateTime(2016, 1, 1), new string[0], true),
                 new PortalUser(customers.GetByName("wellcome").ModelId,
                     "ef132a3f", "r.kiley@wellcome.ac.uk", new DateTime(1961, 10, 31), new string[0], true),
-                new PortalUser(customers.GetByName("test").ModelId,
+                new PortalUser(customers.GetByName("iiifly").ModelId,
                     "9cee79e8", "tom.crane@digirati.co.uk", new DateTime(2010, 6, 21), new string[0], true)
             };
         }
@@ -163,8 +163,8 @@ namespace DLCS.Mock.ApiApp
         {
             return new List<NamedQuery>
             {
-                new NamedQuery(customers.GetByName("test").ModelId, "bob", "{ \"data\": \"data\" }"),
-                new NamedQuery(customers.GetByName("test").ModelId, "manifest", "{ \"data\": \"data\" }"),
+                new NamedQuery(customers.GetByName("iiifly").ModelId, "bob", "{ \"data\": \"data\" }"),
+                new NamedQuery(customers.GetByName("iiifly").ModelId, "manifest", "{ \"data\": \"data\" }"),
             };
         }
 
@@ -175,9 +175,9 @@ namespace DLCS.Mock.ApiApp
             {
                 new OriginStrategy(customers.GetByName("wellcome").ModelId, 
                     "basic", "https://wellcomelibrary.org/service/asset(.+)", "https", "s3://wellcome/path-to-origin-creds"),
-                new OriginStrategy(customers.GetByName("test").ModelId,
+                new OriginStrategy(customers.GetByName("iiifly").ModelId,
                     "basic", "https://example.org/images/(.+)", "https", "s3://test/path-to-origin-creds"),
-                new OriginStrategy(customers.GetByName("test").ModelId,
+                new OriginStrategy(customers.GetByName("iiifly").ModelId,
                     "ftps", "ftps://example.org/images/(.+)", "ftps", "s3://test/path-to-ftp-creds")
             };
         }
@@ -185,7 +185,7 @@ namespace DLCS.Mock.ApiApp
         private static List<AuthService> CreateAuthServices(List<Customer> customers, Dictionary<string, List<string>> authServiceParentChild)
         {
             int wellcome = customers.GetByName("wellcome").ModelId;
-            int test = customers.GetByName("test").ModelId;
+            int iiifly = customers.GetByName("iiifly").ModelId;
             var authServices = new List<AuthService>
             {
                 new AuthService(wellcome, "wellcome-clickthrough-login", "clickthrough", "http://iiif.io/api/auth/0/login", 0,
@@ -204,12 +204,12 @@ namespace DLCS.Mock.ApiApp
                 new AuthService(wellcome, "wellcome-delegated-logout", "delegated-logout", "http://iiif.io/api/auth/0/logout", 0,
                     "Log out", null, null, null, null),
 
-                new AuthService(test, "test-clickthrough-login", "clickthrough", "http://iiif.io/api/auth/0/login", 0,
+                new AuthService(iiifly, "iiifly-clickthrough-login", "clickthrough", "http://iiif.io/api/auth/0/login", 0,
                     "Terms and Conditions", "<p>clickthrough...</p>",
                     "Terms and Conditions", "<p>More detailed info</p>", "Accept terms"),
-                new AuthService(test, "test-clickthrough-token", "clickthrough-token", "http://iiif.io/api/auth/0/token", 1800,
+                new AuthService(iiifly, "iiifly-clickthrough-token", "clickthrough-token", "http://iiif.io/api/auth/0/token", 1800,
                     "token service", null, null, null, null),
-                new AuthService(test, "test-clickthrough-logout", "clickthrough-logout", "http://iiif.io/api/auth/0/logout", 0,
+                new AuthService(iiifly, "iiifly-clickthrough-logout", "clickthrough-logout", "http://iiif.io/api/auth/0/logout", 0,
                     "Forget terms", null, null, null, null),
             };
 
@@ -224,9 +224,9 @@ namespace DLCS.Mock.ApiApp
                                             authServices.GetByIdPart("wellcome-delegated-logout").Id });
 
             authServiceParentChild.Add(
-                    authServices.GetByIdPart("test-clickthrough-login").Id,
-                        new List<string> {  authServices.GetByIdPart("test-clickthrough-token").Id,
-                                            authServices.GetByIdPart("test-clickthrough-logout").Id });
+                    authServices.GetByIdPart("iiifly-clickthrough-login").Id,
+                        new List<string> {  authServices.GetByIdPart("iiifly-clickthrough-token").Id,
+                                            authServices.GetByIdPart("iiifly-clickthrough-logout").Id });
 
             return authServices;
         }
@@ -245,7 +245,7 @@ namespace DLCS.Mock.ApiApp
         private static List<Role> CreateRoles(List<Customer> customers, List<AuthService> authServices, Dictionary<string, string> roleAuthService)
         {
             int wellcome = customers.GetByName("wellcome").ModelId;
-            int test = customers.GetByName("test").ModelId;
+            int iiifly = customers.GetByName("iiifly").ModelId;
             
             var roles = new List<Role>
             {
@@ -258,7 +258,7 @@ namespace DLCS.Mock.ApiApp
                 new Role(wellcome, "restricted", "Restricted Delegate to wellcomelibrary.org",
                     "Role for DLCS-enforced auth with delegation to customer", new [] { "restricted" }),
 
-                new Role(test, "clickthrough", "Click through",
+                new Role(iiifly, "clickthrough", "Click through",
                     "Role for DLCS-enforced auth with no delegation", new [] { "acceptterms" }),
             };
 
@@ -266,7 +266,7 @@ namespace DLCS.Mock.ApiApp
             roleAuthService.Add(roles[1].Id, authServices.GetByIdPart("wellcome-delegated-login").Id);
             roleAuthService.Add(roles[2].Id, authServices.GetByIdPart("wellcome-delegated-login").Id);
             roleAuthService.Add(roles[3].Id, authServices.GetByIdPart("wellcome-delegated-login").Id);
-            roleAuthService.Add(roles[4].Id, authServices.GetByIdPart("test-clickthrough-login").Id);
+            roleAuthService.Add(roles[4].Id, authServices.GetByIdPart("iiifly-clickthrough-login").Id);
             return roles;
         }
 
@@ -274,13 +274,13 @@ namespace DLCS.Mock.ApiApp
         private static List<Space> CreateSpaces(List<Customer> customers, List<Role> roles, Dictionary<string, List<string>> spaceDefaultRoles)
         {
             int wellcome = customers.GetByName("wellcome").ModelId;
-            int test = customers.GetByName("test").ModelId;
+            int iiifly = customers.GetByName("iiifly").ModelId;
             var spaces = new List<Space>
             {
                 new Space(1, wellcome, "wellcome1", DateTime.Now, null, -1),
                 new Space(2, wellcome, "wellcome2", DateTime.Now, null, -1),
-                new Space(11, test, "test1", DateTime.Now, null, 400),
-                new Space(12, test, "test2", DateTime.Now, new [] {"tag1", "tag2"}, -1)
+                new Space(11, iiifly, "iiifly1", DateTime.Now, null, 400),
+                new Space(12, iiifly, "iiifly2", DateTime.Now, new [] {"tag1", "tag2"}, -1)
             };
              
             spaceDefaultRoles.Add(
@@ -288,7 +288,7 @@ namespace DLCS.Mock.ApiApp
                         new List<string> { roles.GetByCustAndId(wellcome, "clinical").Id });
             spaceDefaultRoles.Add(
                     spaces[3].Id,
-                        new List<string> { roles.GetByCustAndId(test, "clickthrough").Id });
+                        new List<string> { roles.GetByCustAndId(iiifly, "clickthrough").Id });
 
             return spaces;
         }

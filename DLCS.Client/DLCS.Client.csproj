@@ -53,20 +53,6 @@
     <Compile Include="IDlcs.cs" />
     <Compile Include="Interface\ICustomer.cs" />
     <Compile Include="Dlcs\Customer.cs" />
-    <Compile Include="Hydra\ApiDocumentation.cs" />
-    <Compile Include="Hydra\Attributes.cs" />
-    <Compile Include="Hydra\HydraClassContext.cs" />
-    <Compile Include="Hydra\Model\Class.cs" />
-    <Compile Include="Hydra\Collections\Collection.cs" />
-    <Compile Include="Hydra\JSONLDBaseWithHydraContext.cs" />
-    <Compile Include="Hydra\Link.cs" />
-    <Compile Include="Hydra\Names.cs" />
-    <Compile Include="Hydra\Collections\PartialCollectionView.cs" />
-    <Compile Include="Hydra\Model\Property.cs" />
-    <Compile Include="Hydra\Model\Status.cs" />
-    <Compile Include="Hydra\Model\Operation.cs" />
-    <Compile Include="Hydra\Model\SupportedProperty.cs" />
-    <Compile Include="Hydra\JSONLDBase.cs" />
     <Compile Include="Model\AuthService.cs" />
     <Compile Include="Model\Batch.cs" />
     <Compile Include="Model\CommonOperations.cs" />
@@ -104,6 +90,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Mock\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hydra\Hydra.csproj">
+      <Project>{38882B8A-B0D2-4795-A62F-D099B905E2F2}</Project>
+      <Name>Hydra</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using DLCS.Client.Hydra;
-using DLCS.Client.Hydra.Model;
+using Hydra;
+using Hydra.Model;
 using Newtonsoft.Json;
 
 namespace DLCS.Client.Model
