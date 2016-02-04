@@ -185,8 +185,10 @@ namespace iiifly.Controllers
             {
                 // they haven't yet got a space...
                 var spaceTask = Dlcs.Dlcs.CreateSpace(applicationUser.Id);
-                applicationUser.DlcsSpace = spaceTask; //.Result;
+                applicationUser.DlcsSpace = spaceTask; 
                 UserManager.Update(applicationUser);
+                var dbCtx = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
+                dbCtx.SaveChanges();
             }
             return new Space
             {

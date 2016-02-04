@@ -1,46 +1,64 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Policy;
 using System.Web;
-using System.Web.Mvc;
+using System.Web.Http;
 using DLCS.Client.Model;
 using Hydra.Collections;
 
 namespace DLCS.Mock.Controllers
 {
     public class SpaceImagesController : MockController
-    {
+    { 
         [HttpGet]
-        public Image GetImage(int customerId, int spaceId, string id)
+        public IHttpActionResult Image(int customerId, int spaceId, string id = null)
         {
-            var image = GetModel().Images.SingleOrDefault(
-                im => im.CustomerId == customerId 
-                && im.SpaceId == spaceId
-                && im.ModelId == id);
-            return image;
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                var images = GetModel().Images.Where(im => im.CustomerId == customerId && im.SpaceId == spaceId);
+                var string1 = Request.GetQueryNameValuePairs().SingleOrDefault(p => p.Key == "string1").Value;
+                if (!string.IsNullOrWhiteSpace(string1))
+                {
+                    images = images.Where(im => im.String1 == string1);
+                }
+                var hc = new Collection<Image>();
+                hc.Members = images.ToArray();
+                hc.TotalItems = hc.Members.Length;
+                hc.Id = Request.RequestUri.ToString();
+                return Ok(hc);
+            }
+            else
+            {
+                var image = GetModel().Images.SingleOrDefault(
+                    im => im.CustomerId == customerId
+                    && im.SpaceId == spaceId
+                    && im.ModelId == id);
+                return Ok(image);
+            }
         }
 
-        [HttpGet]
-        // GET: SpaceImages
-        public Collection<Image> Image(int customerId, int spaceId, string string1 = null)
-        {
-            var images = GetModel().Images.Where(im => im.CustomerId == customerId && im.SpaceId == spaceId);
-            if (string1 != null)
-            {
-                images = images.Where(im => im.String1 == string1);
-            }
-            var hc = new Collection<Image>();
-            hc.Members = images.ToArray();
-            hc.TotalItems = hc.Members.Length;
-            hc.Id = Request.RequestUri.ToString();
-            return hc;
-        }
+        //[HttpGet]
+        //// GET: SpaceImages
+        //public Collection<Image> Image(int customerId, int spaceId, string string1 = null)
+        //{
+        //    var images = GetModel().Images.Where(im => im.CustomerId == customerId && im.SpaceId == spaceId);
+        //    if (string1 != null)
+        //    {
+        //        images = images.Where(im => im.String1 == string1);
+        //    }
+        //    var hc = new Collection<Image>();
+        //    hc.Members = images.ToArray();
+        //    hc.TotalItems = hc.Members.Length;
+        //    hc.Id = Request.RequestUri.ToString();
+        //    return hc;
+        //}
 
         [HttpPut]
         public Image PutImage(int customerId, int spaceId, int id, Image incomingImage)
         {
-            var newImage = new Image(customerId, spaceId,  incomingImage.ModelId,
+            var newImage = new Image(customerId, spaceId, incomingImage.ModelId,
                     DateTime.Now, incomingImage.Origin, incomingImage.InitialOrigin,
                     0, 0, incomingImage.MaxUnauthorised, null, null, null, true, null,
                     incomingImage.Tags, incomingImage.String1, incomingImage.String2, incomingImage.String3,

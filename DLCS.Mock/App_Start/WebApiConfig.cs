@@ -9,6 +9,9 @@ namespace DLCS.Mock
     {
         public static void Register(HttpConfiguration config)
         {
+
+            config.EnableSystemDiagnosticsTracing();
+
             // Web API configuration and services
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
             config.Formatters.JsonFormatter.SerializerSettings = new JsonSerializerSettings

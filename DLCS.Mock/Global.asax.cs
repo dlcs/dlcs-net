@@ -11,6 +11,20 @@ namespace DLCS.Mock
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
+        public override void Init()
+        {
+            base.Init();
+            this.AcquireRequestState += ShowRouteValues;
+        }
+
+        protected void ShowRouteValues(object sender, EventArgs e)
+        {
+            var context = HttpContext.Current;
+            if (context == null)
+                return;
+            var routeData = RouteTable.Routes.GetRouteData(new HttpContextWrapper(context));
+        }
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
