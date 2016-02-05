@@ -12,12 +12,13 @@ namespace DLCS.Mock
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+    
             routes.MapRoute(
                 name: "Home",
                 url: "home/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
 
         }
     }

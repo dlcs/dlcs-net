@@ -68,11 +68,14 @@ namespace iiifly
 
             var googleClientId = ConfigurationManager.AppSettings["google-clientid"];
             var googleClientSecret = ConfigurationManager.AppSettings["google-clientsecret"];
-            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions
+            if (!string.IsNullOrWhiteSpace(googleClientId) && !string.IsNullOrWhiteSpace(googleClientSecret))
             {
-                ClientId = googleClientId,
-                ClientSecret = googleClientSecret
-            });
+                app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions
+                {
+                    ClientId = googleClientId,
+                    ClientSecret = googleClientSecret
+                });
+            }
         }
     }
 }

@@ -43,7 +43,7 @@ namespace DLCS.Client.Model
         
         [RdfProperty(Description = "Total number of completed images in the batch",
             Range = Names.XmlSchema.NonNegativeInteger, ReadOnly = true, WriteOnly = false)]
-        [JsonProperty(Order = 12, PropertyName = "count")]
+        [JsonProperty(Order = 12, PropertyName = "completed")]
         public int Completed { get; set; }
 
         [RdfProperty(Description = "Date the batch was finished (may still have errors)",

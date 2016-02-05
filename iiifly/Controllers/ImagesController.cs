@@ -130,7 +130,7 @@ namespace iiifly.Controllers
             if (ingestImages.Count > 1)
             {
                 // enqueue a batch
-                var dlcsBatch = Dlcs.Dlcs.Enqueue(ingestImages).Result;
+                var dlcsBatch = Dlcs.Dlcs.Enqueue(ingestImages);
                 using (var db = new ApplicationDbContext())
                 { 
                     var imageSet = db.ImageSets.Find(id);
@@ -138,7 +138,7 @@ namespace iiifly.Controllers
                     db.SaveChanges();
                 }
             }
-            return RedirectToAction("ImageSet", "Display", new { user = User.GetPublicPath(), imageSet = id });
+            return RedirectToAction("ImageSet", "Display", new { userPublicPath = User.GetPublicPath(), id });
         }
 
         private List<Image> GetImagesFromDisk(string imageSet, Space space, ApplicationUser applicationUser)

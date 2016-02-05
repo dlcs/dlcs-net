@@ -12,25 +12,23 @@ namespace DLCS.Client.Model
     {
         [JsonIgnore]
         public int CustomerId { get; set; }
-        [JsonIgnore]
-        public int SpaceId { get; set; }
 
         public Image()
         {
         }
 
-        public Image(int customerId, int spaceId, string imageId, 
+        public Image(int customerId, int space, string imageId, 
             DateTime created, string origin, string initialOrigin,
             int width, int height, int maxUnauthorised,
             DateTime? queued, DateTime? dequeued, DateTime? finished, bool ingesting, string error,
             string[] tags, string string1, string string2, string string3,
             long number1, long number2, long number3)
         {
-            string mockDlcsPathTemplate = string.Format("/{0}/{1}/{2}", customerId, spaceId, imageId);
+            string mockDlcsPathTemplate = string.Format("/{0}/{1}/{2}", customerId, space, imageId);
             ModelId = imageId;
             CustomerId = customerId;
-            SpaceId = spaceId;
-            Init(true, customerId, spaceId, ModelId);
+            Space = space;
+            Init(true, customerId, space, ModelId);
             InfoJson = "http://mock.dlcs.io" + mockDlcsPathTemplate;
             DegradedInfoJson = "http://mock.degraded.dlcs.io" + mockDlcsPathTemplate;
             ThumbnailInfoJson = "http://mock.thumbs.dlcs.io" + mockDlcsPathTemplate;
@@ -60,6 +58,11 @@ namespace DLCS.Client.Model
             Range = Names.XmlSchema.String, ReadOnly = false, WriteOnly = false)]
         [JsonProperty(Order = 10, PropertyName = "modelId")]
         public string ModelId { get; set; }
+
+        [RdfProperty(Description = "The identifier for the space within the customer - its URI component",
+            Range = Names.XmlSchema.Integer, ReadOnly = false, WriteOnly = false)]
+        [JsonProperty(Order = 10, PropertyName = "space")]
+        public int Space { get; set; }
 
         [RdfProperty(Description = "info.json URI",
             Range = Names.XmlSchema.String, ReadOnly = false, WriteOnly = false)]

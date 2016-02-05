@@ -43,8 +43,8 @@ namespace DLCS.Client.Model
         public virtual JObject GetCollectionForm()
         {
             dynamic jo = new JObject();
-            jo.Id = Id;
-            jo.Type = Type;
+            jo["@id"] = Id;
+            jo["@type"] = Type;
             return jo;
         }
 

@@ -18,14 +18,17 @@ namespace DLCS.Mock.Controllers
         {
             if (string.IsNullOrWhiteSpace(id))
             {
-                var images = GetModel().Images.Where(im => im.CustomerId == customerId && im.SpaceId == spaceId);
+                var images = GetModel().Images.Where(im => im.CustomerId == customerId && im.Space == spaceId).ToList();
                 var string1 = Request.GetQueryNameValuePairs().SingleOrDefault(p => p.Key == "string1").Value;
                 if (!string.IsNullOrWhiteSpace(string1))
                 {
-                    images = images.Where(im => im.String1 == string1);
+                    images = images.Where(im => im.String1 == string1).ToList();
                 }
-                var hc = new Collection<JObject>();
-                hc.Members = images.Select(im => im.GetCollectionForm()).ToArray();
+                AutoAdvance(images);
+                var hc = new Collection<Image>();
+                hc.Members = images.ToArray();
+                //var hc = new Collection<JObject>();
+                //hc.Members = images.Select(im => im.GetCollectionForm()).ToArray();
                 hc.TotalItems = hc.Members.Length;
                 hc.Id = Request.RequestUri.ToString();
                 return Ok(hc);
@@ -34,9 +37,39 @@ namespace DLCS.Mock.Controllers
             {
                 var image = GetModel().Images.SingleOrDefault(
                     im => im.CustomerId == customerId
-                    && im.SpaceId == spaceId
+                    && im.Space == spaceId
                     && im.ModelId == id);
                 return Ok(image);
+            }
+        }
+
+        private void AutoAdvance(List<Image> images)
+        {
+            var now = DateTime.Now;
+            var tenSeconds = new TimeSpan(0, 0, 10);
+            foreach (var image in images)
+            {
+                if (!image.Queued.HasValue)
+                {
+                    if (now - image.Created > tenSeconds)
+                    {
+                        image.Queued = now;
+                    }
+                }
+                else if (!image.Dequeued.HasValue)
+                {
+                    if (now - image.Queued > tenSeconds)
+                    {
+                        image.Dequeued = now;
+                    }
+                }
+                else if (!image.Finished.HasValue)
+                {
+                    if (now - image.Dequeued > tenSeconds)
+                    {
+                        image.Finished = now;
+                    }
+                }
             }
         }
 
@@ -44,7 +77,7 @@ namespace DLCS.Mock.Controllers
         //// GET: SpaceImages
         //public Collection<Image> Image(int customerId, int spaceId, string string1 = null)
         //{
-        //    var images = GetModel().Images.Where(im => im.CustomerId == customerId && im.SpaceId == spaceId);
+        //    var images = GetModel().Images.Where(im => im.CustomerId == customerId && im.Space == spaceId);
         //    if (string1 != null)
         //    {
         //        images = images.Where(im => im.String1 == string1);

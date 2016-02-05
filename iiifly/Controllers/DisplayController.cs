@@ -34,7 +34,8 @@ namespace iiifly.Controllers
                 ContentType = "application/json"
             };
         }
-        
+
+
 
         // GET: Display
         public ActionResult ImageSet(string userPublicPath, string id)

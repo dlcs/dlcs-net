@@ -29,12 +29,14 @@
         // render UV
         <div class="jumbotron">
             <div class="uv" data-uri="@Model.ProxyManifest" style="width:100%; height:700px; background-color: #000"></div>
-            <script type="text/javascript" id="embedUV" src="http://universalviewer.io/examples/uv/lib/embed.js"></script>
+            <script type="text/javascript" id="embedUV" src="/Scripts/uv-1.6.14/lib/embed.js"></script>
         </div>
     }
     else
     {
-        <p class="has-error">There are no images in this set.</p>
+        <div class="jumbotron">
+            <p class="has-error">There are no images in this set.</p>
+        </div>
     }
 }
 else

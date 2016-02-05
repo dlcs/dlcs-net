@@ -42,18 +42,18 @@ namespace iiifly.Dlcs
             return null;
         }
 
-        public static async Task<Batch> Enqueue(List<Image> ingestImages)
+        public static Batch Enqueue(List<Image> ingestImages)
         {
             var images = new HydraImageCollection
             {
                 Members = ingestImages.ToArray()
             };
             var queueUri = CustomerUrl + "/queue";
-            HttpResponseMessage response = await GetClient().PostAsJsonAsync(queueUri, images);
+            HttpResponseMessage response = GetClient().PostAsJsonAsync(queueUri, images).Result;
             if (response.IsSuccessStatusCode)
             {
                 // Get the URI of the created resou
-                return await response.Content.ReadAsAsync<Batch>();
+                return response.Content.ReadAsAsync<Batch>().Result;
             }
             return null;
         }

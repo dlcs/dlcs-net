@@ -14,6 +14,12 @@ namespace iiifly
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "ImageSet",
+                url: "display/{action}/{userPublicPath}/{id}",
+                defaults: new { controller = "Display", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

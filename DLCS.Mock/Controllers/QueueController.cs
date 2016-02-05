@@ -13,7 +13,7 @@ namespace DLCS.Mock.Controllers
     public class QueueController : MockController
     {
         [HttpGet]
-        public Queue GetQueue(int customerId)
+        public Queue Index(int customerId)
         {
             var queue = GetModel().Queues
                 .Single(cq => cq.ModelId == customerId);
@@ -23,7 +23,7 @@ namespace DLCS.Mock.Controllers
 
 
         [HttpPost]
-        public Batch PostQueue(int customerId, Collection<Image> images)
+        public Batch Index(int customerId, [FromBody] Collection<Image> images)
         {
             List<Image> initialisedImages = new List<Image>();
 
@@ -32,7 +32,7 @@ namespace DLCS.Mock.Controllers
             GetModel().Batches.Add(batch);
             foreach (var incomingImage in images.Members)
             {
-                var newImage = new Image(customerId, incomingImage.SpaceId, incomingImage.ModelId, 
+                var newImage = new Image(customerId, incomingImage.Space, incomingImage.ModelId, 
                     DateTime.Now, incomingImage.Origin, incomingImage.InitialOrigin,
                     0, 0, incomingImage.MaxUnauthorised, null, null, null, true, null, 
                     incomingImage.Tags, incomingImage.String1, incomingImage.String2, incomingImage.String3,
