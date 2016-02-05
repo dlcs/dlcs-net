@@ -168,7 +168,8 @@ namespace iiifly.Controllers
             else
             {
                 var leftPart = Request.Url.GetLeftPart(UriPartial.Authority);
-                img.Origin = string.Format("{0}/origin/{1}/{2}/{3}", leftPart, applicationUser.Id, imageSet, fi.Name);
+                img.Origin = string.Format("{0}/origin/{1}/{2}/{3}", leftPart, 
+                    GlobalData.GetPublicPath(applicationUser.Id), imageSet, fi.Name);
             }
             return img;
         }

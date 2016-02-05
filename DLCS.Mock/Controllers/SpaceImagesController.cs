@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Http;
 using DLCS.Client.Model;
 using Hydra.Collections;
+using Newtonsoft.Json.Linq;
 
 namespace DLCS.Mock.Controllers
 {
@@ -23,8 +24,8 @@ namespace DLCS.Mock.Controllers
                 {
                     images = images.Where(im => im.String1 == string1);
                 }
-                var hc = new Collection<Image>();
-                hc.Members = images.ToArray();
+                var hc = new Collection<JObject>();
+                hc.Members = images.Select(im => im.GetCollectionForm()).ToArray();
                 hc.TotalItems = hc.Members.Length;
                 hc.Id = Request.RequestUri.ToString();
                 return Ok(hc);
@@ -56,7 +57,7 @@ namespace DLCS.Mock.Controllers
         //}
 
         [HttpPut]
-        public Image PutImage(int customerId, int spaceId, int id, Image incomingImage)
+        public Image Image(int customerId, int spaceId, string id, [FromBody]Image incomingImage)
         {
             var newImage = new Image(customerId, spaceId, incomingImage.ModelId,
                     DateTime.Now, incomingImage.Origin, incomingImage.InitialOrigin,
