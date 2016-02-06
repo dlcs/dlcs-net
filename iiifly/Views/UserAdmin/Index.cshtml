@@ -56,7 +56,19 @@
         var checked = $cbox.is(':checked');
         var user = $cbox.attr('data-user');
         var role = $cbox.attr('data-role');
-        alert('TODO: Will set user ' + user + ',\nrole ' + role + ' to ' + checked);
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("SetRoleState", "UserAdmin")',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ userId: user, roleName: role, inRole: checked }),
+            dataType: "json",
+            success: function () {
+            },
+            error: function () {
+                alert('failed to set role state!');
+            }
+        });
+        //alert('TODO: Will set user ' + user + ',\nrole ' + role + ' to ' + checked);
     }
 
 </script>

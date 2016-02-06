@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 using iiifly.Models;
+using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 
 namespace iiifly.Controllers
 {
@@ -39,6 +42,20 @@ namespace iiifly.Controllers
 
             return View(users);
         }
-   
+
+        [HttpPost]
+        public ActionResult SetRoleState(ToggleRoleState state)
+        {
+            if (state.InRole)
+            {
+                UserManager.AddToRole(state.UserId, state.RoleName);
+            }
+            else
+            {
+                UserManager.RemoveFromRole(state.UserId, state.RoleName);
+            }
+            Response.ContentType = "application/json";
+            return Json(state);
+        }
     }
 }

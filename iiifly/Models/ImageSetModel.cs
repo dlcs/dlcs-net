@@ -31,6 +31,9 @@ namespace iiifly.Models
         [StringLength(250)]
         public string DlcsBatch { get; set; }
 
+        public DateTime Created { get; set; }
+        public int NumberOfImages { get; set; }
+
     }
 
 
@@ -42,10 +45,18 @@ namespace iiifly.Models
         public ImageSet ImageSet { get; set; }
         public string ProxyManifest { get; set; }
         public List<Image> Images { get; set; }
+        public string UserDisplay { get; set; }
+        public string UserPublicPath { get; set; }
 
         public bool IsFinished()
         {
             return Images.All(im => im.Finished.HasValue);
         }
+    }
+
+    public class ImageSetList
+    {
+        public string UserDisplay { get; set; }
+        public List<ImageSetWrapper> ImageSetWrappers { get; set; } 
     }
 }

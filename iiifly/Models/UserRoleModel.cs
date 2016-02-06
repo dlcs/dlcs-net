@@ -16,4 +16,11 @@ namespace iiifly.Models
         public bool CanCallDlcs { get; set; }
         public bool CanApproveUsers { get; set; }
     }
+
+    public class ToggleRoleState
+    {
+        public string UserId { get; set; }
+        public string RoleName { get; set; }
+        public bool InRole { get; set; }
+    }
 }

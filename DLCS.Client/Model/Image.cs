@@ -29,10 +29,10 @@ namespace DLCS.Client.Model
             CustomerId = customerId;
             Space = space;
             Init(true, customerId, space, ModelId);
-            InfoJson = "http://mock.dlcs.io" + mockDlcsPathTemplate;
-            DegradedInfoJson = "http://mock.degraded.dlcs.io" + mockDlcsPathTemplate;
-            ThumbnailInfoJson = "http://mock.thumbs.dlcs.io" + mockDlcsPathTemplate;
-            Thumbnail400 = "http://mock.thumbs.dlcs.io" + mockDlcsPathTemplate + "/full/400,/0/default.jpg";
+            InfoJson = "https://mock.dlcs.io" + mockDlcsPathTemplate;
+            DegradedInfoJson = "https://mock.degraded.dlcs.io" + mockDlcsPathTemplate;
+            ThumbnailInfoJson = "https://mock.thumbs.dlcs.io" + mockDlcsPathTemplate;
+            Thumbnail400 = "https://mock.thumbs.dlcs.io" + mockDlcsPathTemplate + "/full/400,/0/default.jpg";
             Created = created;
             Origin = origin;
             InitialOrigin = initialOrigin;

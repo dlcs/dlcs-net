@@ -1,0 +1,33 @@
+﻿@model iiifly.Models.ImageSetList
+
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Image Sets | " + Model.UserDisplay;
+}
+
+
+<div class="row">
+    @if (Model.ImageSetWrappers == null || !Model.ImageSetWrappers.Any())
+    {
+        <p>Sorry, no images for this user.</p>
+    }
+    else
+    {
+        if (!string.IsNullOrWhiteSpace(Model.UserDisplay))
+        {
+            <h2>@Model.UserDisplay</h2>
+        }
+        else
+        {
+            <h2>Recent additions</h2>
+        }
+
+        <div class="list-group">
+            @foreach (var wrapper in Model.ImageSetWrappers)
+            {
+                <a href="@Url.Action("ImageSet", new {userPublicPath = wrapper.UserPublicPath, id = wrapper.ImageSet.Id})" 
+                    class="list-group-item">@wrapper.ImageSet.Label<span class="badge">@wrapper.Images.Count</span></a>
+            }
+        </div>
+    }
+    </div>

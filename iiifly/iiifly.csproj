@@ -196,7 +196,6 @@
     <Compile Include="Controllers\DisplayController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
-    <Compile Include="Controllers\ImageSetsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Controllers\UserBaseController.cs" />
@@ -219,6 +218,14 @@
     <Compile Include="Migrations\201602022003334_PublicPath.Designer.cs">
       <DependentUpon>201602022003334_PublicPath.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602061404466_CreatedDateOnImageSet.cs" />
+    <Compile Include="Migrations\201602061404466_CreatedDateOnImageSet.Designer.cs">
+      <DependentUpon>201602061404466_CreatedDateOnImageSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602061424380_NumImages.cs" />
+    <Compile Include="Migrations\201602061424380_NumImages.Designer.cs">
+      <DependentUpon>201602061424380_NumImages.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ImageSetModel.cs" />
@@ -236,6 +243,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\external_link.png" />
+    <Content Include="Content\logo-iiif-34x30.png" />
     <Content Include="Scripts\openseadragon\images\fullpage_grouphover.png" />
     <Content Include="Scripts\openseadragon\images\fullpage_hover.png" />
     <Content Include="Scripts\openseadragon\images\fullpage_pressed.png" />
@@ -635,11 +643,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\UserAdmin\Index.cshtml" />
-    <Content Include="Views\ImageSets\Create.cshtml" />
-    <Content Include="Views\ImageSets\Delete.cshtml" />
-    <Content Include="Views\ImageSets\Details.cshtml" />
-    <Content Include="Views\ImageSets\Edit.cshtml" />
-    <Content Include="Views\ImageSets\Index.cshtml" />
     <Content Include="Views\Images\noimages.cshtml" />
     <Content Include="Views\Display\ImageSet.cshtml" />
     <Content Include="Scripts\uv-1.6.14\l10n\ach\chrome.properties" />
@@ -869,6 +872,7 @@
     <Content Include="Scripts\uv-1.6.14\schema\uv-seadragon-extension.en-GB.schema.json" />
     <Content Include="Scripts\uv-1.6.14\schema\uv-virtex-extension.cy-GB.schema.json" />
     <Content Include="Scripts\uv-1.6.14\schema\uv-virtex-extension.en-GB.schema.json" />
+    <Content Include="Views\Display\ImageSetList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -890,6 +894,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602022003334_PublicPath.resx">
       <DependentUpon>201602022003334_PublicPath.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602061404466_CreatedDateOnImageSet.resx">
+      <DependentUpon>201602061404466_CreatedDateOnImageSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602061424380_NumImages.resx">
+      <DependentUpon>201602061424380_NumImages.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

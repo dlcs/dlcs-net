@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Optimization;
 using iiifly.Models;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json.Linq;
@@ -17,6 +18,7 @@ namespace iiifly.Controllers
         }
 
 
+        [AllowAnonymous]
         public ActionResult ProxyManifest(string userPublicPath, string id)
         {
             var userId = GlobalData.GetUserIdFromPublicPath(userPublicPath);
@@ -38,26 +40,115 @@ namespace iiifly.Controllers
 
 
         // GET: Display
+
+        [AllowAnonymous]
         public ActionResult ImageSet(string userPublicPath, string id)
         {
+            if (string.IsNullOrWhiteSpace(userPublicPath))
+            {
+                return ShowRecentImageSets();
+            }
             var userId = GlobalData.GetUserIdFromPublicPath(userPublicPath);
-            var user = UserManager.FindById(userId);
-            ImageSet imageSet = null;
+            var imageSetCreator = UserManager.FindById(userId);
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return ShowUserImageSets(imageSetCreator);
+            }
+            ImageSet imageSet;
             using (var db = new ApplicationDbContext())
             {
                 imageSet = db.ImageSets.SingleOrDefault(iset => iset.ApplicationUserId == userId && iset.Id == id); 
             }
             if (imageSet != null)
             {
-                var wrapper = new ImageSetWrapper
-                {
-                    ImageSet = imageSet,
-                    ProxyManifest = "/display/proxymanifest/" + userPublicPath + "/" + id,
-                    Images = Dlcs.Dlcs.GetImages(user.DlcsSpace, id)
-                };
+                var wrapper = GetImageSetWrapper(imageSetCreator, imageSet);
                 return View(wrapper);
             }
             return View();
+        }
+
+        private ImageSetWrapper GetImageSetWrapper(ImageSet imageSet)
+        {
+            var user = UserManager.FindById(imageSet.ApplicationUserId);
+            return GetImageSetWrapper(user, imageSet);
+        }
+
+        private ImageSetWrapper GetImageSetWrapper(ApplicationUser user, ImageSet imageSet)
+        {
+            var userPublicPath = GlobalData.GetPublicPath(user.Id);
+            return new ImageSetWrapper
+            {
+                UserPublicPath = userPublicPath,
+                UserDisplay = GetDisplayForm(user),
+                ImageSet = imageSet,
+                ProxyManifest = "/display/proxymanifest/" + userPublicPath + "/" + imageSet.Id,
+                Images = Dlcs.Dlcs.GetImages(user.DlcsSpace, imageSet.Id)
+            };
+        }
+
+        private string GetDisplayForm(ApplicationUser user)
+        {
+            var s = user.UserName;
+            if (!string.IsNullOrWhiteSpace(user.DisplayName))
+            {
+                s = user.DisplayName;
+            }
+            if (!string.IsNullOrWhiteSpace(user.Affiliation))
+            {
+                s += " (" + user.Affiliation + ")";
+            }
+            return s;
+        }
+
+        private ActionResult ShowRecentImageSets()
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var imageSets = db.ImageSets.OrderByDescending(iset => iset.Created).Take(20).ToList();
+                var setList = new ImageSetList
+                {
+                    ImageSetWrappers = imageSets.Select(GetImageSetWrapper).ToList()
+                };
+                return View("ImageSetList", setList);
+            }
+        }
+
+        private ActionResult ShowUserImageSets(ApplicationUser user)
+        {
+            var setList = new ImageSetList {UserDisplay = GetDisplayForm(user)};
+
+            using (var db = new ApplicationDbContext())
+            {
+                var imageSets = db.ImageSets.Where(iset => iset.ApplicationUserId == user.Id).ToList();
+                setList.ImageSetWrappers = imageSets.Select(iset => GetImageSetWrapper(user, iset)).ToList();
+            }
+            return View("ImageSetList", setList);
+        }
+
+
+        [Authorize(Roles = "CanCallDlcs")]
+        public ActionResult UpdateImageSet()
+        {
+            var currentUser = User.Identity.GetUserId();
+            var imageSetId = Request.Form["ImageSet.Id"];
+            var userPublicPath = Request.Form["UserPublicPath"];
+            var label = Request.Form["ImageSet.Label"];
+            var description = Request.Form["ImageSet.Description"];
+
+            using (var db = new ApplicationDbContext())
+            {
+                var imageSet = db.ImageSets.SingleOrDefault(iset => iset.Id == imageSetId);
+                if (imageSet != null && (imageSet.ApplicationUserId == currentUser || User.IsInRole("canApproveUsers")))
+                {
+                    if (!string.IsNullOrWhiteSpace(label))
+                        imageSet.Label = label;
+                    if (!string.IsNullOrWhiteSpace(description))
+                        imageSet.Description = description;
+                    db.SaveChanges();
+                }
+            }
+
+            return RedirectToAction("ImageSet", new { userPublicPath, id = imageSetId});
         }
     }
 }

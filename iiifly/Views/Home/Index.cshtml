@@ -34,7 +34,7 @@
 </div>
 
 <div class="jumbotron" id="nextBox">
-    <p><a href="@Url.Action("CreateImageSet", "Images", new {id = ViewBag.ImageSet })" class="btn btn-primary btn-lg disabled" id="iiifify">IIIF-ify this image... &raquo;</a></p>
+    <p><a href="@Url.Action("CreateImageSet", "Images", new {id = ViewBag.ImageSet })" class="btn btn-primary btn-lg disabled" data-loading-text="IIIF-ifying..." id="iiifify">IIIF-ify this image... &raquo;</a></p>
     <p class="lead">Add some metadata and iiif-ify!</p>
 </div>
 
@@ -46,6 +46,7 @@
             paramName: "file", // The name that will be used to transfer the file
             maxFilesize: 2, // MB,
             maxFiles: 32,
+            dictDefaultMessage: "Drop images from your computer or the web",
             init: function() {
                 this.on("success", fileSuccess);
                 this.on("error", fileSuccess);

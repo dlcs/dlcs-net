@@ -116,6 +116,8 @@ namespace iiifly.Controllers
                 db.ImageSets.Add(new ImageSet
                 {
                     Id = id,
+                    Created = DateTime.Now,
+                    NumberOfImages = ingestImages.Count,
                     ApplicationUserId = userId,
                     Label = "Made by iiif.ly using DLCS",
                     Description = ""
