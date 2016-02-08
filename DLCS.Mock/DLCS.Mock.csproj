@@ -130,7 +130,9 @@
     <Folder Include="Views\SpaceImages\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiApp\AddHydraApiHeaderFilter.cs" />
     <Compile Include="ApiApp\AttributeUtil.cs" />
+    <Compile Include="ApiApp\DelegatingHandler.cs" />
     <Compile Include="ApiApp\MockHelp.cs" />
     <Compile Include="ApiApp\MockModel.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />

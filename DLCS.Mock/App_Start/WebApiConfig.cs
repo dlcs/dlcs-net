@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Mvc;
+using DLCS.Mock.ApiApp;
 using Newtonsoft.Json;
 
 namespace DLCS.Mock
@@ -11,6 +12,9 @@ namespace DLCS.Mock
         {
 
             config.EnableSystemDiagnosticsTracing();
+
+            config.Filters.Add(new AddHydraApiHeaderFilter());
+            config.MessageHandlers.Add(new HeadHandler());
 
             // Web API configuration and services
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
@@ -30,8 +34,8 @@ namespace DLCS.Mock
 
             config.Routes.MapHttpRoute(
                 name: "Documentation",
-                routeTemplate: "vocab",
-                defaults: new { controller = "Documentation", action = "Vocab" }
+                routeTemplate: "vocab/{format}",
+                defaults: new { controller = "Documentation", action = "Vocab", format = RouteParameter.Optional }
             );
 
             // Routing for customer and its operations
