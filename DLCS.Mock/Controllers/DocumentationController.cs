@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -27,7 +29,8 @@ namespace DLCS.Mock.Controllers
             var vocab = new ApiDocumentation(Constants.Vocab, Constants.Vocab, classes);
             if (format != null)
             {
-                return new DocResult(vocab, format, Request);
+                string docRoot = System.Web.Hosting.HostingEnvironment.MapPath("~/Generated-Docs");
+                return new DocResult(vocab, format, Request, docRoot);
             }
             return Json(vocab);
         }
@@ -51,32 +54,35 @@ namespace DLCS.Mock.Controllers
 
     public class DocResult : IHttpActionResult
     {
-        string _format;
-        HttpRequestMessage _request;
-        ApiDocumentation _vocab;
+        readonly string _format;
+        readonly HttpRequestMessage _request;
+        readonly ApiDocumentation _vocab;
+        readonly string _docRoot;
 
-        public DocResult(ApiDocumentation vocab, string format, HttpRequestMessage request)
+        public DocResult(ApiDocumentation vocab, string format, HttpRequestMessage request, string docRoot)
         {
             _vocab = vocab;
             _format = format;
             _request = request;
+            _docRoot = docRoot;
         }
         public Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
         {
             var response = new HttpResponseMessage()
             {
-                Content = GetStringContent(_vocab, _format),
+                Content = GetStringContent(_vocab, _format, _docRoot),
                 RequestMessage = _request
             };
             return Task.FromResult(response);
         }
 
-        private HttpContent GetStringContent(ApiDocumentation vocab, string format)
+        private HttpContent GetStringContent(ApiDocumentation vocab, string format, string docDir)
         {
-            var sb = new StringBuilder();
-            sb.Heading(format, 1, "Vocab");
+            var sbMain = new StringBuilder();
+            sbMain.Heading(format, 1, "Vocab");
             foreach (var clazz in vocab.SupportedClasses)
             {
+                var sb = new StringBuilder();
                 sb.Heading(format, 1, clazz.Label);
                 sb.Para(format, clazz.Description);
                 sb.Code(format, clazz.UriTemplate);
@@ -107,8 +113,21 @@ namespace DLCS.Mock.Controllers
                     sb.Code(format, clazz.UriTemplate);
                     AppendSupportedOperationsTable(sb, format, clazz.SupportedOperations);
                 }
+                string classDoc = sb.ToString();
+                WriteDocToDisk(format, docDir, clazz, classDoc);
+                sbMain.Append(classDoc);
             }
-            return new StringContent(sb.ToString(), Encoding.UTF8, "text/" + format);
+            return new StringContent(sbMain.ToString(), Encoding.UTF8, "text/" + format);
+        }
+
+        private static void WriteDocToDisk(string format, string docDir, Class clazz, string classDoc)
+        {
+            if ("true".Equals(ConfigurationManager.AppSettings["write-docs-to-disk"], StringComparison.InvariantCultureIgnoreCase))
+            {
+                string extension = "." + VocabHelpers.GetExtension(format);
+                var path = Path.Combine(docDir, clazz.Label + extension);
+                File.WriteAllText(path, classDoc);
+            }
         }
 
         private void AppendSupportedOperationsTable(StringBuilder sb, string format, Operation[] supportedOperations)
@@ -142,6 +161,12 @@ namespace DLCS.Mock.Controllers
     public static class VocabHelpers
     {
         private const string Markdown = "markdown";
+
+        public static string GetExtension(string format)
+        {
+            if (format == Markdown) return "md";
+            return "html";
+        }
 
         public static void Heading(this StringBuilder sb, string format, int level, string text)
         {

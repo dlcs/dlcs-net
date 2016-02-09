@@ -1,0 +1,69 @@
+
+<h1>Queue</h1>
+
+<p>Your current ingesting images</p>
+<pre>/customers/{0}/queue</pre><br/>
+
+
+<h2>Supported properties</h2>
+
+
+<h3>size</h3>
+
+<p>Number of total images in your queue, across batches</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Queue</td><td>xsd:nonNegativeInteger</td><td>True</td><td>False</td></tr>
+</table>
+
+
+<h3>batches</h3>
+
+<p>Separate jobs you have submitted</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Queue</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
+</table>
+
+<p>Supported operations on link:</p>
+<b>Template: </b><pre>/customers/{0}/queue/batches</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Retrieves all batches for customer</td><td></td><td>hydra:Collection</td><td></td></tr>
+</table>
+
+
+<h3>images</h3>
+
+<p>Merged view of images on the queue, across batches</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Queue</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
+</table>
+
+<p>Supported operations on link:</p>
+<b>Template: </b><pre>/customers/{0}/queue/images</pre><br/>
+
+
+<h2>Supported operations</h2>
+
+<b>Template: </b><pre>/customers/{0}/queue</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Returns the queue resource</td><td></td><td>vocab:Queue</td><td></td></tr>
+<tr>
+<td>POST</td><td>Submit an array of Image and get a batch back</td><td>hydra:Collection</td><td>vocab:Batch</td><td>202 Job has been accepted</td></tr>
+</table>
+

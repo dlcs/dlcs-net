@@ -1,0 +1,87 @@
+
+<h1>Role</h1>
+
+<p>A role is used by the DLCS to enforce access control. Images have roles.The DLCS acquires a user's roles from a RoleProvider. In the case of the simple Clickthrough role, the DLCS can supply this role to the user, but in other scenarios the DLCS needs to acquire roles for the user from the customer's endpoints.</p>
+<pre>/customers/{0}/roles/{1}</pre><br/>
+
+
+<h2>Supported properties</h2>
+
+
+<h3>name</h3>
+
+<p>The role name - this might be the same as the ID?</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Role</td><td>xsd:string</td><td>False</td><td>False</td></tr>
+</table>
+
+
+<h3>label</h3>
+
+<p>Label for a slightly longer description of the role</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Role</td><td>xsd:string</td><td>False</td><td>False</td></tr>
+</table>
+
+
+<h3>aliases</h3>
+
+<p>If the DLCS acquires roles from the customer, they might have different names</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Role</td><td>xsd:string</td><td>False</td><td>False</td></tr>
+</table>
+
+
+<h3>authService</h3>
+
+<p>The IIIF Auth Service for this role</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Role</td><td>vocab:AuthService</td><td>False</td><td>False</td></tr>
+</table>
+
+<p>Supported operations on link:</p>
+<b>Template: </b><pre>/customers/{0}/roles/{1}/authService</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Retrieve a Auth Service</td><td></td><td>vocab:Role</td><td></td></tr>
+<tr>
+<td>PUT</td><td>create or replace a Auth Service</td><td>vocab:Role</td><td>vocab:Role</td><td></td></tr>
+<tr>
+<td>PATCH</td><td>Update the supplied fields of the Auth Service</td><td>vocab:Role</td><td>vocab:Role</td><td>200 patched Auth Service</td></tr>
+<tr>
+<td>DELETE</td><td>Delete the Auth Service</td><td></td><td>owl:Nothing</td><td></td></tr>
+</table>
+
+
+<h2>Supported operations</h2>
+
+<b>Template: </b><pre>/customers/{0}/roles/{1}</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Retrieve a Role</td><td></td><td>vocab:Role</td><td></td></tr>
+<tr>
+<td>PUT</td><td>create or replace a Role</td><td>vocab:Role</td><td>vocab:Role</td><td></td></tr>
+<tr>
+<td>PATCH</td><td>Update the supplied fields of the Role</td><td>vocab:Role</td><td>vocab:Role</td><td>200 patched Role</td></tr>
+<tr>
+<td>DELETE</td><td>Delete the Role</td><td></td><td>owl:Nothing</td><td></td></tr>
+</table>
+

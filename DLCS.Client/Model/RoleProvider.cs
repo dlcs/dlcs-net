@@ -41,6 +41,11 @@ namespace DLCS.Client.Model
 
     public class RoleProviderClass : Class
     {
+        public RoleProviderClass()
+        {
+            BootstrapViaReflection(typeof(RoleProvider));
+        }
+
         public override void DefineOperations()
         {
             SupportedOperations = CommonOperations.GetStandardResourceOperations(

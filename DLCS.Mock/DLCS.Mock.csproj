@@ -126,6 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Generated-Docs\" />
     <Folder Include="Models\" />
     <Folder Include="Views\SpaceImages\" />
   </ItemGroup>

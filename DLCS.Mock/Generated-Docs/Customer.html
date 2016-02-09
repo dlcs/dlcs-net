@@ -1,0 +1,197 @@
+
+<h1>Customer</h1>
+
+<p>The route to all of your assets in the DLCS</p>
+<pre>/customers/{0}</pre><br/>
+
+
+<h2>Supported properties</h2>
+
+
+<h3>name</h3>
+
+<p>The URL-friendly name of the customer</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Customer</td><td>xsd:string</td><td>False</td><td>False</td></tr>
+</table>
+
+
+<h3>displayName</h3>
+
+<p>The display name of the customer</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Customer</td><td>xsd:string</td><td>False</td><td>False</td></tr>
+</table>
+
+
+<h3>portalUsers</h3>
+
+<p>Accounts that can log into the portal</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Customer</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
+</table>
+
+<p>Supported operations on link:</p>
+<b>Template: </b><pre>/customers/{0}/portalUsers</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Retrieves all Portal User</td><td></td><td>hydra:Collection</td><td></td></tr>
+<tr>
+<td>POST</td><td>Creates a new Portal User</td><td>vocab:PortalUser</td><td>vocab:PortalUser</td><td>201 Portal User created.</td></tr>
+</table>
+
+
+<h3>namedQueries</h3>
+
+<p>Set of preconfigured URI patterns that will generate IIIF resources on the main DLCS site</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Customer</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
+</table>
+
+<p>Supported operations on link:</p>
+<b>Template: </b><pre>/customers/{0}/namedQueries</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Retrieves all Named Query</td><td></td><td>hydra:Collection</td><td></td></tr>
+<tr>
+<td>POST</td><td>Creates a new Named Query</td><td>vocab:NamedQuery</td><td>vocab:NamedQuery</td><td>201 Named Query created.</td></tr>
+</table>
+
+
+<h3>originStrategies</h3>
+
+<p>Configuration for retrieving images from your endpoint(s)</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Customer</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
+</table>
+
+<p>Supported operations on link:</p>
+<b>Template: </b><pre>/customers/{0}/originStrategies</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Retrieves all Origin Strategy</td><td></td><td>hydra:Collection</td><td></td></tr>
+<tr>
+<td>POST</td><td>Creates a new Origin Strategy</td><td>vocab:OriginStrategy</td><td>vocab:OriginStrategy</td><td>201 Origin Strategy created.</td></tr>
+</table>
+
+
+<h3>authServices</h3>
+
+<p>Configuration for IIIF Auth Services available to you</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Customer</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
+</table>
+
+<p>Supported operations on link:</p>
+<b>Template: </b><pre>/customers/{0}/authServices</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Retrieves all Auth Service</td><td></td><td>hydra:Collection</td><td></td></tr>
+<tr>
+<td>POST</td><td>Creates a new Auth Service</td><td>vocab:AuthService</td><td>vocab:AuthService</td><td>201 Auth Service created.</td></tr>
+</table>
+
+
+<h3>roles</h3>
+
+<p>The set of roles you have registered for the DLCS to enforce access control</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Customer</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
+</table>
+
+<p>Supported operations on link:</p>
+<b>Template: </b><pre>/customers/{0}/roles</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Retrieves all Space</td><td></td><td>hydra:Collection</td><td></td></tr>
+<tr>
+<td>POST</td><td>Creates a new Space</td><td>vocab:Space</td><td>vocab:Space</td><td>201 Space created.</td></tr>
+</table>
+
+
+<h3>queue</h3>
+
+<p>The Customer's view on the DLCS ingest queue</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Customer</td><td>vocab:Queue</td><td>True</td><td>False</td></tr>
+</table>
+
+<p>Supported operations on link:</p>
+<b>Template: </b><pre>/customers/{0}/queue</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Returns the queue resource</td><td></td><td>vocab:Queue</td><td></td></tr>
+<tr>
+<td>POST</td><td>Submit an array of Image and get a batch back</td><td>hydra:Collection</td><td>vocab:Batch</td><td>202 Job has been accepted</td></tr>
+</table>
+
+
+<h3>spaces</h3>
+
+<p>A space allows you to partition images, have different default rules, etc</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Customer</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
+</table>
+
+<p>Supported operations on link:</p>
+<b>Template: </b><pre>/customers/{0}/spaces</pre><br/>
+
+
+<h2>Supported operations</h2>
+
+<b>Template: </b><pre>/customers/{0}</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Retrieve a Customer</td><td></td><td>vocab:Customer</td><td></td></tr>
+<tr>
+<td>PATCH</td><td>Update the supplied fields of the Customer</td><td>vocab:Customer</td><td>vocab:Customer</td><td>200 patched Customer</td></tr>
+</table>
+

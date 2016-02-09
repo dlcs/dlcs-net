@@ -1,0 +1,71 @@
+
+<h1>PortalUser</h1>
+
+<p>A user of the portal</p>
+<pre>/customers/{0}/portalUsers/{1}</pre><br/>
+
+
+<h2>Supported properties</h2>
+
+
+<h3>email</h3>
+
+<p>The email address</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:PortalUser</td><td>xsd:string</td><td>False</td><td>False</td></tr>
+</table>
+
+
+<h3>created</h3>
+
+<p>Create date</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:PortalUser</td><td>xsd:dateTime</td><td>False</td><td>False</td></tr>
+</table>
+
+
+<h3>role</h3>
+
+<p>List of Role URIs that the user has</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:PortalUser</td><td>xsd:string</td><td>False</td><td>False</td></tr>
+</table>
+
+
+<h3>enabled</h3>
+
+<p>Whether the user can log in</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:PortalUser</td><td>xsd:boolean</td><td>False</td><td>False</td></tr>
+</table>
+
+
+<h2>Supported operations</h2>
+
+<b>Template: </b><pre>/customers/{0}/portalUsers/{1}</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Retrieve a Portal User</td><td></td><td>vocab:PortalUser</td><td></td></tr>
+<tr>
+<td>PUT</td><td>create or replace a Portal User</td><td>vocab:PortalUser</td><td>vocab:PortalUser</td><td></td></tr>
+<tr>
+<td>PATCH</td><td>Update the supplied fields of the Portal User</td><td>vocab:PortalUser</td><td>vocab:PortalUser</td><td>200 patched Portal User</td></tr>
+<tr>
+<td>DELETE</td><td>Delete the Portal User</td><td></td><td>owl:Nothing</td><td></td></tr>
+</table>
+

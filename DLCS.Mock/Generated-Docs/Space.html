@@ -1,0 +1,128 @@
+
+<h1>Space</h1>
+
+<p>You can use a Space to partition your images and give them different default settings.</p>
+<pre>/customers/{0}/spaces/{1}</pre><br/>
+
+
+<h2>Supported properties</h2>
+
+
+<h3>modelId</h3>
+
+<p>The internal identifier for the space within the customer (uri component)</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Space</td><td>xsd:integer</td><td>False</td><td>False</td></tr>
+</table>
+
+
+<h3>name</h3>
+
+<p>Space name</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Space</td><td>xsd:string</td><td>False</td><td>False</td></tr>
+</table>
+
+
+<h3>created</h3>
+
+<p>Date the space was created</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Space</td><td>xsd:dateTime</td><td>True</td><td>False</td></tr>
+</table>
+
+
+<h3>defaultTags</h3>
+
+<p>Default tags to apply to images created in this space</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Space</td><td>xsd:string</td><td>False</td><td>False</td></tr>
+</table>
+
+
+<h3>defaultMaxUnauthorised</h3>
+
+<p>Default size at which role-based authorisation will be enforced. -1=open, 0=always require auth</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Space</td><td>xsd:integer</td><td>False</td><td>False</td></tr>
+</table>
+
+
+<h3>defaultRoles</h3>
+
+<p>Default roles that will be applied to images in this space</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Space</td><td>hydra:Collection</td><td>False</td><td>False</td></tr>
+</table>
+
+<p>Supported operations on link:</p>
+<b>Template: </b><pre>/customers/{0}/spaces/{1}/defaultRoles</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Retrieves all Role</td><td></td><td>hydra:Collection</td><td></td></tr>
+<tr>
+<td>POST</td><td>Creates a new Role</td><td>vocab:Role</td><td>vocab:Role</td><td>201 Role created.</td></tr>
+</table>
+
+
+<h3>images</h3>
+
+<p>All the images in the space</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Space</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
+</table>
+
+<p>Supported operations on link:</p>
+<b>Template: </b><pre>/customers/{0}/spaces/{1}/images</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Retrieves all Image</td><td></td><td>hydra:Collection</td><td></td></tr>
+<tr>
+<td>POST</td><td>Creates a new Image</td><td>vocab:Image</td><td>vocab:Image</td><td>201 Image created.</td></tr>
+</table>
+
+
+<h2>Supported operations</h2>
+
+<b>Template: </b><pre>/customers/{0}/spaces/{1}</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Retrieve a Space</td><td></td><td>vocab:Space</td><td></td></tr>
+<tr>
+<td>PUT</td><td>create or replace a Space</td><td>vocab:Space</td><td>vocab:Space</td><td></td></tr>
+<tr>
+<td>PATCH</td><td>Update the supplied fields of the Space</td><td>vocab:Space</td><td>vocab:Space</td><td>200 patched Space</td></tr>
+<tr>
+<td>DELETE</td><td>Delete the Space</td><td></td><td>owl:Nothing</td><td></td></tr>
+</table>
+

@@ -1,0 +1,152 @@
+
+<h1>Batch</h1>
+
+<p>Represents a submitted job of images</p>
+<pre>/customers/{0}/queue/batches/{1}</pre><br/>
+
+
+<h2>Supported properties</h2>
+
+
+<h3>submitted</h3>
+
+<p>Date the batch was POSTed</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Batch</td><td>xsd:dateTime</td><td>True</td><td>False</td></tr>
+</table>
+
+
+<h3>count</h3>
+
+<p>Total number of images in the batch</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Batch</td><td>xsd:nonNegativeInteger</td><td>True</td><td>False</td></tr>
+</table>
+
+
+<h3>completed</h3>
+
+<p>Total number of completed images in the batch</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Batch</td><td>xsd:nonNegativeInteger</td><td>True</td><td>False</td></tr>
+</table>
+
+
+<h3>finished</h3>
+
+<p>Date the batch was finished (may still have errors)</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Batch</td><td>xsd:dateTime</td><td>True</td><td>False</td></tr>
+</table>
+
+
+<h3>errors</h3>
+
+<p>Total number of error images in the batch</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Batch</td><td>xsd:nonNegativeInteger</td><td>True</td><td>False</td></tr>
+</table>
+
+
+<h3>estCompletion</h3>
+
+<p>Estimated Completion (best guess as to when this batch might get done)</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Batch</td><td>xsd:dateTime</td><td>True</td><td>False</td></tr>
+</table>
+
+
+<h3>images</h3>
+
+<p>All the images in the batch</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Batch</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
+</table>
+
+<p>Supported operations on link:</p>
+<b>Template: </b><pre>/customers/{0}/queue/batches/{1}/images</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Retrieves all images in batch regardless of state</td><td></td><td>hydra:Collection</td><td></td></tr>
+</table>
+
+
+<h3>completedImages</h3>
+
+<p>Images that have completed processing</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Batch</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
+</table>
+
+<p>Supported operations on link:</p>
+<b>Template: </b><pre>/customers/{0}/queue/batches/{1}/completedImages</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Retrieves all COMPLETED images in batch</td><td></td><td>hydra:Collection</td><td></td></tr>
+</table>
+
+
+<h3>errorImages</h3>
+
+<p>Images that encountered errors</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Batch</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
+</table>
+
+<p>Supported operations on link:</p>
+<b>Template: </b><pre>/customers/{0}/queue/batches/{1}/errorImages</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Retrieves all ERROR images in batch</td><td></td><td>hydra:Collection</td><td></td></tr>
+</table>
+
+
+<h2>Supported operations</h2>
+
+<b>Template: </b><pre>/customers/{0}/queue/batches/{1}</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Retrieve a Batch</td><td></td><td>vocab:Batch</td><td></td></tr>
+<tr>
+<td>DELETE</td><td>Delete the Batch</td><td></td><td>owl:Nothing</td><td></td></tr>
+</table>
+
