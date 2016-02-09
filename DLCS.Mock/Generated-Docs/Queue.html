@@ -6,6 +6,18 @@
 <pre>/customers/{0}/queue</pre><br/>
 
 
+<h2>Supported operations</h2>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Returns the queue resource</td><td></td><td>vocab:Queue</td><td></td></tr>
+<tr>
+<td>POST</td><td>Submit an array of Image and get a batch back</td><td>hydra:Collection</td><td>vocab:Batch</td><td>202 Job has been accepted</td></tr>
+</table>
+
+
 <h2>Supported properties</h2>
 
 
@@ -20,7 +32,10 @@
 </table>
 
 
-<h3>batches</h3>
+<h3>batches (🔗)</h3>
+
+
+<pre>/customers/{0}/queue/batches</pre><br/>
 
 <p>Separate jobs you have submitted</p>
 
@@ -30,10 +45,6 @@
 <td>vocab:Queue</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
 </table>
 
-<p>This property is a LINK...</p>
-
-<pre>/customers/{0}/queue/batches</pre><br/>
-
 
 <table><tr>
 <th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
@@ -42,7 +53,10 @@
 </table>
 
 
-<h3>images</h3>
+<h3>images (🔗)</h3>
+
+
+<pre>/customers/{0}/queue/images</pre><br/>
 
 <p>Merged view of images on the queue, across batches</p>
 
@@ -50,24 +64,5 @@
 <th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
 <tr>
 <td>vocab:Queue</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
-</table>
-
-<p>This property is a LINK...</p>
-
-<pre>/customers/{0}/queue/images</pre><br/>
-
-
-<h2>Supported operations</h2>
-
-
-<pre>/customers/{0}/queue</pre><br/>
-
-
-<table><tr>
-<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
-<tr>
-<td>GET</td><td>Returns the queue resource</td><td></td><td>vocab:Queue</td><td></td></tr>
-<tr>
-<td>POST</td><td>Submit an array of Image and get a batch back</td><td>hydra:Collection</td><td>vocab:Batch</td><td>202 Job has been accepted</td></tr>
 </table>
 

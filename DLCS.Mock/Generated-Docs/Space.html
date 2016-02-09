@@ -1,9 +1,25 @@
 
 <h1>Space</h1>
 
-<p>You can use a Space to partition your images and give them different default settings.</p>
+<p>Spaces allow you to partition images into groups. You can use them to organise your images logically, like folders. You can also define different default settings to apply to images registered in a space. For example, default access control behaviour for all images in a space, or default tags.These can be overridden for individual images. There is no limit to the number of images you can register in a space.</p>
 
 <pre>/customers/{0}/spaces/{1}</pre><br/>
+
+
+<h2>Supported operations</h2>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Retrieve a Space</td><td></td><td>vocab:Space</td><td></td></tr>
+<tr>
+<td>PUT</td><td>create or replace a Space</td><td>vocab:Space</td><td>vocab:Space</td><td></td></tr>
+<tr>
+<td>PATCH</td><td>Update the supplied fields of the Space</td><td>vocab:Space</td><td>vocab:Space</td><td>200 patched Space</td></tr>
+<tr>
+<td>DELETE</td><td>Delete the Space</td><td></td><td>owl:Nothing</td><td></td></tr>
+</table>
 
 
 <h2>Supported properties</h2>
@@ -64,7 +80,10 @@
 </table>
 
 
-<h3>defaultRoles</h3>
+<h3>defaultRoles (🔗)</h3>
+
+
+<pre>/customers/{0}/spaces/{1}/defaultRoles</pre><br/>
 
 <p>Default roles that will be applied to images in this space</p>
 
@@ -73,10 +92,6 @@
 <tr>
 <td>vocab:Space</td><td>hydra:Collection</td><td>False</td><td>False</td></tr>
 </table>
-
-<p>This property is a LINK...</p>
-
-<pre>/customers/{0}/spaces/{1}/defaultRoles</pre><br/>
 
 
 <table><tr>
@@ -88,7 +103,10 @@
 </table>
 
 
-<h3>images</h3>
+<h3>images (🔗)</h3>
+
+
+<pre>/customers/{0}/spaces/{1}/images</pre><br/>
 
 <p>All the images in the space</p>
 
@@ -98,10 +116,6 @@
 <td>vocab:Space</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
 </table>
 
-<p>This property is a LINK...</p>
-
-<pre>/customers/{0}/spaces/{1}/images</pre><br/>
-
 
 <table><tr>
 <th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
@@ -109,24 +123,5 @@
 <td>GET</td><td>Retrieves all Image</td><td></td><td>hydra:Collection</td><td></td></tr>
 <tr>
 <td>POST</td><td>Creates a new Image</td><td>vocab:Image</td><td>vocab:Image</td><td>201 Image created.</td></tr>
-</table>
-
-
-<h2>Supported operations</h2>
-
-
-<pre>/customers/{0}/spaces/{1}</pre><br/>
-
-
-<table><tr>
-<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
-<tr>
-<td>GET</td><td>Retrieve a Space</td><td></td><td>vocab:Space</td><td></td></tr>
-<tr>
-<td>PUT</td><td>create or replace a Space</td><td>vocab:Space</td><td>vocab:Space</td><td></td></tr>
-<tr>
-<td>PATCH</td><td>Update the supplied fields of the Space</td><td>vocab:Space</td><td>vocab:Space</td><td>200 patched Space</td></tr>
-<tr>
-<td>DELETE</td><td>Delete the Space</td><td></td><td>owl:Nothing</td><td></td></tr>
 </table>
 

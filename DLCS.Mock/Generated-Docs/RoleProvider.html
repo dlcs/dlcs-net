@@ -6,6 +6,22 @@
 <pre>/customers/{0}/authServices/{1}/roleProvider</pre><br/>
 
 
+<h2>Supported operations</h2>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Retrieve a Role Provider</td><td></td><td>vocab:RoleProvider</td><td></td></tr>
+<tr>
+<td>PUT</td><td>create or replace a Role Provider</td><td>vocab:RoleProvider</td><td>vocab:RoleProvider</td><td></td></tr>
+<tr>
+<td>PATCH</td><td>Update the supplied fields of the Role Provider</td><td>vocab:RoleProvider</td><td>vocab:RoleProvider</td><td>200 patched Role Provider</td></tr>
+<tr>
+<td>DELETE</td><td>Delete the Role Provider</td><td></td><td>owl:Nothing</td><td></td></tr>
+</table>
+
+
 <h2>Supported properties</h2>
 
 
@@ -28,24 +44,5 @@
 <th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
 <tr>
 <td>vocab:RoleProvider</td><td>xsd:string</td><td>False</td><td>True</td></tr>
-</table>
-
-
-<h2>Supported operations</h2>
-
-
-<pre>/customers/{0}/authServices/{1}/roleProvider</pre><br/>
-
-
-<table><tr>
-<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
-<tr>
-<td>GET</td><td>Retrieve a Role Provider</td><td></td><td>vocab:RoleProvider</td><td></td></tr>
-<tr>
-<td>PUT</td><td>create or replace a Role Provider</td><td>vocab:RoleProvider</td><td>vocab:RoleProvider</td><td></td></tr>
-<tr>
-<td>PATCH</td><td>Update the supplied fields of the Role Provider</td><td>vocab:RoleProvider</td><td>vocab:RoleProvider</td><td>200 patched Role Provider</td></tr>
-<tr>
-<td>DELETE</td><td>Delete the Role Provider</td><td></td><td>owl:Nothing</td><td></td></tr>
 </table>
 

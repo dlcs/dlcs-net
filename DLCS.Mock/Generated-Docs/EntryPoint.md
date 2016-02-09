@@ -4,15 +4,28 @@
 The main entry point or homepage of the API.
 
 
-```javascript
+```
 
 ```
+
+
+## Supported operations
+
+
+|Method|Label|Expects|Returns|Status|
+|--|--|--|--|--|
+|GET|The API's main entry point.| |vocab:EntryPoint| |
 
 
 ## Supported properties
 
 
-### customers
+### customers (🔗)
+
+
+```
+/customers
+```
 
 List of customers to which you have access (usually 1)
 
@@ -21,28 +34,8 @@ List of customers to which you have access (usually 1)
 |--|--|--|--|
 |vocab:EntryPoint|hydra:Collection|True|False|
 
-This property is a LINK...
-
-
-```javascript
-/customers
-```
-
 
 |Method|Label|Expects|Returns|Status|
 |--|--|--|--|--|
-|GET|Retrieves all Customer entities||hydra:Collection||
-
-
-## Supported operations
-
-
-```javascript
-
-```
-
-
-|Method|Label|Expects|Returns|Status|
-|--|--|--|--|--|
-|GET|The API's main entry point.||vocab:EntryPoint||
+|GET|Retrieves all Customer entities| |hydra:Collection| |
 

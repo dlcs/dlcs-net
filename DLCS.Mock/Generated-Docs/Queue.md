@@ -4,9 +4,18 @@
 Your current ingesting images
 
 
-```javascript
+```
 /customers/{0}/queue
 ```
+
+
+## Supported operations
+
+
+|Method|Label|Expects|Returns|Status|
+|--|--|--|--|--|
+|GET|Returns the queue resource| |vocab:Queue| |
+|POST|Submit an array of Image and get a batch back|hydra:Collection|vocab:Batch|202 Job has been accepted|
 
 
 ## Supported properties
@@ -22,7 +31,12 @@ Number of total images in your queue, across batches
 |vocab:Queue|xsd:nonNegativeInteger|True|False|
 
 
-### batches
+### batches (🔗)
+
+
+```
+/customers/{0}/queue/batches
+```
 
 Separate jobs you have submitted
 
@@ -31,20 +45,18 @@ Separate jobs you have submitted
 |--|--|--|--|
 |vocab:Queue|hydra:Collection|True|False|
 
-This property is a LINK...
-
-
-```javascript
-/customers/{0}/queue/batches
-```
-
 
 |Method|Label|Expects|Returns|Status|
 |--|--|--|--|--|
-|GET|Retrieves all batches for customer||hydra:Collection||
+|GET|Retrieves all batches for customer| |hydra:Collection| |
 
 
-### images
+### images (🔗)
+
+
+```
+/customers/{0}/queue/images
+```
 
 Merged view of images on the queue, across batches
 
@@ -52,25 +64,4 @@ Merged view of images on the queue, across batches
 |domain|range|readonly|writeonly|
 |--|--|--|--|
 |vocab:Queue|hydra:Collection|True|False|
-
-This property is a LINK...
-
-
-```javascript
-/customers/{0}/queue/images
-```
-
-
-## Supported operations
-
-
-```javascript
-/customers/{0}/queue
-```
-
-
-|Method|Label|Expects|Returns|Status|
-|--|--|--|--|--|
-|GET|Returns the queue resource||vocab:Queue||
-|POST|Submit an array of Image and get a batch back|hydra:Collection|vocab:Batch|202 Job has been accepted|
 

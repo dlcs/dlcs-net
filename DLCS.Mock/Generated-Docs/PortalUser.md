@@ -4,9 +4,20 @@
 A user of the portal
 
 
-```javascript
+```
 /customers/{0}/portalUsers/{1}
 ```
+
+
+## Supported operations
+
+
+|Method|Label|Expects|Returns|Status|
+|--|--|--|--|--|
+|GET|Retrieve a Portal User| |vocab:PortalUser| |
+|PUT|create or replace a Portal User|vocab:PortalUser|vocab:PortalUser| |
+|PATCH|Update the supplied fields of the Portal User|vocab:PortalUser|vocab:PortalUser|200 patched Portal User|
+|DELETE|Delete the Portal User| |owl:Nothing| |
 
 
 ## Supported properties
@@ -50,20 +61,4 @@ Whether the user can log in
 |domain|range|readonly|writeonly|
 |--|--|--|--|
 |vocab:PortalUser|xsd:boolean|False|False|
-
-
-## Supported operations
-
-
-```javascript
-/customers/{0}/portalUsers/{1}
-```
-
-
-|Method|Label|Expects|Returns|Status|
-|--|--|--|--|--|
-|GET|Retrieve a Portal User||vocab:PortalUser||
-|PUT|create or replace a Portal User|vocab:PortalUser|vocab:PortalUser||
-|PATCH|Update the supplied fields of the Portal User|vocab:PortalUser|vocab:PortalUser|200 patched Portal User|
-|DELETE|Delete the Portal User||owl:Nothing||
 

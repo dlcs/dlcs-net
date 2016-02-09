@@ -1,9 +1,21 @@
 
 <h1>Customer</h1>
 
-<p>The route to all of your assets in the DLCS</p>
+<p>A customer represents you, the API user. You only have access to one customer, so it is your effective entry point for the API. </p>
 
 <pre>/customers/{0}</pre><br/>
+
+
+<h2>Supported operations</h2>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Retrieve a Customer</td><td></td><td>vocab:Customer</td><td></td></tr>
+<tr>
+<td>PATCH</td><td>Update the supplied fields of the Customer</td><td>vocab:Customer</td><td>vocab:Customer</td><td>200 patched Customer</td></tr>
+</table>
 
 
 <h2>Supported properties</h2>
@@ -31,7 +43,10 @@
 </table>
 
 
-<h3>portalUsers</h3>
+<h3>portalUsers (🔗)</h3>
+
+
+<pre>/customers/{0}/portalUsers</pre><br/>
 
 <p>Accounts that can log into the portal</p>
 
@@ -40,10 +55,6 @@
 <tr>
 <td>vocab:Customer</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
 </table>
-
-<p>This property is a LINK...</p>
-
-<pre>/customers/{0}/portalUsers</pre><br/>
 
 
 <table><tr>
@@ -55,7 +66,10 @@
 </table>
 
 
-<h3>namedQueries</h3>
+<h3>namedQueries (🔗)</h3>
+
+
+<pre>/customers/{0}/namedQueries</pre><br/>
 
 <p>Set of preconfigured URI patterns that will generate IIIF resources on the main DLCS site</p>
 
@@ -64,10 +78,6 @@
 <tr>
 <td>vocab:Customer</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
 </table>
-
-<p>This property is a LINK...</p>
-
-<pre>/customers/{0}/namedQueries</pre><br/>
 
 
 <table><tr>
@@ -79,7 +89,10 @@
 </table>
 
 
-<h3>originStrategies</h3>
+<h3>originStrategies (🔗)</h3>
+
+
+<pre>/customers/{0}/originStrategies</pre><br/>
 
 <p>Configuration for retrieving images from your endpoint(s)</p>
 
@@ -88,10 +101,6 @@
 <tr>
 <td>vocab:Customer</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
 </table>
-
-<p>This property is a LINK...</p>
-
-<pre>/customers/{0}/originStrategies</pre><br/>
 
 
 <table><tr>
@@ -103,7 +112,10 @@
 </table>
 
 
-<h3>authServices</h3>
+<h3>authServices (🔗)</h3>
+
+
+<pre>/customers/{0}/authServices</pre><br/>
 
 <p>Configuration for IIIF Auth Services available to you</p>
 
@@ -112,10 +124,6 @@
 <tr>
 <td>vocab:Customer</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
 </table>
-
-<p>This property is a LINK...</p>
-
-<pre>/customers/{0}/authServices</pre><br/>
 
 
 <table><tr>
@@ -127,7 +135,10 @@
 </table>
 
 
-<h3>roles</h3>
+<h3>roles (🔗)</h3>
+
+
+<pre>/customers/{0}/roles</pre><br/>
 
 <p>The set of roles you have registered for the DLCS to enforce access control</p>
 
@@ -136,10 +147,6 @@
 <tr>
 <td>vocab:Customer</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
 </table>
-
-<p>This property is a LINK...</p>
-
-<pre>/customers/{0}/roles</pre><br/>
 
 
 <table><tr>
@@ -151,7 +158,10 @@
 </table>
 
 
-<h3>queue</h3>
+<h3>queue (🔗)</h3>
+
+
+<pre>/customers/{0}/queue</pre><br/>
 
 <p>The Customer's view on the DLCS ingest queue</p>
 
@@ -160,10 +170,6 @@
 <tr>
 <td>vocab:Customer</td><td>vocab:Queue</td><td>True</td><td>False</td></tr>
 </table>
-
-<p>This property is a LINK...</p>
-
-<pre>/customers/{0}/queue</pre><br/>
 
 
 <table><tr>
@@ -175,7 +181,10 @@
 </table>
 
 
-<h3>spaces</h3>
+<h3>spaces (🔗)</h3>
+
+
+<pre>/customers/{0}/spaces</pre><br/>
 
 <p>A space allows you to partition images, have different default rules, etc</p>
 
@@ -183,24 +192,5 @@
 <th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
 <tr>
 <td>vocab:Customer</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
-</table>
-
-<p>This property is a LINK...</p>
-
-<pre>/customers/{0}/spaces</pre><br/>
-
-
-<h2>Supported operations</h2>
-
-
-<pre>/customers/{0}</pre><br/>
-
-
-<table><tr>
-<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
-<tr>
-<td>GET</td><td>Retrieve a Customer</td><td></td><td>vocab:Customer</td><td></td></tr>
-<tr>
-<td>PATCH</td><td>Update the supplied fields of the Customer</td><td>vocab:Customer</td><td>vocab:Customer</td><td>200 patched Customer</td></tr>
 </table>
 

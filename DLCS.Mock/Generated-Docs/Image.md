@@ -4,9 +4,20 @@
 An image. What it's all about.
 
 
-```javascript
+```
 /customers/{0}/spaces/{1}/images/{2}
 ```
+
+
+## Supported operations
+
+
+|Method|Label|Expects|Returns|Status|
+|--|--|--|--|--|
+|GET|Retrieve a Image| |vocab:Image| |
+|PUT|create or replace a Image|vocab:Image|vocab:Image| |
+|PATCH|Update the supplied fields of the Image|vocab:Image|vocab:Image|200 patched Image|
+|DELETE|Delete the Image| |owl:Nothing| |
 
 
 ## Supported properties
@@ -252,7 +263,12 @@ Number reference 3
 |vocab:Image|xsd:nonNegativeInteger|False|False|
 
 
-### roles
+### roles (🔗)
+
+
+```
+/customers/{0}/spaces/{1}/images/{2}/roles
+```
 
 The role or roles that a user must possess to view this image above maxUnauthorised
 
@@ -261,21 +277,19 @@ The role or roles that a user must possess to view this image above maxUnauthori
 |--|--|--|--|
 |vocab:Image|hydra:Collection|False|False|
 
-This property is a LINK...
-
-
-```javascript
-/customers/{0}/spaces/{1}/images/{2}/roles
-```
-
 
 |Method|Label|Expects|Returns|Status|
 |--|--|--|--|--|
-|GET|Retrieves all Role||hydra:Collection||
+|GET|Retrieves all Role| |hydra:Collection| |
 |POST|Creates a new Role|vocab:Role|vocab:Role|201 Role created.|
 
 
-### batch
+### batch (🔗)
+
+
+```
+/customers/{0}/spaces/{1}/images/{2}/batch
+```
 
 The batch this image was ingested in (most recently). Might be blank if the batch has been archived or the image as ingested in immediate mode.
 
@@ -284,34 +298,11 @@ The batch this image was ingested in (most recently). Might be blank if the batc
 |--|--|--|--|
 |vocab:Image|vocab:Batch|True|False|
 
-This property is a LINK...
-
-
-```javascript
-/customers/{0}/spaces/{1}/images/{2}/batch
-```
-
 
 |Method|Label|Expects|Returns|Status|
 |--|--|--|--|--|
-|GET|Retrieve a Batch||vocab:Image||
-|PUT|create or replace a Batch|vocab:Image|vocab:Image||
+|GET|Retrieve a Batch| |vocab:Image| |
+|PUT|create or replace a Batch|vocab:Image|vocab:Image| |
 |PATCH|Update the supplied fields of the Batch|vocab:Image|vocab:Image|200 patched Batch|
-|DELETE|Delete the Batch||owl:Nothing||
-
-
-## Supported operations
-
-
-```javascript
-/customers/{0}/spaces/{1}/images/{2}
-```
-
-
-|Method|Label|Expects|Returns|Status|
-|--|--|--|--|--|
-|GET|Retrieve a Image||vocab:Image||
-|PUT|create or replace a Image|vocab:Image|vocab:Image||
-|PATCH|Update the supplied fields of the Image|vocab:Image|vocab:Image|200 patched Image|
-|DELETE|Delete the Image||owl:Nothing||
+|DELETE|Delete the Batch| |owl:Nothing| |
 

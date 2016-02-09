@@ -86,30 +86,36 @@ namespace DLCS.Mock.Controllers
                 sb.Heading(format, 1, clazz.Label);
                 sb.Para(format, clazz.Description);
                 sb.Code(format, clazz.UriTemplate);
+                if (clazz.SupportedOperations != null && clazz.SupportedOperations.Length > 0)
+                {
+                    sb.Heading(format, 2, "Supported operations");
+                    // sb.Code(format, clazz.UriTemplate);
+                    AppendSupportedOperationsTable(sb, format, clazz.SupportedOperations);
+                }
                 if (clazz.SupportedProperties != null && clazz.SupportedProperties.Length > 0)
                 {
                     sb.Heading(format, 2, "Supported properties");
                     foreach (SupportedProperty prop in clazz.SupportedProperties)
                     {
-                        sb.Heading(format, 3, prop.Title);
+                        var linkProp = prop.Property as HydraLinkProperty;
+                        if (linkProp != null)
+                        {
+                            sb.Heading(format, 3, prop.Title + " (🔗)");
+                            sb.Code(format, clazz.UriTemplate + "/" + linkProp.Label);
+                        }
+                        else
+                        {
+                            sb.Heading(format, 3, prop.Title);
+                        }
                         sb.Para(format, prop.Description);
                         sb.StartTable(format, "domain", "range", "readonly", "writeonly");
                         sb.TableRow(format, NameSpace(prop.Property.Domain), NameSpace(prop.Property.Range), prop.ReadOnly.ToString(), prop.WriteOnly.ToString());
                         sb.EndTable(format);
-                        var linkProp = prop.Property as HydraLinkProperty;
                         if (linkProp != null)
                         {
-                            sb.Para(format, "This property is a LINK...");
-                            sb.Code(format, clazz.UriTemplate + "/" + linkProp.Label);
                             AppendSupportedOperationsTable(sb, format, linkProp.SupportedOperations);
                         }
                     }
-                }
-                if (clazz.SupportedOperations != null && clazz.SupportedOperations.Length > 0)
-                {
-                    sb.Heading(format, 2, "Supported operations");
-                    sb.Code(format, clazz.UriTemplate);
-                    AppendSupportedOperationsTable(sb, format, clazz.SupportedOperations);
                 }
                 string classDoc = sb.ToString();
                 WriteDocToDisk(format, docDir, clazz, classDoc);
@@ -240,7 +246,10 @@ namespace DLCS.Mock.Controllers
             {
                 foreach (var cell in cells)
                 {
-                    sb.Append("|" + cell);
+                    var text = cell;
+                    if (string.IsNullOrWhiteSpace(text))
+                        text = " ";
+                    sb.Append("|" + text);
                 }
                 sb.AppendLine("|");
             }
@@ -272,7 +281,7 @@ namespace DLCS.Mock.Controllers
             sb.AppendLine();
             if (format == Markdown)
             {
-                sb.AppendLine("```javascript");
+                sb.AppendLine("```");
                 sb.AppendLine(code);
                 sb.AppendLine("```");
             }

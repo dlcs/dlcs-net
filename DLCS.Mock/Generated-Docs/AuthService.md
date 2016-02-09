@@ -4,9 +4,20 @@
 IIIF Autheintication Service configuration. The DLCS provides the service, but may need to delegate to your endpoints to acquire roles.
 
 
-```javascript
+```
 /customers/{0}/authServices/{1}
 ```
+
+
+## Supported operations
+
+
+|Method|Label|Expects|Returns|Status|
+|--|--|--|--|--|
+|GET|Retrieve a Auth Service| |vocab:AuthService| |
+|PUT|create or replace a Auth Service|vocab:AuthService|vocab:AuthService| |
+|PATCH|Update the supplied fields of the Auth Service|vocab:AuthService|vocab:AuthService|200 patched Auth Service|
+|DELETE|Delete the Auth Service| |owl:Nothing| |
 
 
 ## Supported properties
@@ -92,7 +103,12 @@ How long a cookie session and bearer token are valid for (seconds)
 |vocab:AuthService|xsd:nonNegativeInteger|False|False|
 
 
-### nestedServices
+### nestedServices (🔗)
+
+
+```
+/customers/{0}/authServices/{1}/nestedServices
+```
 
 Child auth services of a parent (relationship between login and token,logout)
 
@@ -101,21 +117,19 @@ Child auth services of a parent (relationship between login and token,logout)
 |--|--|--|--|
 |vocab:AuthService|hydra:Collection|True|False|
 
-This property is a LINK...
-
-
-```javascript
-/customers/{0}/authServices/{1}/nestedServices
-```
-
 
 |Method|Label|Expects|Returns|Status|
 |--|--|--|--|--|
-|GET|Retrieves all Nested Auth Service||hydra:Collection||
+|GET|Retrieves all Nested Auth Service| |hydra:Collection| |
 |POST|Creates a new Nested Auth Service|vocab:AuthService|vocab:AuthService|201 Nested Auth Service created.|
 
 
-### roleProvider
+### roleProvider (🔗)
+
+
+```
+/customers/{0}/authServices/{1}/roleProvider
+```
 
 External service that can be used by the DLCS to acquire roles for user sessions
 
@@ -124,31 +138,8 @@ External service that can be used by the DLCS to acquire roles for user sessions
 |--|--|--|--|
 |vocab:AuthService|vocab:RoleProvider|True|False|
 
-This property is a LINK...
-
-
-```javascript
-/customers/{0}/authServices/{1}/roleProvider
-```
-
 
 |Method|Label|Expects|Returns|Status|
 |--|--|--|--|--|
-|GET|Retrieve a Role Provider||vocab:Role||
-
-
-## Supported operations
-
-
-```javascript
-/customers/{0}/authServices/{1}
-```
-
-
-|Method|Label|Expects|Returns|Status|
-|--|--|--|--|--|
-|GET|Retrieve a Auth Service||vocab:AuthService||
-|PUT|create or replace a Auth Service|vocab:AuthService|vocab:AuthService||
-|PATCH|Update the supplied fields of the Auth Service|vocab:AuthService|vocab:AuthService|200 patched Auth Service|
-|DELETE|Delete the Auth Service||owl:Nothing||
+|GET|Retrieve a Role Provider| |vocab:Role| |
 

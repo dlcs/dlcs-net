@@ -6,6 +6,18 @@
 <pre>/customers/{0}/queue/batches/{1}</pre><br/>
 
 
+<h2>Supported operations</h2>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Retrieve a Batch</td><td></td><td>vocab:Batch</td><td></td></tr>
+<tr>
+<td>DELETE</td><td>Delete the Batch</td><td></td><td>owl:Nothing</td><td></td></tr>
+</table>
+
+
 <h2>Supported properties</h2>
 
 
@@ -75,7 +87,10 @@
 </table>
 
 
-<h3>images</h3>
+<h3>images (🔗)</h3>
+
+
+<pre>/customers/{0}/queue/batches/{1}/images</pre><br/>
 
 <p>All the images in the batch</p>
 
@@ -85,10 +100,6 @@
 <td>vocab:Batch</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
 </table>
 
-<p>This property is a LINK...</p>
-
-<pre>/customers/{0}/queue/batches/{1}/images</pre><br/>
-
 
 <table><tr>
 <th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
@@ -97,7 +108,10 @@
 </table>
 
 
-<h3>completedImages</h3>
+<h3>completedImages (🔗)</h3>
+
+
+<pre>/customers/{0}/queue/batches/{1}/completedImages</pre><br/>
 
 <p>Images that have completed processing</p>
 
@@ -107,10 +121,6 @@
 <td>vocab:Batch</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
 </table>
 
-<p>This property is a LINK...</p>
-
-<pre>/customers/{0}/queue/batches/{1}/completedImages</pre><br/>
-
 
 <table><tr>
 <th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
@@ -119,7 +129,10 @@
 </table>
 
 
-<h3>errorImages</h3>
+<h3>errorImages (🔗)</h3>
+
+
+<pre>/customers/{0}/queue/batches/{1}/errorImages</pre><br/>
 
 <p>Images that encountered errors</p>
 
@@ -129,29 +142,10 @@
 <td>vocab:Batch</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
 </table>
 
-<p>This property is a LINK...</p>
-
-<pre>/customers/{0}/queue/batches/{1}/errorImages</pre><br/>
-
 
 <table><tr>
 <th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
 <tr>
 <td>GET</td><td>Retrieves all ERROR images in batch</td><td></td><td>hydra:Collection</td><td></td></tr>
-</table>
-
-
-<h2>Supported operations</h2>
-
-
-<pre>/customers/{0}/queue/batches/{1}</pre><br/>
-
-
-<table><tr>
-<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
-<tr>
-<td>GET</td><td>Retrieve a Batch</td><td></td><td>vocab:Batch</td><td></td></tr>
-<tr>
-<td>DELETE</td><td>Delete the Batch</td><td></td><td>owl:Nothing</td><td></td></tr>
 </table>
 

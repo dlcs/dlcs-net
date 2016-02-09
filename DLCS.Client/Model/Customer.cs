@@ -5,7 +5,8 @@ using Newtonsoft.Json;
 namespace DLCS.Client.Model
 {
     [HydraClass(typeof(CustomerClass), 
-        Description = "The route to all of your assets in the DLCS",
+        Description = "A customer represents you, the API user. You only have access to one customer, " +
+                      "so it is your effective entry point for the API. ",
         UriTemplate = "/customers/{0}")]
     public class Customer : DlcsResource
     {

@@ -4,9 +4,18 @@
 Represents a submitted job of images
 
 
-```javascript
+```
 /customers/{0}/queue/batches/{1}
 ```
+
+
+## Supported operations
+
+
+|Method|Label|Expects|Returns|Status|
+|--|--|--|--|--|
+|GET|Retrieve a Batch| |vocab:Batch| |
+|DELETE|Delete the Batch| |owl:Nothing| |
 
 
 ## Supported properties
@@ -72,7 +81,12 @@ Estimated Completion (best guess as to when this batch might get done)
 |vocab:Batch|xsd:dateTime|True|False|
 
 
-### images
+### images (🔗)
+
+
+```
+/customers/{0}/queue/batches/{1}/images
+```
 
 All the images in the batch
 
@@ -81,20 +95,18 @@ All the images in the batch
 |--|--|--|--|
 |vocab:Batch|hydra:Collection|True|False|
 
-This property is a LINK...
-
-
-```javascript
-/customers/{0}/queue/batches/{1}/images
-```
-
 
 |Method|Label|Expects|Returns|Status|
 |--|--|--|--|--|
-|GET|Retrieves all images in batch regardless of state||hydra:Collection||
+|GET|Retrieves all images in batch regardless of state| |hydra:Collection| |
 
 
-### completedImages
+### completedImages (🔗)
+
+
+```
+/customers/{0}/queue/batches/{1}/completedImages
+```
 
 Images that have completed processing
 
@@ -103,20 +115,18 @@ Images that have completed processing
 |--|--|--|--|
 |vocab:Batch|hydra:Collection|True|False|
 
-This property is a LINK...
-
-
-```javascript
-/customers/{0}/queue/batches/{1}/completedImages
-```
-
 
 |Method|Label|Expects|Returns|Status|
 |--|--|--|--|--|
-|GET|Retrieves all COMPLETED images in batch||hydra:Collection||
+|GET|Retrieves all COMPLETED images in batch| |hydra:Collection| |
 
 
-### errorImages
+### errorImages (🔗)
+
+
+```
+/customers/{0}/queue/batches/{1}/errorImages
+```
 
 Images that encountered errors
 
@@ -125,29 +135,8 @@ Images that encountered errors
 |--|--|--|--|
 |vocab:Batch|hydra:Collection|True|False|
 
-This property is a LINK...
-
-
-```javascript
-/customers/{0}/queue/batches/{1}/errorImages
-```
-
 
 |Method|Label|Expects|Returns|Status|
 |--|--|--|--|--|
-|GET|Retrieves all ERROR images in batch||hydra:Collection||
-
-
-## Supported operations
-
-
-```javascript
-/customers/{0}/queue/batches/{1}
-```
-
-
-|Method|Label|Expects|Returns|Status|
-|--|--|--|--|--|
-|GET|Retrieve a Batch||vocab:Batch||
-|DELETE|Delete the Batch||owl:Nothing||
+|GET|Retrieves all ERROR images in batch| |hydra:Collection| |
 

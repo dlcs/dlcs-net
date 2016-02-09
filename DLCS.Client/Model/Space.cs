@@ -6,7 +6,11 @@ using Newtonsoft.Json;
 namespace DLCS.Client.Model
 {
     [HydraClass(typeof(SpaceClass),
-           Description = "You can use a Space to partition your images and give them different default settings.",
+           Description = "Spaces allow you to partition images into groups. You can use them to organise your " +
+                         "images logically, like folders. You can also define different default settings to apply " +
+                         "to images registered in a space. For example, default access control behaviour for all " +
+                         "images in a space, or default tags.These can be overridden for individual images. " +
+                         "There is no limit to the number of images you can register in a space.",
            UriTemplate = "/customers/{0}/spaces/{1}")]
     public class Space : DlcsResource
     {

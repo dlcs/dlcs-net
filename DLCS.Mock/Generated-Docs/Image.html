@@ -6,6 +6,22 @@
 <pre>/customers/{0}/spaces/{1}/images/{2}</pre><br/>
 
 
+<h2>Supported operations</h2>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Retrieve a Image</td><td></td><td>vocab:Image</td><td></td></tr>
+<tr>
+<td>PUT</td><td>create or replace a Image</td><td>vocab:Image</td><td>vocab:Image</td><td></td></tr>
+<tr>
+<td>PATCH</td><td>Update the supplied fields of the Image</td><td>vocab:Image</td><td>vocab:Image</td><td>200 patched Image</td></tr>
+<tr>
+<td>DELETE</td><td>Delete the Image</td><td></td><td>owl:Nothing</td><td></td></tr>
+</table>
+
+
 <h2>Supported properties</h2>
 
 
@@ -273,7 +289,10 @@
 </table>
 
 
-<h3>roles</h3>
+<h3>roles (🔗)</h3>
+
+
+<pre>/customers/{0}/spaces/{1}/images/{2}/roles</pre><br/>
 
 <p>The role or roles that a user must possess to view this image above maxUnauthorised</p>
 
@@ -282,10 +301,6 @@
 <tr>
 <td>vocab:Image</td><td>hydra:Collection</td><td>False</td><td>False</td></tr>
 </table>
-
-<p>This property is a LINK...</p>
-
-<pre>/customers/{0}/spaces/{1}/images/{2}/roles</pre><br/>
 
 
 <table><tr>
@@ -297,7 +312,10 @@
 </table>
 
 
-<h3>batch</h3>
+<h3>batch (🔗)</h3>
+
+
+<pre>/customers/{0}/spaces/{1}/images/{2}/batch</pre><br/>
 
 <p>The batch this image was ingested in (most recently). Might be blank if the batch has been archived or the image as ingested in immediate mode.</p>
 
@@ -306,10 +324,6 @@
 <tr>
 <td>vocab:Image</td><td>vocab:Batch</td><td>True</td><td>False</td></tr>
 </table>
-
-<p>This property is a LINK...</p>
-
-<pre>/customers/{0}/spaces/{1}/images/{2}/batch</pre><br/>
 
 
 <table><tr>
@@ -322,24 +336,5 @@
 <td>PATCH</td><td>Update the supplied fields of the Batch</td><td>vocab:Image</td><td>vocab:Image</td><td>200 patched Batch</td></tr>
 <tr>
 <td>DELETE</td><td>Delete the Batch</td><td></td><td>owl:Nothing</td><td></td></tr>
-</table>
-
-
-<h2>Supported operations</h2>
-
-
-<pre>/customers/{0}/spaces/{1}/images/{2}</pre><br/>
-
-
-<table><tr>
-<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
-<tr>
-<td>GET</td><td>Retrieve a Image</td><td></td><td>vocab:Image</td><td></td></tr>
-<tr>
-<td>PUT</td><td>create or replace a Image</td><td>vocab:Image</td><td>vocab:Image</td><td></td></tr>
-<tr>
-<td>PATCH</td><td>Update the supplied fields of the Image</td><td>vocab:Image</td><td>vocab:Image</td><td>200 patched Image</td></tr>
-<tr>
-<td>DELETE</td><td>Delete the Image</td><td></td><td>owl:Nothing</td><td></td></tr>
 </table>
 

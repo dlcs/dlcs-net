@@ -6,6 +6,22 @@
 <pre>/customers/{0}/authServices/{1}</pre><br/>
 
 
+<h2>Supported operations</h2>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<tr>
+<td>GET</td><td>Retrieve a Auth Service</td><td></td><td>vocab:AuthService</td><td></td></tr>
+<tr>
+<td>PUT</td><td>create or replace a Auth Service</td><td>vocab:AuthService</td><td>vocab:AuthService</td><td></td></tr>
+<tr>
+<td>PATCH</td><td>Update the supplied fields of the Auth Service</td><td>vocab:AuthService</td><td>vocab:AuthService</td><td>200 patched Auth Service</td></tr>
+<tr>
+<td>DELETE</td><td>Delete the Auth Service</td><td></td><td>owl:Nothing</td><td></td></tr>
+</table>
+
+
 <h2>Supported properties</h2>
 
 
@@ -97,7 +113,10 @@
 </table>
 
 
-<h3>nestedServices</h3>
+<h3>nestedServices (🔗)</h3>
+
+
+<pre>/customers/{0}/authServices/{1}/nestedServices</pre><br/>
 
 <p>Child auth services of a parent (relationship between login and token,logout)</p>
 
@@ -106,10 +125,6 @@
 <tr>
 <td>vocab:AuthService</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
 </table>
-
-<p>This property is a LINK...</p>
-
-<pre>/customers/{0}/authServices/{1}/nestedServices</pre><br/>
 
 
 <table><tr>
@@ -121,7 +136,10 @@
 </table>
 
 
-<h3>roleProvider</h3>
+<h3>roleProvider (🔗)</h3>
+
+
+<pre>/customers/{0}/authServices/{1}/roleProvider</pre><br/>
 
 <p>External service that can be used by the DLCS to acquire roles for user sessions</p>
 
@@ -131,33 +149,10 @@
 <td>vocab:AuthService</td><td>vocab:RoleProvider</td><td>True</td><td>False</td></tr>
 </table>
 
-<p>This property is a LINK...</p>
-
-<pre>/customers/{0}/authServices/{1}/roleProvider</pre><br/>
-
 
 <table><tr>
 <th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
 <tr>
 <td>GET</td><td>Retrieve a Role Provider</td><td></td><td>vocab:Role</td><td></td></tr>
-</table>
-
-
-<h2>Supported operations</h2>
-
-
-<pre>/customers/{0}/authServices/{1}</pre><br/>
-
-
-<table><tr>
-<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
-<tr>
-<td>GET</td><td>Retrieve a Auth Service</td><td></td><td>vocab:AuthService</td><td></td></tr>
-<tr>
-<td>PUT</td><td>create or replace a Auth Service</td><td>vocab:AuthService</td><td>vocab:AuthService</td><td></td></tr>
-<tr>
-<td>PATCH</td><td>Update the supplied fields of the Auth Service</td><td>vocab:AuthService</td><td>vocab:AuthService</td><td>200 patched Auth Service</td></tr>
-<tr>
-<td>DELETE</td><td>Delete the Auth Service</td><td></td><td>owl:Nothing</td><td></td></tr>
 </table>
 
