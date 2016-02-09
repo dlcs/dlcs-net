@@ -41,9 +41,9 @@ Accounts that can log into the portal
 |--|--|--|--|
 |vocab:Customer|hydra:Collection|True|False|
 
-Supported operations on link:
+This property is a LINK...
 
-**Template: **
+
 ```javascript
 /customers/{0}/portalUsers
 ```
@@ -64,9 +64,9 @@ Set of preconfigured URI patterns that will generate IIIF resources on the main 
 |--|--|--|--|
 |vocab:Customer|hydra:Collection|True|False|
 
-Supported operations on link:
+This property is a LINK...
 
-**Template: **
+
 ```javascript
 /customers/{0}/namedQueries
 ```
@@ -87,9 +87,9 @@ Configuration for retrieving images from your endpoint(s)
 |--|--|--|--|
 |vocab:Customer|hydra:Collection|True|False|
 
-Supported operations on link:
+This property is a LINK...
 
-**Template: **
+
 ```javascript
 /customers/{0}/originStrategies
 ```
@@ -110,9 +110,9 @@ Configuration for IIIF Auth Services available to you
 |--|--|--|--|
 |vocab:Customer|hydra:Collection|True|False|
 
-Supported operations on link:
+This property is a LINK...
 
-**Template: **
+
 ```javascript
 /customers/{0}/authServices
 ```
@@ -133,9 +133,9 @@ The set of roles you have registered for the DLCS to enforce access control
 |--|--|--|--|
 |vocab:Customer|hydra:Collection|True|False|
 
-Supported operations on link:
+This property is a LINK...
 
-**Template: **
+
 ```javascript
 /customers/{0}/roles
 ```
@@ -156,9 +156,9 @@ The Customer's view on the DLCS ingest queue
 |--|--|--|--|
 |vocab:Customer|vocab:Queue|True|False|
 
-Supported operations on link:
+This property is a LINK...
 
-**Template: **
+
 ```javascript
 /customers/{0}/queue
 ```
@@ -179,9 +179,9 @@ A space allows you to partition images, have different default rules, etc
 |--|--|--|--|
 |vocab:Customer|hydra:Collection|True|False|
 
-Supported operations on link:
+This property is a LINK...
 
-**Template: **
+
 ```javascript
 /customers/{0}/spaces
 ```

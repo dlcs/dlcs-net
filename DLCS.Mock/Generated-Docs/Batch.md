@@ -81,9 +81,9 @@ All the images in the batch
 |--|--|--|--|
 |vocab:Batch|hydra:Collection|True|False|
 
-Supported operations on link:
+This property is a LINK...
 
-**Template: **
+
 ```javascript
 /customers/{0}/queue/batches/{1}/images
 ```
@@ -103,9 +103,9 @@ Images that have completed processing
 |--|--|--|--|
 |vocab:Batch|hydra:Collection|True|False|
 
-Supported operations on link:
+This property is a LINK...
 
-**Template: **
+
 ```javascript
 /customers/{0}/queue/batches/{1}/completedImages
 ```
@@ -125,9 +125,9 @@ Images that encountered errors
 |--|--|--|--|
 |vocab:Batch|hydra:Collection|True|False|
 
-Supported operations on link:
+This property is a LINK...
 
-**Template: **
+
 ```javascript
 /customers/{0}/queue/batches/{1}/errorImages
 ```

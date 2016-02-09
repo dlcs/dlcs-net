@@ -31,9 +31,9 @@ Separate jobs you have submitted
 |--|--|--|--|
 |vocab:Queue|hydra:Collection|True|False|
 
-Supported operations on link:
+This property is a LINK...
 
-**Template: **
+
 ```javascript
 /customers/{0}/queue/batches
 ```
@@ -53,9 +53,9 @@ Merged view of images on the queue, across batches
 |--|--|--|--|
 |vocab:Queue|hydra:Collection|True|False|
 
-Supported operations on link:
+This property is a LINK...
 
-**Template: **
+
 ```javascript
 /customers/{0}/queue/images
 ```

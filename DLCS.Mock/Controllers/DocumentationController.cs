@@ -99,8 +99,7 @@ namespace DLCS.Mock.Controllers
                         var linkProp = prop.Property as HydraLinkProperty;
                         if (linkProp != null)
                         {
-                            sb.Para(format, "Supported operations on link:");
-                            sb.Bold(format, "Template: ");
+                            sb.Para(format, "This property is a LINK...");
                             sb.Code(format, clazz.UriTemplate + "/" + linkProp.Label);
                             AppendSupportedOperationsTable(sb, format, linkProp.SupportedOperations);
                         }

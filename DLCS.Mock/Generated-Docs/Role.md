@@ -51,9 +51,9 @@ The IIIF Auth Service for this role
 |--|--|--|--|
 |vocab:Role|vocab:AuthService|False|False|
 
-Supported operations on link:
+This property is a LINK...
 
-**Template: **
+
 ```javascript
 /customers/{0}/roles/{1}/authService
 ```

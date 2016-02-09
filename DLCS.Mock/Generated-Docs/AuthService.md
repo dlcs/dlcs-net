@@ -101,9 +101,9 @@ Child auth services of a parent (relationship between login and token,logout)
 |--|--|--|--|
 |vocab:AuthService|hydra:Collection|True|False|
 
-Supported operations on link:
+This property is a LINK...
 
-**Template: **
+
 ```javascript
 /customers/{0}/authServices/{1}/nestedServices
 ```
@@ -124,9 +124,9 @@ External service that can be used by the DLCS to acquire roles for user sessions
 |--|--|--|--|
 |vocab:AuthService|vocab:RoleProvider|True|False|
 
-Supported operations on link:
+This property is a LINK...
 
-**Template: **
+
 ```javascript
 /customers/{0}/authServices/{1}/roleProvider
 ```

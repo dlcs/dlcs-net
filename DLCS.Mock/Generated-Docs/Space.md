@@ -71,9 +71,9 @@ Default roles that will be applied to images in this space
 |--|--|--|--|
 |vocab:Space|hydra:Collection|False|False|
 
-Supported operations on link:
+This property is a LINK...
 
-**Template: **
+
 ```javascript
 /customers/{0}/spaces/{1}/defaultRoles
 ```
@@ -94,9 +94,9 @@ All the images in the space
 |--|--|--|--|
 |vocab:Space|hydra:Collection|True|False|
 
-Supported operations on link:
+This property is a LINK...
 
-**Template: **
+
 ```javascript
 /customers/{0}/spaces/{1}/images
 ```

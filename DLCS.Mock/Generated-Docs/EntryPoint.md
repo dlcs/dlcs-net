@@ -21,9 +21,9 @@ List of customers to which you have access (usually 1)
 |--|--|--|--|
 |vocab:EntryPoint|hydra:Collection|True|False|
 
-Supported operations on link:
+This property is a LINK...
 
-**Template: **
+
 ```javascript
 /customers
 ```

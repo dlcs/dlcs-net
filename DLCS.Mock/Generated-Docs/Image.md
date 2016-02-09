@@ -261,9 +261,9 @@ The role or roles that a user must possess to view this image above maxUnauthori
 |--|--|--|--|
 |vocab:Image|hydra:Collection|False|False|
 
-Supported operations on link:
+This property is a LINK...
 
-**Template: **
+
 ```javascript
 /customers/{0}/spaces/{1}/images/{2}/roles
 ```
@@ -284,9 +284,9 @@ The batch this image was ingested in (most recently). Might be blank if the batc
 |--|--|--|--|
 |vocab:Image|vocab:Batch|True|False|
 
-Supported operations on link:
+This property is a LINK...
 
-**Template: **
+
 ```javascript
 /customers/{0}/spaces/{1}/images/{2}/batch
 ```
