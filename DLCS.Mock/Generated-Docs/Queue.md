@@ -3,6 +3,8 @@
 
 Your current ingesting images
 
+
+
 ```javascript
 /customers/{0}/queue
 ```
@@ -32,7 +34,9 @@ Separate jobs you have submitted
 
 Supported operations on link:
 
-**Template: **```javascript
+**Template: **
+
+```javascript
 /customers/{0}/queue/batches
 ```
 
@@ -53,14 +57,18 @@ Merged view of images on the queue, across batches
 
 Supported operations on link:
 
-**Template: **```javascript
+**Template: **
+
+```javascript
 /customers/{0}/queue/images
 ```
 
 
 ## Supported operations
 
-**Template: **```javascript
+**Template: **
+
+```javascript
 /customers/{0}/queue
 ```
 

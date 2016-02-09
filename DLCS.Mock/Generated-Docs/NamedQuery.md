@@ -3,6 +3,8 @@
 
 A stored query that will generate IIIF manifests
 
+
+
 ```javascript
 /customers/{0}/namedQueries/{1}
 ```
@@ -23,7 +25,9 @@ The data for the query. JSON object?
 
 ## Supported operations
 
-**Template: **```javascript
+**Template: **
+
+```javascript
 /customers/{0}/namedQueries/{1}
 ```
 

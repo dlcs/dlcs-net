@@ -3,6 +3,8 @@
 
 A role is used by the DLCS to enforce access control. Images have roles.The DLCS acquires a user's roles from a RoleProvider. In the case of the simple Clickthrough role, the DLCS can supply this role to the user, but in other scenarios the DLCS needs to acquire roles for the user from the customer's endpoints.
 
+
+
 ```javascript
 /customers/{0}/roles/{1}
 ```
@@ -52,7 +54,9 @@ The IIIF Auth Service for this role
 
 Supported operations on link:
 
-**Template: **```javascript
+**Template: **
+
+```javascript
 /customers/{0}/roles/{1}/authService
 ```
 
@@ -67,7 +71,9 @@ Supported operations on link:
 
 ## Supported operations
 
-**Template: **```javascript
+**Template: **
+
+```javascript
 /customers/{0}/roles/{1}
 ```
 

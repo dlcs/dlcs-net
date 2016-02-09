@@ -3,6 +3,8 @@
 
 Configuration that tells the DLCS how to acquire images from your origin endpoints
 
+
+
 ```javascript
 /customers/{0}/originStrategies/{1}
 ```
@@ -43,7 +45,9 @@ JSON object - credentials appropriate to the protocol, will vary
 
 ## Supported operations
 
-**Template: **```javascript
+**Template: **
+
+```javascript
 /customers/{0}/originStrategies/{1}
 ```
 

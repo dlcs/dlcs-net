@@ -3,6 +3,8 @@
 
 You can use a Space to partition your images and give them different default settings.
 
+
+
 ```javascript
 /customers/{0}/spaces/{1}
 ```
@@ -72,7 +74,9 @@ Default roles that will be applied to images in this space
 
 Supported operations on link:
 
-**Template: **```javascript
+**Template: **
+
+```javascript
 /customers/{0}/spaces/{1}/defaultRoles
 ```
 
@@ -94,7 +98,9 @@ All the images in the space
 
 Supported operations on link:
 
-**Template: **```javascript
+**Template: **
+
+```javascript
 /customers/{0}/spaces/{1}/images
 ```
 
@@ -107,7 +113,9 @@ Supported operations on link:
 
 ## Supported operations
 
-**Template: **```javascript
+**Template: **
+
+```javascript
 /customers/{0}/spaces/{1}
 ```
 

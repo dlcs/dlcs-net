@@ -271,8 +271,10 @@ namespace DLCS.Mock.Controllers
 
         public static void Code(this StringBuilder sb, string format, string code)
         {
+            sb.AppendLine();
             if (format == Markdown)
             {
+                sb.AppendLine();
                 sb.AppendLine("```javascript");
                 sb.AppendLine(code);
                 sb.AppendLine("```");

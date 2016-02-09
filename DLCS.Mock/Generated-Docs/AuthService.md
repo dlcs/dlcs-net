@@ -3,6 +3,8 @@
 
 IIIF Autheintication Service configuration. The DLCS provides the service, but may need to delegate to your endpoints to acquire roles.
 
+
+
 ```javascript
 /customers/{0}/authServices/{1}
 ```
@@ -102,7 +104,9 @@ Child auth services of a parent (relationship between login and token,logout)
 
 Supported operations on link:
 
-**Template: **```javascript
+**Template: **
+
+```javascript
 /customers/{0}/authServices/{1}/nestedServices
 ```
 
@@ -124,7 +128,9 @@ External service that can be used by the DLCS to acquire roles for user sessions
 
 Supported operations on link:
 
-**Template: **```javascript
+**Template: **
+
+```javascript
 /customers/{0}/authServices/{1}/roleProvider
 ```
 
@@ -136,7 +142,9 @@ Supported operations on link:
 
 ## Supported operations
 
-**Template: **```javascript
+**Template: **
+
+```javascript
 /customers/{0}/authServices/{1}
 ```
 
