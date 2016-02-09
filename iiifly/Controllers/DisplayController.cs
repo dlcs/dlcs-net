@@ -61,29 +61,40 @@ namespace iiifly.Controllers
             }
             if (imageSet != null)
             {
-                var wrapper = GetImageSetWrapper(imageSetCreator, imageSet);
+                var wrapper = GetImageSetWrapper(imageSetCreator, imageSet, true);
                 return View(wrapper);
             }
             return View();
         }
 
-        private ImageSetWrapper GetImageSetWrapper(ImageSet imageSet)
+        private ImageSetWrapper GetImageSetWrapper(ImageSet imageSet, bool loadImages = false)
         {
             var user = UserManager.FindById(imageSet.ApplicationUserId);
-            return GetImageSetWrapper(user, imageSet);
+            return GetImageSetWrapper(user, imageSet, loadImages);
         }
 
-        private ImageSetWrapper GetImageSetWrapper(ApplicationUser user, ImageSet imageSet)
+        private ImageSetWrapper GetImageSetWrapper(ApplicationUser user, ImageSet imageSet, bool loadImages)
         {
             var userPublicPath = GlobalData.GetPublicPath(user.Id);
-            return new ImageSetWrapper
+            var isw = new ImageSetWrapper
             {
                 UserPublicPath = userPublicPath,
                 UserDisplay = GetDisplayForm(user),
                 ImageSet = imageSet,
-                ProxyManifest = "/display/proxymanifest/" + userPublicPath + "/" + imageSet.Id,
-                Images = Dlcs.Dlcs.GetImages(user.DlcsSpace, imageSet.Id)
+                ProxyManifest = "/display/proxymanifest/" + userPublicPath + "/" + imageSet.Id
             };
+            if (loadImages)
+            {
+                isw.Images = Dlcs.Dlcs.GetImages(user.DlcsSpace, imageSet.Id);
+                foreach (var image in isw.Images)
+                {
+                    if (image.Finished.HasValue && image.Finished.Value.Year < 2000)
+                    {
+                        image.Finished = null;
+                    }
+                }
+            }
+            return isw;
         }
 
         private string GetDisplayForm(ApplicationUser user)
@@ -107,7 +118,7 @@ namespace iiifly.Controllers
                 var imageSets = db.ImageSets.OrderByDescending(iset => iset.Created).Take(20).ToList();
                 var setList = new ImageSetList
                 {
-                    ImageSetWrappers = imageSets.Select(GetImageSetWrapper).ToList()
+                    ImageSetWrappers = imageSets.Select(iset => GetImageSetWrapper(iset)).ToList()
                 };
                 return View("ImageSetList", setList);
             }
@@ -120,13 +131,13 @@ namespace iiifly.Controllers
             using (var db = new ApplicationDbContext())
             {
                 var imageSets = db.ImageSets.Where(iset => iset.ApplicationUserId == user.Id).ToList();
-                setList.ImageSetWrappers = imageSets.Select(iset => GetImageSetWrapper(user, iset)).ToList();
+                setList.ImageSetWrappers = imageSets.Select(iset => GetImageSetWrapper(user, iset, false)).ToList();
             }
             return View("ImageSetList", setList);
         }
 
 
-        [Authorize(Roles = "CanCallDlcs")]
+        [Authorize(Roles = "canCallDlcs")]
         public ActionResult UpdateImageSet()
         {
             var currentUser = User.Identity.GetUserId();

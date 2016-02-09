@@ -50,7 +50,7 @@ namespace iiifly.Models
 
         public bool IsFinished()
         {
-            return Images.All(im => im.Finished.HasValue);
+            return Images.All(im => im.Finished.HasValue && im.Finished.Value.Year > 2000);
         }
     }
 

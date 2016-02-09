@@ -26,7 +26,7 @@
             @foreach (var wrapper in Model.ImageSetWrappers)
             {
                 <a href="@Url.Action("ImageSet", new {userPublicPath = wrapper.UserPublicPath, id = wrapper.ImageSet.Id})" 
-                    class="list-group-item">@wrapper.ImageSet.Label<span class="badge">@wrapper.Images.Count</span></a>
+                    class="list-group-item">@wrapper.ImageSet.Label<span class="badge">@wrapper.ImageSet.NumberOfImages</span></a>
             }
         </div>
     }
