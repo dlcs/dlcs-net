@@ -43,17 +43,17 @@ The display name of the customer
 
 ### portalUsers (🔗)
 
-
-```
-/customers/{0}/portalUsers
-```
-
 Accounts that can log into the portal
 
 
 |domain|range|readonly|writeonly|
 |--|--|--|--|
 |vocab:Customer|hydra:Collection|True|False|
+
+
+```
+/customers/{0}/portalUsers
+```
 
 
 |Method|Label|Expects|Returns|Status|
@@ -64,17 +64,17 @@ Accounts that can log into the portal
 
 ### namedQueries (🔗)
 
-
-```
-/customers/{0}/namedQueries
-```
-
 Set of preconfigured URI patterns that will generate IIIF resources on the main DLCS site
 
 
 |domain|range|readonly|writeonly|
 |--|--|--|--|
 |vocab:Customer|hydra:Collection|True|False|
+
+
+```
+/customers/{0}/namedQueries
+```
 
 
 |Method|Label|Expects|Returns|Status|
@@ -85,17 +85,17 @@ Set of preconfigured URI patterns that will generate IIIF resources on the main 
 
 ### originStrategies (🔗)
 
-
-```
-/customers/{0}/originStrategies
-```
-
 Configuration for retrieving images from your endpoint(s)
 
 
 |domain|range|readonly|writeonly|
 |--|--|--|--|
 |vocab:Customer|hydra:Collection|True|False|
+
+
+```
+/customers/{0}/originStrategies
+```
 
 
 |Method|Label|Expects|Returns|Status|
@@ -106,17 +106,17 @@ Configuration for retrieving images from your endpoint(s)
 
 ### authServices (🔗)
 
-
-```
-/customers/{0}/authServices
-```
-
 Configuration for IIIF Auth Services available to you
 
 
 |domain|range|readonly|writeonly|
 |--|--|--|--|
 |vocab:Customer|hydra:Collection|True|False|
+
+
+```
+/customers/{0}/authServices
+```
 
 
 |Method|Label|Expects|Returns|Status|
@@ -127,17 +127,17 @@ Configuration for IIIF Auth Services available to you
 
 ### roles (🔗)
 
-
-```
-/customers/{0}/roles
-```
-
 The set of roles you have registered for the DLCS to enforce access control
 
 
 |domain|range|readonly|writeonly|
 |--|--|--|--|
 |vocab:Customer|hydra:Collection|True|False|
+
+
+```
+/customers/{0}/roles
+```
 
 
 |Method|Label|Expects|Returns|Status|
@@ -148,17 +148,17 @@ The set of roles you have registered for the DLCS to enforce access control
 
 ### queue (🔗)
 
-
-```
-/customers/{0}/queue
-```
-
 The Customer's view on the DLCS ingest queue
 
 
 |domain|range|readonly|writeonly|
 |--|--|--|--|
 |vocab:Customer|vocab:Queue|True|False|
+
+
+```
+/customers/{0}/queue
+```
 
 
 |Method|Label|Expects|Returns|Status|
@@ -169,15 +169,15 @@ The Customer's view on the DLCS ingest queue
 
 ### spaces (🔗)
 
-
-```
-/customers/{0}/spaces
-```
-
 A space allows you to partition images, have different default rules, etc
 
 
 |domain|range|readonly|writeonly|
 |--|--|--|--|
 |vocab:Customer|hydra:Collection|True|False|
+
+
+```
+/customers/{0}/spaces
+```
 

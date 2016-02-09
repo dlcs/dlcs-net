@@ -75,17 +75,17 @@ Default size at which role-based authorisation will be enforced. -1=open, 0=alwa
 
 ### defaultRoles (🔗)
 
-
-```
-/customers/{0}/spaces/{1}/defaultRoles
-```
-
 Default roles that will be applied to images in this space
 
 
 |domain|range|readonly|writeonly|
 |--|--|--|--|
 |vocab:Space|hydra:Collection|False|False|
+
+
+```
+/customers/{0}/spaces/{1}/defaultRoles
+```
 
 
 |Method|Label|Expects|Returns|Status|
@@ -96,17 +96,17 @@ Default roles that will be applied to images in this space
 
 ### images (🔗)
 
-
-```
-/customers/{0}/spaces/{1}/images
-```
-
 All the images in the space
 
 
 |domain|range|readonly|writeonly|
 |--|--|--|--|
 |vocab:Space|hydra:Collection|True|False|
+
+
+```
+/customers/{0}/spaces/{1}/images
+```
 
 
 |Method|Label|Expects|Returns|Status|

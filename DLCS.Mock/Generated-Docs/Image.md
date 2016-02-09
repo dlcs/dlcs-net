@@ -265,17 +265,17 @@ Number reference 3
 
 ### roles (🔗)
 
-
-```
-/customers/{0}/spaces/{1}/images/{2}/roles
-```
-
 The role or roles that a user must possess to view this image above maxUnauthorised
 
 
 |domain|range|readonly|writeonly|
 |--|--|--|--|
 |vocab:Image|hydra:Collection|False|False|
+
+
+```
+/customers/{0}/spaces/{1}/images/{2}/roles
+```
 
 
 |Method|Label|Expects|Returns|Status|
@@ -286,17 +286,17 @@ The role or roles that a user must possess to view this image above maxUnauthori
 
 ### batch (🔗)
 
-
-```
-/customers/{0}/spaces/{1}/images/{2}/batch
-```
-
 The batch this image was ingested in (most recently). Might be blank if the batch has been archived or the image as ingested in immediate mode.
 
 
 |domain|range|readonly|writeonly|
 |--|--|--|--|
 |vocab:Image|vocab:Batch|True|False|
+
+
+```
+/customers/{0}/spaces/{1}/images/{2}/batch
+```
 
 
 |Method|Label|Expects|Returns|Status|

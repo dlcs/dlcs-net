@@ -22,17 +22,17 @@ The main entry point or homepage of the API.
 
 ### customers (🔗)
 
-
-```
-/customers
-```
-
 List of customers to which you have access (usually 1)
 
 
 |domain|range|readonly|writeonly|
 |--|--|--|--|
 |vocab:EntryPoint|hydra:Collection|True|False|
+
+
+```
+/customers
+```
 
 
 |Method|Label|Expects|Returns|Status|

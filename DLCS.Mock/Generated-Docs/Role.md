@@ -55,17 +55,17 @@ If the DLCS acquires roles from the customer, they might have different names
 
 ### authService (🔗)
 
-
-```
-/customers/{0}/roles/{1}/authService
-```
-
 The IIIF Auth Service for this role
 
 
 |domain|range|readonly|writeonly|
 |--|--|--|--|
 |vocab:Role|vocab:AuthService|False|False|
+
+
+```
+/customers/{0}/roles/{1}/authService
+```
 
 
 |Method|Label|Expects|Returns|Status|

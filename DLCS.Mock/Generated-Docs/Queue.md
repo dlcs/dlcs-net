@@ -33,17 +33,17 @@ Number of total images in your queue, across batches
 
 ### batches (🔗)
 
-
-```
-/customers/{0}/queue/batches
-```
-
 Separate jobs you have submitted
 
 
 |domain|range|readonly|writeonly|
 |--|--|--|--|
 |vocab:Queue|hydra:Collection|True|False|
+
+
+```
+/customers/{0}/queue/batches
+```
 
 
 |Method|Label|Expects|Returns|Status|
@@ -53,15 +53,15 @@ Separate jobs you have submitted
 
 ### images (🔗)
 
-
-```
-/customers/{0}/queue/images
-```
-
 Merged view of images on the queue, across batches
 
 
 |domain|range|readonly|writeonly|
 |--|--|--|--|
 |vocab:Queue|hydra:Collection|True|False|
+
+
+```
+/customers/{0}/queue/images
+```
 

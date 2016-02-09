@@ -83,17 +83,17 @@ Estimated Completion (best guess as to when this batch might get done)
 
 ### images (🔗)
 
-
-```
-/customers/{0}/queue/batches/{1}/images
-```
-
 All the images in the batch
 
 
 |domain|range|readonly|writeonly|
 |--|--|--|--|
 |vocab:Batch|hydra:Collection|True|False|
+
+
+```
+/customers/{0}/queue/batches/{1}/images
+```
 
 
 |Method|Label|Expects|Returns|Status|
@@ -103,17 +103,17 @@ All the images in the batch
 
 ### completedImages (🔗)
 
-
-```
-/customers/{0}/queue/batches/{1}/completedImages
-```
-
 Images that have completed processing
 
 
 |domain|range|readonly|writeonly|
 |--|--|--|--|
 |vocab:Batch|hydra:Collection|True|False|
+
+
+```
+/customers/{0}/queue/batches/{1}/completedImages
+```
 
 
 |Method|Label|Expects|Returns|Status|
@@ -123,17 +123,17 @@ Images that have completed processing
 
 ### errorImages (🔗)
 
-
-```
-/customers/{0}/queue/batches/{1}/errorImages
-```
-
 Images that encountered errors
 
 
 |domain|range|readonly|writeonly|
 |--|--|--|--|
 |vocab:Batch|hydra:Collection|True|False|
+
+
+```
+/customers/{0}/queue/batches/{1}/errorImages
+```
 
 
 |Method|Label|Expects|Returns|Status|

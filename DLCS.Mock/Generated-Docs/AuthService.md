@@ -105,17 +105,17 @@ How long a cookie session and bearer token are valid for (seconds)
 
 ### nestedServices (🔗)
 
-
-```
-/customers/{0}/authServices/{1}/nestedServices
-```
-
 Child auth services of a parent (relationship between login and token,logout)
 
 
 |domain|range|readonly|writeonly|
 |--|--|--|--|
 |vocab:AuthService|hydra:Collection|True|False|
+
+
+```
+/customers/{0}/authServices/{1}/nestedServices
+```
 
 
 |Method|Label|Expects|Returns|Status|
@@ -126,17 +126,17 @@ Child auth services of a parent (relationship between login and token,logout)
 
 ### roleProvider (🔗)
 
-
-```
-/customers/{0}/authServices/{1}/roleProvider
-```
-
 External service that can be used by the DLCS to acquire roles for user sessions
 
 
 |domain|range|readonly|writeonly|
 |--|--|--|--|
 |vocab:AuthService|vocab:RoleProvider|True|False|
+
+
+```
+/customers/{0}/authServices/{1}/roleProvider
+```
 
 
 |Method|Label|Expects|Returns|Status|

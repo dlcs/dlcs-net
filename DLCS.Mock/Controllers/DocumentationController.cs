@@ -101,7 +101,6 @@ namespace DLCS.Mock.Controllers
                         if (linkProp != null)
                         {
                             sb.Heading(format, 3, prop.Title + " (🔗)");
-                            sb.Code(format, clazz.UriTemplate + "/" + linkProp.Label);
                         }
                         else
                         {
@@ -113,6 +112,7 @@ namespace DLCS.Mock.Controllers
                         sb.EndTable(format);
                         if (linkProp != null)
                         {
+                            sb.Code(format, clazz.UriTemplate + "/" + linkProp.Label);
                             AppendSupportedOperationsTable(sb, format, linkProp.SupportedOperations);
                         }
                     }
