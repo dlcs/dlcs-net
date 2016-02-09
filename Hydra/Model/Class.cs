@@ -39,6 +39,12 @@ namespace Hydra.Model
         }
 
         /// <summary>
+        /// For assistance with documentation
+        /// </summary>
+        [JsonIgnore]
+        public string UriTemplate { get; set; }
+
+        /// <summary>
         /// I'm trying to strike a balance between excessive reflection and ease of coding
         /// </summary>
         /// <param name="resourceType"></param>
@@ -49,6 +55,7 @@ namespace Hydra.Model
             Id = "vocab:" + resourceType.Name;
             Label = resourceType.Name;
             Description = classAttr.Description;
+            UriTemplate = classAttr.UriTemplate;
 
             // We won't get Supported Operations by reflecting on attributes - hard to read
             // Requring it there does not involve any duplication, which is the main reason
