@@ -109,7 +109,6 @@ namespace DLCS.Mock.Controllers
                 if (clazz.SupportedOperations != null && clazz.SupportedOperations.Length > 0)
                 {
                     sb.Heading(format, 2, "Supported operations");
-                    sb.Bold(format, "Template: ");
                     sb.Code(format, clazz.UriTemplate);
                     AppendSupportedOperationsTable(sb, format, clazz.SupportedOperations);
                 }
@@ -274,7 +273,6 @@ namespace DLCS.Mock.Controllers
             sb.AppendLine();
             if (format == Markdown)
             {
-                sb.AppendLine();
                 sb.AppendLine("```javascript");
                 sb.AppendLine(code);
                 sb.AppendLine("```");

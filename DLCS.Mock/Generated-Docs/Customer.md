@@ -4,7 +4,6 @@
 The route to all of your assets in the DLCS
 
 
-
 ```javascript
 /customers/{0}
 ```
@@ -45,7 +44,6 @@ Accounts that can log into the portal
 Supported operations on link:
 
 **Template: **
-
 ```javascript
 /customers/{0}/portalUsers
 ```
@@ -69,7 +67,6 @@ Set of preconfigured URI patterns that will generate IIIF resources on the main 
 Supported operations on link:
 
 **Template: **
-
 ```javascript
 /customers/{0}/namedQueries
 ```
@@ -93,7 +90,6 @@ Configuration for retrieving images from your endpoint(s)
 Supported operations on link:
 
 **Template: **
-
 ```javascript
 /customers/{0}/originStrategies
 ```
@@ -117,7 +113,6 @@ Configuration for IIIF Auth Services available to you
 Supported operations on link:
 
 **Template: **
-
 ```javascript
 /customers/{0}/authServices
 ```
@@ -141,7 +136,6 @@ The set of roles you have registered for the DLCS to enforce access control
 Supported operations on link:
 
 **Template: **
-
 ```javascript
 /customers/{0}/roles
 ```
@@ -165,7 +159,6 @@ The Customer's view on the DLCS ingest queue
 Supported operations on link:
 
 **Template: **
-
 ```javascript
 /customers/{0}/queue
 ```
@@ -189,7 +182,6 @@ A space allows you to partition images, have different default rules, etc
 Supported operations on link:
 
 **Template: **
-
 ```javascript
 /customers/{0}/spaces
 ```
@@ -197,7 +189,6 @@ Supported operations on link:
 
 ## Supported operations
 
-**Template: **
 
 ```javascript
 /customers/{0}

@@ -4,7 +4,6 @@
 Represents a submitted job of images
 
 
-
 ```javascript
 /customers/{0}/queue/batches/{1}
 ```
@@ -85,7 +84,6 @@ All the images in the batch
 Supported operations on link:
 
 **Template: **
-
 ```javascript
 /customers/{0}/queue/batches/{1}/images
 ```
@@ -108,7 +106,6 @@ Images that have completed processing
 Supported operations on link:
 
 **Template: **
-
 ```javascript
 /customers/{0}/queue/batches/{1}/completedImages
 ```
@@ -131,7 +128,6 @@ Images that encountered errors
 Supported operations on link:
 
 **Template: **
-
 ```javascript
 /customers/{0}/queue/batches/{1}/errorImages
 ```
@@ -144,7 +140,6 @@ Supported operations on link:
 
 ## Supported operations
 
-**Template: **
 
 ```javascript
 /customers/{0}/queue/batches/{1}

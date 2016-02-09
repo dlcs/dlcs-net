@@ -4,7 +4,6 @@
 The main entry point or homepage of the API.
 
 
-
 ```javascript
 
 ```
@@ -25,7 +24,6 @@ List of customers to which you have access (usually 1)
 Supported operations on link:
 
 **Template: **
-
 ```javascript
 /customers
 ```
@@ -38,7 +36,6 @@ Supported operations on link:
 
 ## Supported operations
 
-**Template: **
 
 ```javascript
 

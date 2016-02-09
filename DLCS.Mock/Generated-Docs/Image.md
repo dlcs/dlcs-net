@@ -4,7 +4,6 @@
 An image. What it's all about.
 
 
-
 ```javascript
 /customers/{0}/spaces/{1}/images/{2}
 ```
@@ -265,7 +264,6 @@ The role or roles that a user must possess to view this image above maxUnauthori
 Supported operations on link:
 
 **Template: **
-
 ```javascript
 /customers/{0}/spaces/{1}/images/{2}/roles
 ```
@@ -289,7 +287,6 @@ The batch this image was ingested in (most recently). Might be blank if the batc
 Supported operations on link:
 
 **Template: **
-
 ```javascript
 /customers/{0}/spaces/{1}/images/{2}/batch
 ```
@@ -305,7 +302,6 @@ Supported operations on link:
 
 ## Supported operations
 
-**Template: **
 
 ```javascript
 /customers/{0}/spaces/{1}/images/{2}

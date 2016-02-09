@@ -4,7 +4,6 @@
 A user of the portal
 
 
-
 ```javascript
 /customers/{0}/portalUsers/{1}
 ```
@@ -55,7 +54,6 @@ Whether the user can log in
 
 ## Supported operations
 
-**Template: **
 
 ```javascript
 /customers/{0}/portalUsers/{1}

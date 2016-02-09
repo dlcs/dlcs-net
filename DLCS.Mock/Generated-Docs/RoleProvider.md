@@ -4,7 +4,6 @@
 Resource that represents the means by which the DLCS acquires roles to enforce an access control session. The DLCS maintains the session, but needs an external auth service (CAS, OAuth etc) to authenitcate the user and acquire roles. Credentials are stored in S3 and not returned via the API.
 
 
-
 ```javascript
 /customers/{0}/authServices/{1}/roleProvider
 ```
@@ -35,7 +34,6 @@ Credentials - not exposed via API, but can be written to by customer.
 
 ## Supported operations
 
-**Template: **
 
 ```javascript
 /customers/{0}/authServices/{1}/roleProvider
