@@ -10,15 +10,15 @@
 
 
 <table><tr>
-<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Statuses</th></tr>
 <tr>
-<td>GET</td><td>Retrieve a Space</td><td></td><td>vocab:Space</td><td></td></tr>
+<td>GET</td><td>Retrieve a Space</td><td></td><td>vocab:Space</td><td>200 OK, 404 Not found</td></tr>
 <tr>
-<td>PUT</td><td>create or replace a Space</td><td>vocab:Space</td><td>vocab:Space</td><td></td></tr>
+<td>PUT</td><td>create or replace a Space</td><td>vocab:Space</td><td>vocab:Space</td><td>200 OK, 201 Created Space, 404 Not found</td></tr>
 <tr>
-<td>PATCH</td><td>Update the supplied fields of the Space</td><td>vocab:Space</td><td>vocab:Space</td><td>200 patched Space</td></tr>
+<td>PATCH</td><td>Update the supplied fields of the Space</td><td>vocab:Space</td><td>vocab:Space</td><td>205 Accepted Space, reset view, 400 Bad request, 404 Not found</td></tr>
 <tr>
-<td>DELETE</td><td>Delete the Space</td><td></td><td>owl:Nothing</td><td></td></tr>
+<td>DELETE</td><td>Delete the Space</td><td></td><td>owl:Nothing</td><td>205 Accepted Space, reset view, 404 Not found</td></tr>
 </table>
 
 
@@ -95,11 +95,11 @@
 
 
 <table><tr>
-<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Statuses</th></tr>
 <tr>
-<td>GET</td><td>Retrieves all Role</td><td></td><td>hydra:Collection</td><td></td></tr>
+<td>GET</td><td>Retrieves all Role</td><td></td><td>hydra:Collection</td><td>200 OK</td></tr>
 <tr>
-<td>POST</td><td>Creates a new Role</td><td>vocab:Role</td><td>vocab:Role</td><td>201 Role created.</td></tr>
+<td>POST</td><td>Creates a new Role</td><td>vocab:Role</td><td>vocab:Role</td><td>201 Role created., 400 Bad Request</td></tr>
 </table>
 
 
@@ -118,10 +118,31 @@
 
 
 <table><tr>
-<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Statuses</th></tr>
 <tr>
-<td>GET</td><td>Retrieves all Image</td><td></td><td>hydra:Collection</td><td></td></tr>
+<td>GET</td><td>Retrieves all Image</td><td></td><td>hydra:Collection</td><td>200 OK</td></tr>
 <tr>
-<td>POST</td><td>Creates a new Image</td><td>vocab:Image</td><td>vocab:Image</td><td>201 Image created.</td></tr>
+<td>POST</td><td>Creates a new Image</td><td>vocab:Image</td><td>vocab:Image</td><td>201 Image created., 400 Bad Request</td></tr>
+</table>
+
+
+<h3>metadata (🔗)</h3>
+
+<p>Metadata options for the space</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Space</td><td>vocab:Metadata</td><td>True</td><td>False</td></tr>
+</table>
+
+
+<pre>/customers/{0}/spaces/{1}/metadata</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Statuses</th></tr>
+<tr>
+<td>GET</td><td>Retrieve the metadata</td><td></td><td>vocab:Metadata</td><td>200 OK</td></tr>
 </table>
 

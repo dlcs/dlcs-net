@@ -138,7 +138,7 @@ namespace DLCS.Mock.Controllers
         {
             if (supportedOperations != null && supportedOperations.Length > 0)
             {
-                sb.StartTable(format, "Method", "Label", "Expects", "Returns", "Status");
+                sb.StartTable(format, "Method", "Label", "Expects", "Returns", "Statuses");
                 foreach (var op in supportedOperations)
                 {
                     string statuses = "";

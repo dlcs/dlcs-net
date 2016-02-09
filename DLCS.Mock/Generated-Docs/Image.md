@@ -12,12 +12,12 @@ An image. What it's all about.
 ## Supported operations
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieve a Image| |vocab:Image| |
-|PUT|create or replace a Image|vocab:Image|vocab:Image| |
-|PATCH|Update the supplied fields of the Image|vocab:Image|vocab:Image|200 patched Image|
-|DELETE|Delete the Image| |owl:Nothing| |
+|GET|Retrieve a Image| |vocab:Image|200 OK, 404 Not found|
+|PUT|create or replace a Image|vocab:Image|vocab:Image|200 OK, 201 Created Image, 404 Not found|
+|PATCH|Update the supplied fields of the Image|vocab:Image|vocab:Image|205 Accepted Image, reset view, 400 Bad request, 404 Not found|
+|DELETE|Delete the Image| |owl:Nothing|205 Accepted Image, reset view, 404 Not found|
 
 
 ## Supported properties
@@ -278,10 +278,10 @@ The role or roles that a user must possess to view this image above maxUnauthori
 ```
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieves all Role| |hydra:Collection| |
-|POST|Creates a new Role|vocab:Role|vocab:Role|201 Role created.|
+|GET|Retrieves all Role| |hydra:Collection|200 OK|
+|POST|Creates a new Role|vocab:Role|vocab:Role|201 Role created., 400 Bad Request|
 
 
 ### batch (🔗)
@@ -299,10 +299,10 @@ The batch this image was ingested in (most recently). Might be blank if the batc
 ```
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieve a Batch| |vocab:Image| |
-|PUT|create or replace a Batch|vocab:Image|vocab:Image| |
-|PATCH|Update the supplied fields of the Batch|vocab:Image|vocab:Image|200 patched Batch|
-|DELETE|Delete the Batch| |owl:Nothing| |
+|GET|Retrieve a Batch| |vocab:Image|200 OK, 404 Not found|
+|PUT|create or replace a Batch|vocab:Image|vocab:Image|200 OK, 201 Created Batch, 404 Not found|
+|PATCH|Update the supplied fields of the Batch|vocab:Image|vocab:Image|205 Accepted Batch, reset view, 400 Bad request, 404 Not found|
+|DELETE|Delete the Batch| |owl:Nothing|205 Accepted Batch, reset view, 404 Not found|
 

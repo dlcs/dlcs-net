@@ -12,12 +12,12 @@ A user of the portal
 ## Supported operations
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieve a Portal User| |vocab:PortalUser| |
-|PUT|create or replace a Portal User|vocab:PortalUser|vocab:PortalUser| |
-|PATCH|Update the supplied fields of the Portal User|vocab:PortalUser|vocab:PortalUser|200 patched Portal User|
-|DELETE|Delete the Portal User| |owl:Nothing| |
+|GET|Retrieve a Portal User| |vocab:PortalUser|200 OK, 404 Not found|
+|PUT|create or replace a Portal User|vocab:PortalUser|vocab:PortalUser|200 OK, 201 Created Portal User, 404 Not found|
+|PATCH|Update the supplied fields of the Portal User|vocab:PortalUser|vocab:PortalUser|205 Accepted Portal User, reset view, 400 Bad request, 404 Not found|
+|DELETE|Delete the Portal User| |owl:Nothing|205 Accepted Portal User, reset view, 404 Not found|
 
 
 ## Supported properties

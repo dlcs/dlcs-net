@@ -12,12 +12,12 @@ As a customer you can provide information to the DLCS to allow it to fetch your 
 ## Supported operations
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieve a Origin Strategy| |vocab:OriginStrategy| |
-|PUT|create or replace a Origin Strategy|vocab:OriginStrategy|vocab:OriginStrategy| |
-|PATCH|Update the supplied fields of the Origin Strategy|vocab:OriginStrategy|vocab:OriginStrategy|200 patched Origin Strategy|
-|DELETE|Delete the Origin Strategy| |owl:Nothing| |
+|GET|Retrieve a Origin Strategy| |vocab:OriginStrategy|200 OK, 404 Not found|
+|PUT|create or replace a Origin Strategy|vocab:OriginStrategy|vocab:OriginStrategy|200 OK, 201 Created Origin Strategy, 404 Not found|
+|PATCH|Update the supplied fields of the Origin Strategy|vocab:OriginStrategy|vocab:OriginStrategy|205 Accepted Origin Strategy, reset view, 400 Bad request, 404 Not found|
+|DELETE|Delete the Origin Strategy| |owl:Nothing|205 Accepted Origin Strategy, reset view, 404 Not found|
 
 
 ## Supported properties

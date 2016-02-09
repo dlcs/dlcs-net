@@ -12,12 +12,12 @@ Resource that represents the means by which the DLCS acquires roles to enforce a
 ## Supported operations
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieve a Role Provider| |vocab:RoleProvider| |
-|PUT|create or replace a Role Provider|vocab:RoleProvider|vocab:RoleProvider| |
-|PATCH|Update the supplied fields of the Role Provider|vocab:RoleProvider|vocab:RoleProvider|200 patched Role Provider|
-|DELETE|Delete the Role Provider| |owl:Nothing| |
+|GET|Retrieve a Role Provider| |vocab:RoleProvider|200 OK, 404 Not found|
+|PUT|create or replace a Role Provider|vocab:RoleProvider|vocab:RoleProvider|200 OK, 201 Created Role Provider, 404 Not found|
+|PATCH|Update the supplied fields of the Role Provider|vocab:RoleProvider|vocab:RoleProvider|205 Accepted Role Provider, reset view, 400 Bad request, 404 Not found|
+|DELETE|Delete the Role Provider| |owl:Nothing|205 Accepted Role Provider, reset view, 404 Not found|
 
 
 ## Supported properties

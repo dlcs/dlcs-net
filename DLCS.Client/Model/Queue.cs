@@ -63,6 +63,17 @@ namespace DLCS.Client.Model
                     Returns = Names.Hydra.Collection
                 }
             };
+
+            GetHydraLinkProperty("images").SupportedOperations = new[]
+            {
+                new Operation
+                {
+                    Id = "_:customer_queue_batch_collection_retrieve",
+                    Method = "GET",
+                    Label = "Retrieves all images across batches for customer",
+                    Returns = Names.Hydra.Collection
+                }
+            };
         }
 
         public static Operation[] GetSpecialQueueOperations()
@@ -98,8 +109,8 @@ namespace DLCS.Client.Model
                     {
                         new Status
                         {
-                            StatusCode = 202,
-                            Description = "Job has been accepted"
+                            StatusCode = 201,
+                            Description = "Job has been accepted - Batch created and returned"
                         }
                     }
                 }

@@ -12,12 +12,12 @@ IIIF Autheintication Service configuration. The DLCS provides the service, but m
 ## Supported operations
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieve a Auth Service| |vocab:AuthService| |
-|PUT|create or replace a Auth Service|vocab:AuthService|vocab:AuthService| |
-|PATCH|Update the supplied fields of the Auth Service|vocab:AuthService|vocab:AuthService|200 patched Auth Service|
-|DELETE|Delete the Auth Service| |owl:Nothing| |
+|GET|Retrieve a Auth Service| |vocab:AuthService|200 OK, 404 Not found|
+|PUT|create or replace a Auth Service|vocab:AuthService|vocab:AuthService|200 OK, 201 Created Auth Service, 404 Not found|
+|PATCH|Update the supplied fields of the Auth Service|vocab:AuthService|vocab:AuthService|205 Accepted Auth Service, reset view, 400 Bad request, 404 Not found|
+|DELETE|Delete the Auth Service| |owl:Nothing|205 Accepted Auth Service, reset view, 404 Not found|
 
 
 ## Supported properties
@@ -118,10 +118,10 @@ Child auth services of a parent (relationship between login and token,logout)
 ```
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieves all Nested Auth Service| |hydra:Collection| |
-|POST|Creates a new Nested Auth Service|vocab:AuthService|vocab:AuthService|201 Nested Auth Service created.|
+|GET|Retrieves all Nested Auth Service| |hydra:Collection|200 OK|
+|POST|Creates a new Nested Auth Service|vocab:AuthService|vocab:AuthService|201 Nested Auth Service created., 400 Bad Request|
 
 
 ### roleProvider (🔗)
@@ -139,7 +139,7 @@ External service that can be used by the DLCS to acquire roles for user sessions
 ```
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieve a Role Provider| |vocab:Role| |
+|GET|Retrieve a Role Provider| |vocab:Role|200 OK, 404 Not found|
 

@@ -28,6 +28,7 @@ namespace iiifly.Dlcs
                             var credentials = Convert.ToBase64String(Encoding.ASCII.GetBytes(authHeaderPlain));
                             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credentials);
                         }
+                        _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/ld+json"));
                     }
                 }
             }

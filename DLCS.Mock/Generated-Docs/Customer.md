@@ -12,10 +12,9 @@ A customer represents you, the API user. You only have access to one customer, s
 ## Supported operations
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieve a Customer| |vocab:Customer| |
-|PATCH|Update the supplied fields of the Customer|vocab:Customer|vocab:Customer|200 patched Customer|
+|GET|Retrieve a Customer| |vocab:Customer|200 OK, 404 Not found|
 
 
 ## Supported properties
@@ -56,10 +55,10 @@ Accounts that can log into the portal
 ```
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieves all Portal User| |hydra:Collection| |
-|POST|Creates a new Portal User|vocab:PortalUser|vocab:PortalUser|201 Portal User created.|
+|GET|Retrieves all Portal User| |hydra:Collection|200 OK|
+|POST|Creates a new Portal User|vocab:PortalUser|vocab:PortalUser|201 Portal User created., 400 Bad Request|
 
 
 ### namedQueries (🔗)
@@ -77,10 +76,10 @@ Set of preconfigured URI patterns that will generate IIIF resources on the main 
 ```
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieves all Named Query| |hydra:Collection| |
-|POST|Creates a new Named Query|vocab:NamedQuery|vocab:NamedQuery|201 Named Query created.|
+|GET|Retrieves all Named Query| |hydra:Collection|200 OK|
+|POST|Creates a new Named Query|vocab:NamedQuery|vocab:NamedQuery|201 Named Query created., 400 Bad Request|
 
 
 ### originStrategies (🔗)
@@ -98,10 +97,10 @@ Configuration for retrieving images from your endpoint(s)
 ```
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieves all Origin Strategy| |hydra:Collection| |
-|POST|Creates a new Origin Strategy|vocab:OriginStrategy|vocab:OriginStrategy|201 Origin Strategy created.|
+|GET|Retrieves all Origin Strategy| |hydra:Collection|200 OK|
+|POST|Creates a new Origin Strategy|vocab:OriginStrategy|vocab:OriginStrategy|201 Origin Strategy created., 400 Bad Request|
 
 
 ### authServices (🔗)
@@ -119,10 +118,10 @@ Configuration for IIIF Auth Services available to you
 ```
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieves all Auth Service| |hydra:Collection| |
-|POST|Creates a new Auth Service|vocab:AuthService|vocab:AuthService|201 Auth Service created.|
+|GET|Retrieves all Auth Service| |hydra:Collection|200 OK|
+|POST|Creates a new Auth Service|vocab:AuthService|vocab:AuthService|201 Auth Service created., 400 Bad Request|
 
 
 ### roles (🔗)
@@ -140,10 +139,10 @@ The set of roles you have registered for the DLCS to enforce access control
 ```
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieves all Space| |hydra:Collection| |
-|POST|Creates a new Space|vocab:Space|vocab:Space|201 Space created.|
+|GET|Retrieves all Space| |hydra:Collection|200 OK|
+|POST|Creates a new Space|vocab:Space|vocab:Space|201 Space created., 400 Bad Request|
 
 
 ### queue (🔗)
@@ -161,10 +160,10 @@ The Customer's view on the DLCS ingest queue
 ```
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
 |GET|Returns the queue resource| |vocab:Queue| |
-|POST|Submit an array of Image and get a batch back|hydra:Collection|vocab:Batch|202 Job has been accepted|
+|POST|Submit an array of Image and get a batch back|hydra:Collection|vocab:Batch|201 Job has been accepted - Batch created and returned|
 
 
 ### spaces (🔗)

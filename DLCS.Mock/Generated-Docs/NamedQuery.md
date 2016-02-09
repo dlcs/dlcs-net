@@ -12,12 +12,12 @@ A stored query that will generate IIIF manifests
 ## Supported operations
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieve a Named Query| |vocab:NamedQuery| |
-|PUT|create or replace a Named Query|vocab:NamedQuery|vocab:NamedQuery| |
-|PATCH|Update the supplied fields of the Named Query|vocab:NamedQuery|vocab:NamedQuery|200 patched Named Query|
-|DELETE|Delete the Named Query| |owl:Nothing| |
+|GET|Retrieve a Named Query| |vocab:NamedQuery|200 OK, 404 Not found|
+|PUT|create or replace a Named Query|vocab:NamedQuery|vocab:NamedQuery|200 OK, 201 Created Named Query, 404 Not found|
+|PATCH|Update the supplied fields of the Named Query|vocab:NamedQuery|vocab:NamedQuery|205 Accepted Named Query, reset view, 400 Bad request, 404 Not found|
+|DELETE|Delete the Named Query| |owl:Nothing|205 Accepted Named Query, reset view, 404 Not found|
 
 
 ## Supported properties

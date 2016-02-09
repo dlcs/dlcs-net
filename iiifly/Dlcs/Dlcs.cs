@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net.Http;
-using System.Threading.Tasks;
 using HydraImageCollection = Hydra.Collections.Collection<iiifly.Dlcs.Image>;
 using iiifly.Models;
 using Newtonsoft.Json;
@@ -17,6 +16,12 @@ namespace iiifly.Dlcs
         private static HttpClient GetClient()
         {
             return HttpClientBuilder.GetHttpClient();
+        }
+
+        private static T ReadViaStringAsync<T>(HttpContent content)
+        {
+            var s = content.ReadAsStringAsync().Result;
+            return JsonConvert.DeserializeObject<T>(s);
         }
 
         private static readonly string CustomerUrl = 
@@ -52,8 +57,9 @@ namespace iiifly.Dlcs
             HttpResponseMessage response = GetClient().PostAsJsonAsync(queueUri, images).Result;
             if (response.IsSuccessStatusCode)
             {
-                // Get the URI of the created resou
-                return response.Content.ReadAsAsync<Batch>().Result;
+                // Get the URI of the created resource
+                return ReadViaStringAsync<Batch>(response.Content);
+                //return response.Content.ReadAsAsync<Batch>().Result;
             }
             return null;
         }
@@ -70,7 +76,8 @@ namespace iiifly.Dlcs
             HttpResponseMessage response = client.PutAsJsonAsync(putUri, ingestImage).Result;
             if (response.IsSuccessStatusCode)
             {
-                return response.Content.ReadAsAsync<Image>().Result;
+                return ReadViaStringAsync<Image>(response.Content);
+                //return response.Content.ReadAsAsync<Image>().Result;
             }
             return null;
         }
@@ -82,7 +89,9 @@ namespace iiifly.Dlcs
             HttpResponseMessage response = client.GetAsync(requestUrl).Result;
             if (response.IsSuccessStatusCode)
             {
-                HydraImageCollection hc = response.Content.ReadAsAsync<HydraImageCollection>().Result;
+
+                HydraImageCollection hc = ReadViaStringAsync<HydraImageCollection>(response.Content);
+                // HydraImageCollection hc = response.Content.ReadAsAsync<HydraImageCollection>().Result;
                 return hc.Members.OrderBy(img => img.Number1).ToList();
             }
 

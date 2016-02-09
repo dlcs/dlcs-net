@@ -12,7 +12,7 @@ The main entry point or homepage of the API.
 ## Supported operations
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
 |GET|The API's main entry point.| |vocab:EntryPoint| |
 
@@ -35,7 +35,7 @@ List of customers to which you have access (usually 1)
 ```
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
 |GET|Retrieves all Customer entities| |hydra:Collection| |
 

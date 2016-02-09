@@ -12,10 +12,9 @@ Represents a submitted job of images
 ## Supported operations
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieve a Batch| |vocab:Batch| |
-|DELETE|Delete the Batch| |owl:Nothing| |
+|GET|Retrieve a Batch| |vocab:Batch|200 OK, 404 Not found|
 
 
 ## Supported properties
@@ -96,9 +95,9 @@ All the images in the batch
 ```
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieves all images in batch regardless of state| |hydra:Collection| |
+|GET|Retrieves all images in batch regardless of state| |hydra:Collection|200 OK|
 
 
 ### completedImages (🔗)
@@ -116,9 +115,9 @@ Images that have completed processing
 ```
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieves all COMPLETED images in batch| |hydra:Collection| |
+|GET|Retrieves all COMPLETED images in batch| |hydra:Collection|200 OK|
 
 
 ### errorImages (🔗)
@@ -136,7 +135,7 @@ Images that encountered errors
 ```
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieves all ERROR images in batch| |hydra:Collection| |
+|GET|Retrieves all ERROR images in batch| |hydra:Collection|200 OK|
 

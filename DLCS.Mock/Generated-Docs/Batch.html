@@ -10,11 +10,9 @@
 
 
 <table><tr>
-<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Statuses</th></tr>
 <tr>
-<td>GET</td><td>Retrieve a Batch</td><td></td><td>vocab:Batch</td><td></td></tr>
-<tr>
-<td>DELETE</td><td>Delete the Batch</td><td></td><td>owl:Nothing</td><td></td></tr>
+<td>GET</td><td>Retrieve a Batch</td><td></td><td>vocab:Batch</td><td>200 OK, 404 Not found</td></tr>
 </table>
 
 
@@ -102,9 +100,9 @@
 
 
 <table><tr>
-<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Statuses</th></tr>
 <tr>
-<td>GET</td><td>Retrieves all images in batch regardless of state</td><td></td><td>hydra:Collection</td><td></td></tr>
+<td>GET</td><td>Retrieves all images in batch regardless of state</td><td></td><td>hydra:Collection</td><td>200 OK</td></tr>
 </table>
 
 
@@ -123,9 +121,9 @@
 
 
 <table><tr>
-<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Statuses</th></tr>
 <tr>
-<td>GET</td><td>Retrieves all COMPLETED images in batch</td><td></td><td>hydra:Collection</td><td></td></tr>
+<td>GET</td><td>Retrieves all COMPLETED images in batch</td><td></td><td>hydra:Collection</td><td>200 OK</td></tr>
 </table>
 
 
@@ -144,8 +142,8 @@
 
 
 <table><tr>
-<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Statuses</th></tr>
 <tr>
-<td>GET</td><td>Retrieves all ERROR images in batch</td><td></td><td>hydra:Collection</td><td></td></tr>
+<td>GET</td><td>Retrieves all ERROR images in batch</td><td></td><td>hydra:Collection</td><td>200 OK</td></tr>
 </table>
 

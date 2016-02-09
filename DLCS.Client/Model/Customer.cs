@@ -86,7 +86,7 @@ namespace DLCS.Client.Model
 
             SupportedOperations = CommonOperations.GetStandardResourceOperations(
                 operationId, "Customer", Id,
-                "GET", "PATCH");
+                "GET");
 
             // Hydra link properties - i.e., a link to another resource, rather than a field of the current resource.
 

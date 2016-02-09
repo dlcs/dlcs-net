@@ -10,11 +10,11 @@
 
 
 <table><tr>
-<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Statuses</th></tr>
 <tr>
 <td>GET</td><td>Returns the queue resource</td><td></td><td>vocab:Queue</td><td></td></tr>
 <tr>
-<td>POST</td><td>Submit an array of Image and get a batch back</td><td>hydra:Collection</td><td>vocab:Batch</td><td>202 Job has been accepted</td></tr>
+<td>POST</td><td>Submit an array of Image and get a batch back</td><td>hydra:Collection</td><td>vocab:Batch</td><td>201 Job has been accepted - Batch created and returned</td></tr>
 </table>
 
 
@@ -47,7 +47,7 @@
 
 
 <table><tr>
-<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Status</th></tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Statuses</th></tr>
 <tr>
 <td>GET</td><td>Retrieves all batches for customer</td><td></td><td>hydra:Collection</td><td></td></tr>
 </table>
@@ -65,4 +65,11 @@
 
 
 <pre>/customers/{0}/queue/images</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Statuses</th></tr>
+<tr>
+<td>GET</td><td>Retrieves all images across batches for customer</td><td></td><td>hydra:Collection</td><td></td></tr>
+</table>
 

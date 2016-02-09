@@ -89,7 +89,7 @@ namespace DLCS.Client.Model
             string operationId = "_:customer_queue_batch_";
             SupportedOperations = CommonOperations.GetStandardResourceOperations(
                 operationId, "Batch", Id,
-                "GET", "DELETE"); // do we allow this?
+                "GET"); // do we allow DELETE?
 
             // These collections are read only
 

@@ -66,8 +66,13 @@ namespace DLCS.Client.Model
 
         [HydraLink(Description = "All the images in the space",
             Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]
-        [JsonProperty(Order = 20, PropertyName = "images")]
+        [JsonProperty(Order = 22, PropertyName = "images")]
         public string Images { get; set; }
+
+        [HydraLink(Description = "Metadata options for the space", // TOOD- what exactly?
+            Range = "vocab:Metadata", ReadOnly = true, WriteOnly = false)]
+        [JsonProperty(Order = 24, PropertyName = "metadata")]
+        public string Metadata { get; set; }
     }
 
     public class SpaceClass : Class
@@ -86,11 +91,34 @@ namespace DLCS.Client.Model
             var images = GetHydraLinkProperty("images");
             images.SupportedOperations = CommonOperations
                 .GetStandardCollectionOperations("_:customer_space_image_", "Image", "vocab:Image");
+            images.SupportedOperations.WithMethod("GET").Description =
+                "Can take query parameters";
             images.SupportedOperations.WithMethod("POST").Description =
                 "Push an image for immediate processing, asynchronously. Might fail or timeout. This operation is rate-limited.";
 
             GetHydraLinkProperty("defaultRoles").SupportedOperations = CommonOperations
                 .GetStandardCollectionOperations("_:customer_space_defaultRole_", "Role", "vocab:Role");
+
+            GetHydraLinkProperty("metadata").SupportedOperations = new []
+            {
+                new Operation
+                {
+                    Id = Id,
+                    Method = "GET",
+                    Label = "Retrieve the metadata",
+                    Description = "desc",
+                    Returns = "vocab:Metadata",
+                    StatusCodes = new[]
+                    {
+                        new Status
+                        {
+                            StatusCode = 200,
+                            Description = "OK"
+                        }
+                    }
+                }
+            };
+                
         }
     }
 }

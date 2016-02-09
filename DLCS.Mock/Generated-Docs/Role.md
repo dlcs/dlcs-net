@@ -12,12 +12,12 @@ A role is used by the DLCS to enforce access control. Images have roles.The DLCS
 ## Supported operations
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieve a Role| |vocab:Role| |
-|PUT|create or replace a Role|vocab:Role|vocab:Role| |
-|PATCH|Update the supplied fields of the Role|vocab:Role|vocab:Role|200 patched Role|
-|DELETE|Delete the Role| |owl:Nothing| |
+|GET|Retrieve a Role| |vocab:Role|200 OK, 404 Not found|
+|PUT|create or replace a Role|vocab:Role|vocab:Role|200 OK, 201 Created Role, 404 Not found|
+|PATCH|Update the supplied fields of the Role|vocab:Role|vocab:Role|205 Accepted Role, reset view, 400 Bad request, 404 Not found|
+|DELETE|Delete the Role| |owl:Nothing|205 Accepted Role, reset view, 404 Not found|
 
 
 ## Supported properties
@@ -68,10 +68,10 @@ The IIIF Auth Service for this role
 ```
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieve a Auth Service| |vocab:Role| |
-|PUT|create or replace a Auth Service|vocab:Role|vocab:Role| |
-|PATCH|Update the supplied fields of the Auth Service|vocab:Role|vocab:Role|200 patched Auth Service|
-|DELETE|Delete the Auth Service| |owl:Nothing| |
+|GET|Retrieve a Auth Service| |vocab:Role|200 OK, 404 Not found|
+|PUT|create or replace a Auth Service|vocab:Role|vocab:Role|200 OK, 201 Created Auth Service, 404 Not found|
+|PATCH|Update the supplied fields of the Auth Service|vocab:Role|vocab:Role|205 Accepted Auth Service, reset view, 400 Bad request, 404 Not found|
+|DELETE|Delete the Auth Service| |owl:Nothing|205 Accepted Auth Service, reset view, 404 Not found|
 

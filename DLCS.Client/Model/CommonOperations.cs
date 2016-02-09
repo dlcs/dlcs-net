@@ -101,9 +101,11 @@ namespace DLCS.Client.Model
                 Method = "GET",
                 Label = label,
                 Description = description,
-                Returns = Names.Hydra.Collection
+                Returns = Names.Hydra.Collection,
+                StatusCodes = GetStandardGetCollectionStatusCodes()
             };
         }
+
 
         public static Operation StandardCollectionPost(string id, string label, string description, 
             string expectsAndReturns, string displayNameOfCollectionType)
@@ -119,7 +121,19 @@ namespace DLCS.Client.Model
                 StatusCodes = GetStandardPostToCollectionStatusCodes(displayNameOfCollectionType)
             };
         }
-        
+
+        private static Status[] GetStandardGetCollectionStatusCodes()
+        {
+            return new[]
+            {
+                new Status
+                {
+                    StatusCode = 200,
+                    Description = "OK"
+                }
+            };
+        }
+
         public static Status[] GetStandardPostToCollectionStatusCodes(string resourceName)
         {
             return new[]
@@ -128,6 +142,11 @@ namespace DLCS.Client.Model
                 {
                     StatusCode = 201,
                     Description = resourceName + " created."
+                },
+                new Status
+                {
+                    StatusCode = 400,
+                    Description = "Bad Request"
                 }
             };
         }
@@ -138,8 +157,18 @@ namespace DLCS.Client.Model
             {
                 new Status
                 {
-                    StatusCode = 200,
-                    Description = "patched " + resourceName
+                    StatusCode = 205,
+                    Description = "Accepted " + resourceName + ", reset view"
+                },
+                new Status
+                {
+                    StatusCode = 400,
+                    Description = "Bad request"
+                },
+                new Status
+                {
+                    StatusCode = 404,
+                    Description = "Not found"
                 }
             };
         }
@@ -147,18 +176,56 @@ namespace DLCS.Client.Model
 
         private static Status[] GetStandardDeleteResourceStatusCodes(string displayNameOfCollectionType)
         {
-            // TODO - GetStandardDeleteResourceStatusCodes
-            return null;
+            return new[]
+            {
+                new Status
+                {
+                    StatusCode = 205,
+                    Description = "Accepted " + displayNameOfCollectionType + ", reset view"
+                },
+                new Status
+                {
+                    StatusCode = 404,
+                    Description = "Not found"
+                }
+            };
         }
         private static Status[] GetStandardGetResourceStatusCodes(string displayNameOfCollectionType)
         {
-            // TODO - GetStandardGetResourceStatusCodes
-            return null;
+            return new[]
+            {
+                new Status
+                {
+                    StatusCode = 200,
+                    Description = "OK"
+                },
+                new Status
+                {
+                    StatusCode = 404,
+                    Description = "Not found"
+                }
+            };
         }
         private static Status[] GetStandardPutResourceStatusCodes(string displayNameOfCollectionType)
         {
-            // TODO - GetStandardPutResourceStatusCodes
-            return null;
+            return new[]
+            {
+                new Status
+                {
+                    StatusCode = 200,
+                    Description = "OK"
+                },
+                new Status
+                {
+                    StatusCode = 201,
+                    Description = "Created " + displayNameOfCollectionType
+                },
+                new Status
+                {
+                    StatusCode = 404,
+                    Description = "Not found"
+                }
+            };
         }
 
         public static Operation WithMethod(this Operation[] operations, string method)

@@ -12,12 +12,12 @@ Spaces allow you to partition images into groups. You can use them to organise y
 ## Supported operations
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieve a Space| |vocab:Space| |
-|PUT|create or replace a Space|vocab:Space|vocab:Space| |
-|PATCH|Update the supplied fields of the Space|vocab:Space|vocab:Space|200 patched Space|
-|DELETE|Delete the Space| |owl:Nothing| |
+|GET|Retrieve a Space| |vocab:Space|200 OK, 404 Not found|
+|PUT|create or replace a Space|vocab:Space|vocab:Space|200 OK, 201 Created Space, 404 Not found|
+|PATCH|Update the supplied fields of the Space|vocab:Space|vocab:Space|205 Accepted Space, reset view, 400 Bad request, 404 Not found|
+|DELETE|Delete the Space| |owl:Nothing|205 Accepted Space, reset view, 404 Not found|
 
 
 ## Supported properties
@@ -88,10 +88,10 @@ Default roles that will be applied to images in this space
 ```
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieves all Role| |hydra:Collection| |
-|POST|Creates a new Role|vocab:Role|vocab:Role|201 Role created.|
+|GET|Retrieves all Role| |hydra:Collection|200 OK|
+|POST|Creates a new Role|vocab:Role|vocab:Role|201 Role created., 400 Bad Request|
 
 
 ### images (🔗)
@@ -109,8 +109,28 @@ All the images in the space
 ```
 
 
-|Method|Label|Expects|Returns|Status|
+|Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieves all Image| |hydra:Collection| |
-|POST|Creates a new Image|vocab:Image|vocab:Image|201 Image created.|
+|GET|Retrieves all Image| |hydra:Collection|200 OK|
+|POST|Creates a new Image|vocab:Image|vocab:Image|201 Image created., 400 Bad Request|
+
+
+### metadata (🔗)
+
+Metadata options for the space
+
+
+|domain|range|readonly|writeonly|
+|--|--|--|--|
+|vocab:Space|vocab:Metadata|True|False|
+
+
+```
+/customers/{0}/spaces/{1}/metadata
+```
+
+
+|Method|Label|Expects|Returns|Statuses|
+|--|--|--|--|--|
+|GET|Retrieve the metadata| |vocab:Metadata|200 OK|
 
