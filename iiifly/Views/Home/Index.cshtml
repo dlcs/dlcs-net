@@ -73,7 +73,7 @@
             } else {
                 //Find the url embedded in the dataTransfer data
                 var data = e.dataTransfer.getData("text/html");
-                var matches = data.match(/http:\/\/[^"]+/gi);
+                var matches = data.match(/https?:\/\/[^"]+/gi);
                 var url = (matches || [false])[0]; //returns the url or false if no match found
                 if (url) {
                     pseudoUpload(url);

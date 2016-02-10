@@ -22,7 +22,7 @@ namespace iiifly.Controllers
         public ActionResult ProxyManifest(string userPublicPath, string id)
         {
             var userId = GlobalData.GetUserIdFromPublicPath(userPublicPath);
-            dynamic manifest = Dlcs.Dlcs.GetManifest(userPublicPath, id).Result;
+            dynamic manifest = Dlcs.Dlcs.GetManifest(userPublicPath, id);
             using (var db = new ApplicationDbContext())
             {
                 var imageSet = db.ImageSets.Single(iset => iset.ApplicationUserId == userId && iset.Id == id);
