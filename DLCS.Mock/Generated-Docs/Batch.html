@@ -1,7 +1,7 @@
 
 <h1>Batch</h1>
 
-<p>Represents a submitted job of images</p>
+<p>Represents a submitted job of images. Typically you'd interact with this while it is being processed, or to update your internal systems with the status of images on the DLCS. The DLCS might clear out old batches after a specific time interval.</p>
 
 <pre>/customers/{0}/queue/batches/{1}</pre><br/>
 
@@ -21,7 +21,7 @@
 
 <h3>submitted</h3>
 
-<p>Date the batch was POSTed</p>
+<p>Date the batch was POSTed to the queue</p>
 
 <table><tr>
 <th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
@@ -54,7 +54,7 @@
 
 <h3>finished</h3>
 
-<p>Date the batch was finished (may still have errors)</p>
+<p>Date the batch was finished, if it has finished (may still have errors)</p>
 
 <table><tr>
 <th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
@@ -76,7 +76,7 @@
 
 <h3>estCompletion</h3>
 
-<p>Estimated Completion (best guess as to when this batch might get done)</p>
+<p>Estimated Completion (best guess as to when this batch might be finished)</p>
 
 <table><tr>
 <th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
@@ -87,7 +87,7 @@
 
 <h3>images (🔗)</h3>
 
-<p>All the images in the batch</p>
+<p>Collection of all the images in the batch</p>
 
 <table><tr>
 <th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
@@ -108,7 +108,7 @@
 
 <h3>completedImages (🔗)</h3>
 
-<p>Images that have completed processing</p>
+<p>Collection of images that have completed processing</p>
 
 <table><tr>
 <th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
@@ -129,7 +129,7 @@
 
 <h3>errorImages (🔗)</h3>
 
-<p>Images that encountered errors</p>
+<p>Collection of images that encountered errors</p>
 
 <table><tr>
 <th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>

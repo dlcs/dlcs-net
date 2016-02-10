@@ -1,7 +1,7 @@
 
 # Image
 
-An image. What it's all about.
+The Image resource is the DLCS view of an image that you have registered. The job of the DLCS is to offer services on that image, such as IIIF Image API endpoints. As well as the status of the image, the DLCS lets you store arbitrary metadata that you can use to build interesting applications.
 
 
 ```
@@ -25,7 +25,7 @@ An image. What it's all about.
 
 ### modelId
 
-The identifier for the image within the space - its URI component
+The identifier for the image within the space - its URI component. TODO - this shoud not be exposed in the API, use the URI instead?
 
 
 |domain|range|readonly|writeonly|
@@ -45,7 +45,7 @@ The identifier for the space within the customer - its URI component
 
 ### infoJson
 
-info.json URI
+info.json URI - where the IIIF Image API is exposed for this image
 
 
 |domain|range|readonly|writeonly|
@@ -55,7 +55,7 @@ info.json URI
 
 ### degradedInfoJson
 
-Degraded info.json URI
+Degraded info.json URI - if a user does not have permission to view the full image, but a degraded image is permitted, the DLCS will redirect them to this URI.
 
 
 |domain|range|readonly|writeonly|
@@ -95,7 +95,7 @@ Date the image was added
 
 ### origin
 
-Origin endpoint from where the original image can be acquired
+Origin endpoint from where the original image can be acquired (or was acquired)
 
 
 |domain|range|readonly|writeonly|
@@ -105,7 +105,7 @@ Origin endpoint from where the original image can be acquired
 
 ### initialOrigin
 
-Endpoint to use the first time the image is retrieved
+Endpoint to use the first time the image is retrieved. This allows an initial ingest from a short term s3 bucket (for example) but subsequent references from an https URI.
 
 
 |domain|range|readonly|writeonly|

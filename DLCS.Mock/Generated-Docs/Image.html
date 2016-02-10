@@ -1,7 +1,7 @@
 
 <h1>Image</h1>
 
-<p>An image. What it's all about.</p>
+<p>The Image resource is the DLCS view of an image that you have registered. The job of the DLCS is to offer services on that image, such as IIIF Image API endpoints. As well as the status of the image, the DLCS lets you store arbitrary metadata that you can use to build interesting applications.</p>
 
 <pre>/customers/{0}/spaces/{1}/images/{2}</pre><br/>
 
@@ -27,7 +27,7 @@
 
 <h3>modelId</h3>
 
-<p>The identifier for the image within the space - its URI component</p>
+<p>The identifier for the image within the space - its URI component. TODO - this shoud not be exposed in the API, use the URI instead?</p>
 
 <table><tr>
 <th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
@@ -49,7 +49,7 @@
 
 <h3>infoJson</h3>
 
-<p>info.json URI</p>
+<p>info.json URI - where the IIIF Image API is exposed for this image</p>
 
 <table><tr>
 <th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
@@ -60,7 +60,7 @@
 
 <h3>degradedInfoJson</h3>
 
-<p>Degraded info.json URI</p>
+<p>Degraded info.json URI - if a user does not have permission to view the full image, but a degraded image is permitted, the DLCS will redirect them to this URI.</p>
 
 <table><tr>
 <th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
@@ -104,7 +104,7 @@
 
 <h3>origin</h3>
 
-<p>Origin endpoint from where the original image can be acquired</p>
+<p>Origin endpoint from where the original image can be acquired (or was acquired)</p>
 
 <table><tr>
 <th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
@@ -115,7 +115,7 @@
 
 <h3>initialOrigin</h3>
 
-<p>Endpoint to use the first time the image is retrieved</p>
+<p>Endpoint to use the first time the image is retrieved. This allows an initial ingest from a short term s3 bucket (for example) but subsequent references from an https URI.</p>
 
 <table><tr>
 <th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>

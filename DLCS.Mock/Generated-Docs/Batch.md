@@ -1,7 +1,7 @@
 
 # Batch
 
-Represents a submitted job of images
+Represents a submitted job of images. Typically you'd interact with this while it is being processed, or to update your internal systems with the status of images on the DLCS. The DLCS might clear out old batches after a specific time interval.
 
 
 ```
@@ -22,7 +22,7 @@ Represents a submitted job of images
 
 ### submitted
 
-Date the batch was POSTed
+Date the batch was POSTed to the queue
 
 
 |domain|range|readonly|writeonly|
@@ -52,7 +52,7 @@ Total number of completed images in the batch
 
 ### finished
 
-Date the batch was finished (may still have errors)
+Date the batch was finished, if it has finished (may still have errors)
 
 
 |domain|range|readonly|writeonly|
@@ -72,7 +72,7 @@ Total number of error images in the batch
 
 ### estCompletion
 
-Estimated Completion (best guess as to when this batch might get done)
+Estimated Completion (best guess as to when this batch might be finished)
 
 
 |domain|range|readonly|writeonly|
@@ -82,7 +82,7 @@ Estimated Completion (best guess as to when this batch might get done)
 
 ### images (🔗)
 
-All the images in the batch
+Collection of all the images in the batch
 
 
 |domain|range|readonly|writeonly|
@@ -102,7 +102,7 @@ All the images in the batch
 
 ### completedImages (🔗)
 
-Images that have completed processing
+Collection of images that have completed processing
 
 
 |domain|range|readonly|writeonly|
@@ -122,7 +122,7 @@ Images that have completed processing
 
 ### errorImages (🔗)
 
-Images that encountered errors
+Collection of images that encountered errors
 
 
 |domain|range|readonly|writeonly|

@@ -1,7 +1,7 @@
 
 <h1>OriginStrategy</h1>
 
-<p>As a customer you can provide information to the DLCS to allow it to fetch your images from their origin endpoints. Every customer has a default origin strategy, which is for the DLCS to attempt to fetch the image from its origin URL without presenting credentials. This is fine for images that are publicly available, but is unlikely to be appropriate for images you are exposing from your asset management system.You might have a service that is available only to the DLCS, or an FTP site.</p>
+<p>As a customer you can provide information to the DLCS to allow it to fetch your images from their origin endpoints. Every customer has a default origin strategy, which is for the DLCS to attempt to fetch the image from its origin URL without presenting credentials. This is fine for images that are publicly available, but is unlikely to be appropriate for images you are exposing from your asset management system. You might have a service that is available only to the DLCS, or an FTP site.</p>
 
 <pre>/customers/{0}/originStrategies/{1}</pre><br/>
 
@@ -27,7 +27,7 @@
 
 <h3>regex</h3>
 
-<p>Regex for matching origin</p>
+<p>Regex for matching origin. When the DLCS tries to work out how to fetch from your origin, it uses this regex to match to find the correct strategy.</p>
 
 <table><tr>
 <th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
@@ -38,7 +38,7 @@
 
 <h3>protocol</h3>
 
-<p>The protocol to use, if it can't be deduced from the regex</p>
+<p>The protocol to use. This may not be obvious from the regex. We have overloaded this slightly to convey information such as 'https+basic' to signify basic authentication over https. A list of supported protocols is provided HERE.</p>
 
 <table><tr>
 <th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
@@ -49,7 +49,7 @@
 
 <h3>credentials</h3>
 
-<p>JSON object - credentials appropriate to the protocol, will vary</p>
+<p>JSON object - credentials appropriate to the protocol, will vary. These are stored in S3 and are not available via the API.</p>
 
 <table><tr>
 <th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>

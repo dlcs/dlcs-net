@@ -1,7 +1,7 @@
 
 # Customer
 
-A customer represents you, the API user. You only have access to one customer, so it is your effective entry point for the API. 
+A customer represents you, the API user. You only have access to one customer, so it is your effective entry point for the API. The only interation you can have with your Customer resource directly is updating the display name, but it provides links (🔗) tocollections of all the other resources.
 
 
 ```
@@ -42,7 +42,7 @@ The display name of the customer
 
 ### portalUsers (🔗)
 
-Accounts that can log into the portal
+Collection of user accounts that can log into the portal. Use this to grant access to others in your organisation
 
 
 |domain|range|readonly|writeonly|
@@ -63,7 +63,7 @@ Accounts that can log into the portal
 
 ### namedQueries (🔗)
 
-Set of preconfigured URI patterns that will generate IIIF resources on the main DLCS site
+Collection of all the Named Queries you have configured (plus those provided 'out of the box'). See the NamedQuery topic for further information
 
 
 |domain|range|readonly|writeonly|
@@ -84,7 +84,7 @@ Set of preconfigured URI patterns that will generate IIIF resources on the main 
 
 ### originStrategies (🔗)
 
-Configuration for retrieving images from your endpoint(s)
+Collection of configuration settings for retrieving your registered images from their origin URLs. If your images come from multiple locations you will have multiple origin strategies. See the OriginStrategy topic.
 
 
 |domain|range|readonly|writeonly|
@@ -105,7 +105,7 @@ Configuration for retrieving images from your endpoint(s)
 
 ### authServices (🔗)
 
-Configuration for IIIF Auth Services available to you
+Collection of IIIF Authentication services available for use with your images. The images are associated with the auth services via Roles. An AuthService is a means of acquirung a role.
 
 
 |domain|range|readonly|writeonly|
@@ -126,7 +126,7 @@ Configuration for IIIF Auth Services available to you
 
 ### roles (🔗)
 
-The set of roles you have registered for the DLCS to enforce access control
+Collection of the available roles you can assign to your images. In order for a user to see an image, the user must have the role associated with the image, or one of them. Users interact with an AuthService to acquire a role or roles.
 
 
 |domain|range|readonly|writeonly|
@@ -147,7 +147,7 @@ The set of roles you have registered for the DLCS to enforce access control
 
 ### queue (🔗)
 
-The Customer's view on the DLCS ingest queue
+The Customer's view on the DLCS ingest queue. As well as allowing you to query the status of batches you have registered, you can POST new batches to the queue.
 
 
 |domain|range|readonly|writeonly|
@@ -168,7 +168,7 @@ The Customer's view on the DLCS ingest queue
 
 ### spaces (🔗)
 
-A space allows you to partition images, have different default rules, etc
+Collection of all the Space resources associated with your customer. A space allows you to partition images, have different default roles and tags, etc. See the Space topic.
 
 
 |domain|range|readonly|writeonly|

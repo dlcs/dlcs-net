@@ -1,7 +1,7 @@
 
 # Queue
 
-Your current ingesting images
+The Queue resource allows the DLCS to process very large number of image registration requests.You can post a Collection of images to the Queue for processing (a Hydra collection, see note). This results in the creation of a Batch resource. You can then retrieve these batches to monitor the progress of your images.
 
 
 ```
@@ -23,7 +23,7 @@ Your current ingesting images
 
 ### size
 
-Number of total images in your queue, across batches
+Number of total images in your queue, across all batches
 
 
 |domain|range|readonly|writeonly|
@@ -33,7 +33,7 @@ Number of total images in your queue, across batches
 
 ### batches (🔗)
 
-Separate jobs you have submitted
+Collection (paged) of the batches - the separate jobs you have submitted to the queue
 
 
 |domain|range|readonly|writeonly|
@@ -53,7 +53,7 @@ Separate jobs you have submitted
 
 ### images (🔗)
 
-Merged view of images on the queue, across batches
+Collection (paged). Merged view of images on the queue, across batches. Typically you'd use this to look at the top or bottom of the queue (first or large page).
 
 
 |domain|range|readonly|writeonly|

@@ -1,7 +1,7 @@
 
 # OriginStrategy
 
-As a customer you can provide information to the DLCS to allow it to fetch your images from their origin endpoints. Every customer has a default origin strategy, which is for the DLCS to attempt to fetch the image from its origin URL without presenting credentials. This is fine for images that are publicly available, but is unlikely to be appropriate for images you are exposing from your asset management system.You might have a service that is available only to the DLCS, or an FTP site.
+As a customer you can provide information to the DLCS to allow it to fetch your images from their origin endpoints. Every customer has a default origin strategy, which is for the DLCS to attempt to fetch the image from its origin URL without presenting credentials. This is fine for images that are publicly available, but is unlikely to be appropriate for images you are exposing from your asset management system. You might have a service that is available only to the DLCS, or an FTP site.
 
 
 ```
@@ -25,7 +25,7 @@ As a customer you can provide information to the DLCS to allow it to fetch your 
 
 ### regex
 
-Regex for matching origin
+Regex for matching origin. When the DLCS tries to work out how to fetch from your origin, it uses this regex to match to find the correct strategy.
 
 
 |domain|range|readonly|writeonly|
@@ -35,7 +35,7 @@ Regex for matching origin
 
 ### protocol
 
-The protocol to use, if it can't be deduced from the regex
+The protocol to use. This may not be obvious from the regex. We have overloaded this slightly to convey information such as 'https+basic' to signify basic authentication over https. A list of supported protocols is provided HERE.
 
 
 |domain|range|readonly|writeonly|
@@ -45,7 +45,7 @@ The protocol to use, if it can't be deduced from the regex
 
 ### credentials
 
-JSON object - credentials appropriate to the protocol, will vary
+JSON object - credentials appropriate to the protocol, will vary. These are stored in S3 and are not available via the API.
 
 
 |domain|range|readonly|writeonly|

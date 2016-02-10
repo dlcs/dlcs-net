@@ -6,7 +6,9 @@ using Newtonsoft.Json;
 namespace DLCS.Client.Model
 {
     [HydraClass(typeof(PortalUserClass),
-        Description = "A user of the portal",
+        Description = "A user of the portal. Represents an account for use by a person, rather than by a machine. You can create " +
+                      "as many portal user accounts as required. Note that the roles a portal user has relate to DLCS permissions " +
+                      "rather than permissions on your image resources.",
         UriTemplate = "/customers/{0}/portalUsers/{1}")]
     public class PortalUser : DlcsResource
     {
@@ -39,12 +41,15 @@ namespace DLCS.Client.Model
         [JsonProperty(Order = 12, PropertyName = "created")]
         public DateTime Created { get; set; }
 
-        [RdfProperty(Description = "List of Role URIs that the user has",
+        [RdfProperty(Description = "List of Role URIs that the user has. (List of possible roles to be provided). These roles should not" +
+                                   " be confused with the roles associated with images and authservices, which govern the interactions that" +
+                                   " end users can have with your image resources. These PortalUser roles govern the actions that your handful" +
+                                   " of registered DLCS back end users can perform in the portal. ",
             Range = Names.XmlSchema.String, ReadOnly = false, WriteOnly = false)]
         [JsonProperty(Order = 13, PropertyName = "role")]
         public string[] Role { get; set; }
 
-        [RdfProperty(Description = "Whether the user can log in",
+        [RdfProperty(Description = "Whether the user can log in - for temporary or permanent rescinding of access.",
             Range = Names.XmlSchema.Boolean, ReadOnly = false, WriteOnly = false)]
         [JsonProperty(Order = 14, PropertyName = "enabled")]
         public bool Enabled { get; set; }

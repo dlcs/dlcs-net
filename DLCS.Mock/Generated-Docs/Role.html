@@ -1,7 +1,7 @@
 
 <h1>Role</h1>
 
-<p>A role is used by the DLCS to enforce access control. Images have roles.The DLCS acquires a user's roles from a RoleProvider. In the case of the simple Clickthrough role, the DLCS can supply this role to the user, but in other scenarios the DLCS needs to acquire roles for the user from the customer's endpoints.</p>
+<p>A role is used by the DLCS to enforce access control. Images have roles.The DLCS acquires a user's roles from a RoleProvider. In the case of the simple 'clickthrough' role, the DLCS can supply this role to the user, but in other scenarios the DLCS needs to acquire roles for the user from the customer's endpoints.</p>
 
 <pre>/customers/{0}/roles/{1}</pre><br/>
 
@@ -49,7 +49,7 @@
 
 <h3>aliases</h3>
 
-<p>If the DLCS acquires roles from the customer, they might have different names</p>
+<p>If the DLCS acquires roles from the customer, they might have different names, or change over time. This allows a customer to release one role name via a roleprovider but use a different name within the DLCS.</p>
 
 <table><tr>
 <th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>

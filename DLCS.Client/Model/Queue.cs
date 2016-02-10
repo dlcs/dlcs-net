@@ -5,7 +5,9 @@ using Newtonsoft.Json;
 namespace DLCS.Client.Model
 {
     [HydraClass(typeof (QueueClass),
-        Description = "Your current ingesting images",
+        Description = "The Queue resource allows the DLCS to process very large number of image registration requests." +
+                      "You can post a Collection of images to the Queue for processing (a Hydra collection, see note). This results " +
+                      "in the creation of a Batch resource. You can then retrieve these batches to monitor the progress of your images.",
         UriTemplate = "/customers/{0}/queue")]
     public class Queue : DlcsResource
     {
@@ -22,17 +24,18 @@ namespace DLCS.Client.Model
             Init(true, customerId);
         }
 
-        [RdfProperty(Description = "Number of total images in your queue, across batches",
+        [RdfProperty(Description = "Number of total images in your queue, across all batches",
             Range = Names.XmlSchema.NonNegativeInteger, ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 11, PropertyName = "size")]
         public int Size { get; set; }
 
-        [HydraLink(Description = "Separate jobs you have submitted",
+        [HydraLink(Description = "Collection (paged) of the batches - the separate jobs you have submitted to the queue",
             Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 12, PropertyName = "batches")]
         public string Batches { get; set; }
 
-        [HydraLink(Description = "Merged view of images on the queue, across batches",
+        [HydraLink(Description = "Collection (paged). Merged view of images on the queue, across batches. Typically you'd use this to " +
+                                 "look at the top or bottom of the queue (first or large page).",
             Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 13, PropertyName = "images")]
         public string Images { get; set; }

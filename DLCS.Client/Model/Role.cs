@@ -7,7 +7,7 @@ namespace DLCS.Client.Model
     [HydraClass(typeof(RoleClass),
         Description = "A role is used by the DLCS to enforce access control. Images have roles." +
                       "The DLCS acquires a user's roles from a RoleProvider. In the case of the simple " +
-                      "Clickthrough role, the DLCS can supply this role to the user, but in other scenarios " +
+                      "'clickthrough' role, the DLCS can supply this role to the user, but in other scenarios " +
                       "the DLCS needs to acquire roles for the user from the customer's endpoints.",
         UriTemplate = "/customers/{0}/roles/{1}")]
     public class Role : DlcsResource
@@ -40,7 +40,8 @@ namespace DLCS.Client.Model
         [JsonProperty(Order = 12, PropertyName = "label")]
         public string Label { get; set; }
 
-        [RdfProperty(Description = "If the DLCS acquires roles from the customer, they might have different names",
+        [RdfProperty(Description = "If the DLCS acquires roles from the customer, they might have different names, or change over time. " +
+                                   "This allows a customer to release one role name via a roleprovider but use a different name within the DLCS.",
             Range = Names.XmlSchema.String, ReadOnly = false, WriteOnly = false)]
         [JsonProperty(Order = 13, PropertyName = "aliases")]
         public string[] Aliases { get; set; }

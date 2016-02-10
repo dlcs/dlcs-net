@@ -6,7 +6,9 @@ using Newtonsoft.Json;
 namespace DLCS.Client.Model
 {
     [HydraClass(typeof(ImageClass),
-        Description = "An image. What it's all about.",
+        Description = "The Image resource is the DLCS view of an image that you have registered. The job of the DLCS is to offer services on that image, " +
+                      "such as IIIF Image API endpoints. As well as the status of the image, the DLCS lets you store arbitrary metadata that you can " +
+                      "use to build interesting applications.",
         UriTemplate = "/customers/{0}/spaces/{1}/images/{2}")]
     public class Image : DlcsResource
     {
@@ -54,7 +56,7 @@ namespace DLCS.Client.Model
         }
 
 
-        [RdfProperty(Description = "The identifier for the image within the space - its URI component",
+        [RdfProperty(Description = "The identifier for the image within the space - its URI component. TODO - this shoud not be exposed in the API, use the URI instead?",
             Range = Names.XmlSchema.String, ReadOnly = false, WriteOnly = false)]
         [JsonProperty(Order = 10, PropertyName = "modelId")]
         public string ModelId { get; set; }
@@ -64,12 +66,13 @@ namespace DLCS.Client.Model
         [JsonProperty(Order = 10, PropertyName = "space")]
         public int Space { get; set; }
 
-        [RdfProperty(Description = "info.json URI",
+        [RdfProperty(Description = "info.json URI - where the IIIF Image API is exposed for this image",
             Range = Names.XmlSchema.String, ReadOnly = false, WriteOnly = false)]
         [JsonProperty(Order = 11, PropertyName = "infoJson")]
         public string InfoJson { get; set; }
 
-        [RdfProperty(Description = "Degraded info.json URI",
+        [RdfProperty(Description = "Degraded info.json URI - if a user does not have permission to view the full image, " +
+                                   "but a degraded image is permitted, the DLCS will redirect them to this URI.",
             Range = Names.XmlSchema.String, ReadOnly = false, WriteOnly = false)]
         [JsonProperty(Order = 12, PropertyName = "degradedInfoJson")]
         public string DegradedInfoJson { get; set; }
@@ -89,12 +92,13 @@ namespace DLCS.Client.Model
         [JsonProperty(Order = 14, PropertyName = "created")]
         public DateTime Created { get; set; }
 
-        [RdfProperty(Description = "Origin endpoint from where the original image can be acquired",
+        [RdfProperty(Description = "Origin endpoint from where the original image can be acquired (or was acquired)",
             Range = Names.XmlSchema.String, ReadOnly = false, WriteOnly = false)]
         [JsonProperty(Order = 15, PropertyName = "origin")]
         public string Origin { get; set; }
 
-        [RdfProperty(Description = "Endpoint to use the first time the image is retrieved",
+        [RdfProperty(Description = "Endpoint to use the first time the image is retrieved. This allows an initial " +
+                                   "ingest from a short term s3 bucket (for example) but subsequent references from an https URI.",
             Range = Names.XmlSchema.String, ReadOnly = false, WriteOnly = false)]
         [JsonProperty(Order = 16, PropertyName = "initialOrigin")]
         public string InitialOrigin { get; set; }

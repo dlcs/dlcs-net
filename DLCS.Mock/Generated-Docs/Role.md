@@ -1,7 +1,7 @@
 
 # Role
 
-A role is used by the DLCS to enforce access control. Images have roles.The DLCS acquires a user's roles from a RoleProvider. In the case of the simple Clickthrough role, the DLCS can supply this role to the user, but in other scenarios the DLCS needs to acquire roles for the user from the customer's endpoints.
+A role is used by the DLCS to enforce access control. Images have roles.The DLCS acquires a user's roles from a RoleProvider. In the case of the simple 'clickthrough' role, the DLCS can supply this role to the user, but in other scenarios the DLCS needs to acquire roles for the user from the customer's endpoints.
 
 
 ```
@@ -45,7 +45,7 @@ Label for a slightly longer description of the role
 
 ### aliases
 
-If the DLCS acquires roles from the customer, they might have different names
+If the DLCS acquires roles from the customer, they might have different names, or change over time. This allows a customer to release one role name via a roleprovider but use a different name within the DLCS.
 
 
 |domain|range|readonly|writeonly|

@@ -6,7 +6,9 @@ using Newtonsoft.Json;
 namespace DLCS.Client.Model
 {
     [HydraClass(typeof(BatchClass),
-           Description = "Represents a submitted job of images",
+           Description = "Represents a submitted job of images. Typically you'd interact with this while it is being processed, " +
+                         "or to update your internal systems with the status of images on the DLCS." +
+                         " The DLCS might clear out old batches after a specific time interval.",
            UriTemplate = "/customers/{0}/queue/batches/{1}")]
     public class Batch : DlcsResource
     {
@@ -31,7 +33,7 @@ namespace DLCS.Client.Model
         }
 
 
-        [RdfProperty(Description = "Date the batch was POSTed",
+        [RdfProperty(Description = "Date the batch was POSTed to the queue",
             Range = Names.XmlSchema.DateTime, ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 11, PropertyName = "submitted")]
         public DateTime Submitted { get; set; }
@@ -46,7 +48,7 @@ namespace DLCS.Client.Model
         [JsonProperty(Order = 12, PropertyName = "completed")]
         public int Completed { get; set; }
 
-        [RdfProperty(Description = "Date the batch was finished (may still have errors)",
+        [RdfProperty(Description = "Date the batch was finished, if it has finished (may still have errors)",
             Range = Names.XmlSchema.DateTime, ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 13, PropertyName = "finished")]
         public DateTime? Finished { get; set; }
@@ -56,22 +58,22 @@ namespace DLCS.Client.Model
         [JsonProperty(Order = 14, PropertyName = "errors")]
         public int Errors { get; set; }
 
-        [RdfProperty(Description = "Estimated Completion (best guess as to when this batch might get done)",
+        [RdfProperty(Description = "Estimated Completion (best guess as to when this batch might be finished)",
             Range = Names.XmlSchema.DateTime, ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 15, PropertyName = "estCompletion")]
         public DateTime? EstCompletion { get; set; }
 
-        [HydraLink(Description = "All the images in the batch",
+        [HydraLink(Description = "Collection of all the images in the batch",
             Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 20, PropertyName = "images")]
         public string Images { get; set; }
 
-        [HydraLink(Description = "Images that have completed processing",
+        [HydraLink(Description = "Collection of images that have completed processing",
             Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 20, PropertyName = "completedImages")]
         public string CompletedImages { get; set; }
 
-        [HydraLink(Description = "Images that encountered errors",
+        [HydraLink(Description = "Collection of images that encountered errors",
             Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 20, PropertyName = "errorImages")]
         public string ErrorImages { get; set; }
