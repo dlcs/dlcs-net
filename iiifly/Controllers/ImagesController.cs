@@ -31,7 +31,7 @@ namespace iiifly.Controllers
                 return Json(new { error = "No imageSet in request" });
             }
 
-            string filename = "";
+            string fileNameForSaving = "";
             try
             {
                 foreach (string fileName in Request.Files)
@@ -40,8 +40,9 @@ namespace iiifly.Controllers
                     if(file == null || file.ContentLength <= 0) continue;
 
                     //Save file content goes here
-                    filename = Path.GetFileName(file.FileName) ?? file.FileName;
-                    file.SaveAs(Path.Combine(GetOriginDirectory(imageSet).ToString(), filename));
+                    fileNameForSaving = Path.GetFileName(file.FileName) ?? file.FileName;
+                    fileNameForSaving = fileNameForSaving.Replace(' ', '_'); 
+                    file.SaveAs(Path.Combine(GetOriginDirectory(imageSet).ToString(), fileNameForSaving));
                 }
 
             }
@@ -52,9 +53,9 @@ namespace iiifly.Controllers
 
             if (errorMessage == null)
             {
-                return Json(new { message = "completed: " + filename });
+                return Json(new { message = "completed: " + fileNameForSaving });
             }
-            return Json(new { error = errorMessage, message = "error: " + filename + ", " + errorMessage });
+            return Json(new { error = errorMessage, message = "error: " + fileNameForSaving + ", " + errorMessage });
         }
 
         [Authorize(Roles = "canCallDlcs")]
@@ -119,8 +120,8 @@ namespace iiifly.Controllers
                     Created = DateTime.Now,
                     NumberOfImages = ingestImages.Count,
                     ApplicationUserId = userId,
-                    Label = "Made by iiif.ly using DLCS",
-                    Description = ""
+                    Label = "Created by " + applicationUser.DisplayName + " on " + DateTime.Now.ToString("yyyy-MM-dd"),
+                    Description = "Made by iiif.ly using DLCS"
                 });
                 db.SaveChanges();
             }
@@ -156,7 +157,7 @@ namespace iiifly.Controllers
         {
             var img = new Image
             {
-                ModelId = string.Format("{0}_{1}", imageSet, fi.Name),
+                ModelId = string.Format("{0}_{1}", imageSet, UrlSanitise(fi.Name)),
                 Space = spaceModelId,
                 String1 = imageSet,
                 Number1 = index
@@ -176,6 +177,13 @@ namespace iiifly.Controllers
             return img;
         }
         
+        private string UrlSanitise(string name)
+        {
+            char[] others = {' ', '/', '\\', '%'};
+            var invalids = Path.GetInvalidFileNameChars().Union(others).ToArray();
+            return string.Join("_", name.Split(invalids, StringSplitOptions.RemoveEmptyEntries)).TrimEnd('.');
+        }
+
         private int GetSpaceId(string space)
         {
             // er, this is not very RESTful...

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using iiifly.Models
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -23,9 +24,14 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li><a href="/display/ImageSet">Recent additions</a></li>
+                    @if (User != null && User.IsInRole("canCallDlcs"))
+                    {
+                        <li>@Html.ActionLink("My stuff", "ImageSet", "Display", new {userPublicPath = User.GetPublicPath(), id = string.Empty}, new {})</li>
+                    }
+                    @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
                     @if (User != null && User.IsInRole("canApproveUsers"))
                     {
                         <li>@Html.ActionLink("Users", "Index", "UserAdmin")</li>

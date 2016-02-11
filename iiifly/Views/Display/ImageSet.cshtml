@@ -3,6 +3,10 @@
 @using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Image Set | " + Model.ImageSet.Label + " | " + Model.ImageSet.Id;
+    if (Model.Images.Count == 1)
+    {
+        ViewBag.InfoJson = Model.Images[0].InfoJson + "/info.json";
+    }
 }
 
 
@@ -28,7 +32,7 @@
                     var viewer1 = OpenSeadragon({
                         id: "osd",
                         prefixUrl: "/Scripts/openseadragon/images/",
-                        tileSources: "@Model.Images[0].InfoJson" + "/info.json",
+                        tileSources: "@ViewBag.InfoJson",
                         showNavigator: true
                     });
                 </script>
@@ -49,9 +53,17 @@
                 <i>IIIF-ified by <a href="/display/imageset/@Model.UserPublicPath">@Model.UserDisplay</a></i>
                 <br/>
                 <a class="drgndrp" href="@Model.ProxyManifest?manifest=@Model.ProxyManifest">
+                    <img width="18" src="/Content/logo-iiif-34x30.png" style="vertical-align: top" />
                     IIIF Manifest
-                    <img width="18" src="/Content/logo-iiif-34x30.png" style="vertical-align: top"/>
                 </a>
+                @if (Model.Images.Count == 1)
+                {
+                    <br />
+                    <a class="drgndrp" href="@ViewBag.InfoJson">
+                        <img width="18" src="/Content/logo-iiif-34x30.png" style="vertical-align: top" />
+                        IIIF Image API endpoint
+                    </a>
+                }
             </p>
         </div>
     }
@@ -78,7 +90,7 @@
                                 <img src="@image.Thumbnail400"/>
                             }
                         </td>
-                        <td>@image.ModelId</td>
+                        <td>@image.Id</td>
                         <td>@image.Queued</td>
                         <td>@image.Dequeued</td>
                         <td>@image.Finished</td>

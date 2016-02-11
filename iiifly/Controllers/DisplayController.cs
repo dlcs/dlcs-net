@@ -26,8 +26,8 @@ namespace iiifly.Controllers
             using (var db = new ApplicationDbContext())
             {
                 var imageSet = db.ImageSets.Single(iset => iset.ApplicationUserId == userId && iset.Id == id);
-                manifest.Label = imageSet.Label;
-                manifest.Description = imageSet.Description;
+                manifest.label = imageSet.Label;
+                manifest.description = imageSet.Description;
             }
             Response.Headers["Access-Control-Allow-Origin"] = "*";
             return new ContentResult
@@ -72,6 +72,7 @@ namespace iiifly.Controllers
             var user = UserManager.FindById(imageSet.ApplicationUserId);
             return GetImageSetWrapper(user, imageSet, loadImages);
         }
+
 
         private ImageSetWrapper GetImageSetWrapper(ApplicationUser user, ImageSet imageSet, bool loadImages)
         {
@@ -130,7 +131,10 @@ namespace iiifly.Controllers
 
             using (var db = new ApplicationDbContext())
             {
-                var imageSets = db.ImageSets.Where(iset => iset.ApplicationUserId == user.Id).ToList();
+                var imageSets = db.ImageSets
+                    .Where(iset => iset.ApplicationUserId == user.Id)
+                    .OrderByDescending(iset => iset.Created)
+                    .ToList();
                 setList.ImageSetWrappers = imageSets.Select(iset => GetImageSetWrapper(user, iset, false)).ToList();
             }
             return View("ImageSetList", setList);
