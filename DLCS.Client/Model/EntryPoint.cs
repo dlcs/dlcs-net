@@ -26,7 +26,22 @@ namespace DLCS.Client.Model
                                  " These are not the same as the roles end users acquire for accessing protected image services.",
             Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 13, PropertyName = "portalRoles")]
+
         public string PortalRoles { get; set; }
+
+        [HydraLink(Description = "List of available optimisation policies the DLCS uses to process your image to provide a IIIF endpoint. " +
+                                 "We keep a record of the policy used to allow a different policy (e.g., better quality) to be used later.",
+            Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]
+        [JsonProperty(Order = 14, PropertyName = "imageOptimisationPolicies")]
+
+        public string ImageOptimisationPolicies { get; set; }
+
+
+        [HydraLink(Description = "List of all the different roles available to portal users - i.e., the small number of people who log into the portal." +
+                                 " These are not the same as the roles end users acquire for accessing protected image services.",
+            Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]
+        [JsonProperty(Order = 15, PropertyName = "thumbnailPolicies")]
+        public string ThumbnailPolicies { get; set; }
     }
 
     public class EntryPointClass : Class
@@ -85,6 +100,31 @@ namespace DLCS.Client.Model
                     Returns = Names.Hydra.Collection
                 }
             };
+
+            var imageOptimisationPolicies = GetHydraLinkProperty("imageOptimisationPolicies");
+            imageOptimisationPolicies.SupportedOperations = new[]
+            {
+                new Operation
+                {
+                    Id = "_:imageOptimisationPolicy_collection_retrieve",
+                    Method = "GET",
+                    Label = "Retrieves the policies the DLCS can use or has used in the past to optimise your origin image for IIIF delivery",
+                    Returns = Names.Hydra.Collection
+                }
+            };
+
+            var thumbnailPolicies = GetHydraLinkProperty("thumbnailPolicies");
+            thumbnailPolicies.SupportedOperations = new[]
+            {
+                new Operation
+                {
+                    Id = "_:thumbnailPolicy_collection_retrieve",
+                    Method = "GET",
+                    Label = "Retrieves available thumbnail polices - a record of the thumbnails created for an image.",
+                    Returns = Names.Hydra.Collection
+                }
+            };
+
         }
     }
 }

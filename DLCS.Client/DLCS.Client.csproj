@@ -60,6 +60,7 @@
     <Compile Include="Model\DlcsClassContext.cs" />
     <Compile Include="Model\EntryPoint.cs" />
     <Compile Include="Model\Image.cs" />
+    <Compile Include="Model\ImageOptimisationPolicy.cs" />
     <Compile Include="Model\Images\Image.cs" />
     <Compile Include="Model\Images\ImageBatchRegistrationResponse.cs" />
     <Compile Include="Model\Images\ImageQuery.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Model\Queue.cs" />
     <Compile Include="Model\RoleProvider.cs" />
     <Compile Include="Model\Space.cs" />
+    <Compile Include="Model\ThumbnailPolicy.cs" />
     <Compile Include="Operation.cs" />
     <Compile Include="PDFs\MakePdfRequest.cs" />
     <Compile Include="PDFs\MakePdfResponse.cs" />

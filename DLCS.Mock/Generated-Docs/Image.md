@@ -306,3 +306,33 @@ The batch this image was ingested in (most recently). Might be blank if the batc
 |PATCH|Update the supplied fields of the Batch|vocab:Image|vocab:Image|205 Accepted Batch, reset view, 400 Bad request, 404 Not found|
 |DELETE|Delete the Batch| |owl:Nothing|205 Accepted Batch, reset view, 404 Not found|
 
+
+### imageOptimisationPolicy (🔗)
+
+The image optimisation policy used when this image was last processed (e.g., registered)
+
+
+|domain|range|readonly|writeonly|
+|--|--|--|--|
+|vocab:Image|vocab:ImageOptimisationPolicy|True|False|
+
+
+```
+/customers/{0}/spaces/{1}/images/{2}/imageOptimisationPolicy
+```
+
+
+### thumbnailPolicy (🔗)
+
+The thumbnail settings used when this image was last processed (e.g., registered)
+
+
+|domain|range|readonly|writeonly|
+|--|--|--|--|
+|vocab:Image|vocab:ThumbnailPolicy|True|False|
+
+
+```
+/customers/{0}/spaces/{1}/images/{2}/thumbnailPolicy
+```
+

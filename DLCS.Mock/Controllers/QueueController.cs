@@ -36,7 +36,9 @@ namespace DLCS.Mock.Controllers
                     DateTime.Now, incomingImage.Origin, incomingImage.InitialOrigin,
                     0, 0, incomingImage.MaxUnauthorised, null, null, null, true, null, 
                     incomingImage.Tags, incomingImage.String1, incomingImage.String2, incomingImage.String3,
-                    incomingImage.Number1, incomingImage.Number2, incomingImage.Number3);
+                    incomingImage.Number1, incomingImage.Number2, incomingImage.Number3,
+                    GetModel().ImageOptimisationPolicies.First().Id,
+                    GetModel().ThumbnailPolicies.First().Id);
                 initialisedImages.Add(newImage);
             }
             GetModel().Images.AddRange(initialisedImages);

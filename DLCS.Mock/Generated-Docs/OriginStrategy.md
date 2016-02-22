@@ -1,11 +1,11 @@
 
 # OriginStrategy
 
-As a customer you can provide information to the DLCS to allow it to fetch your images from their origin endpoints. Every customer has a default origin strategy, which is for the DLCS to attempt to fetch the image from its origin URL without presenting credentials. This is fine for images that are publicly available, but is unlikely to be appropriate for images you are exposing from your asset management system. You might have a service that is available only to the DLCS, or an FTP site.
+As a customer you can provide information to the DLCS to allow it to fetch your images from their origin endpoints. Every customer is given a default origin strategy, which is for the DLCS to attempt to fetch the image from its origin URL without presenting credentials. This is fine for images that are publicly available, but is unlikely to be appropriate for images you are exposing from your asset management system. You might have a service that is available only to the DLCS, or an FTP site. The 
 
 
 ```
-/customers/{0}/originStrategies/{1}
+/originStrategies/{0}
 ```
 
 
@@ -15,37 +15,14 @@ As a customer you can provide information to the DLCS to allow it to fetch your 
 |Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
 |GET|Retrieve a Origin Strategy| |vocab:OriginStrategy|200 OK, 404 Not found|
-|PUT|create or replace a Origin Strategy|vocab:OriginStrategy|vocab:OriginStrategy|200 OK, 201 Created Origin Strategy, 404 Not found|
-|PATCH|Update the supplied fields of the Origin Strategy|vocab:OriginStrategy|vocab:OriginStrategy|205 Accepted Origin Strategy, reset view, 400 Bad request, 404 Not found|
-|DELETE|Delete the Origin Strategy| |owl:Nothing|205 Accepted Origin Strategy, reset view, 404 Not found|
 
 
 ## Supported properties
 
 
-### regex
+### name
 
-Regex for matching origin. When the DLCS tries to work out how to fetch from your origin, it uses this regex to match to find the correct strategy.
-
-
-|domain|range|readonly|writeonly|
-|--|--|--|--|
-|vocab:OriginStrategy|xsd:string|False|False|
-
-
-### protocol
-
-The protocol to use. This may not be obvious from the regex. We have overloaded this slightly to convey information such as 'https+basic' to signify basic authentication over https. A list of supported protocols is provided HERE.
-
-
-|domain|range|readonly|writeonly|
-|--|--|--|--|
-|vocab:OriginStrategy|xsd:string|False|False|
-
-
-### credentials
-
-JSON object - credentials appropriate to the protocol, will vary. These are stored in S3 and are not available via the API.
+The human readable name of the origin strategy
 
 
 |domain|range|readonly|writeonly|

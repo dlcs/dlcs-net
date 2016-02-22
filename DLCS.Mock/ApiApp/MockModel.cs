@@ -12,6 +12,8 @@ namespace DLCS.Mock.ApiApp
         public List<PortalUser> PortalUsers { get; set; }
         public List<NamedQuery> NamedQueries { get; set; }
         public List<OriginStrategy> OriginStrategies { get; set; }
+        public List<ThumbnailPolicy> ThumbnailPolicies { get; set; } 
+        public List<ImageOptimisationPolicy> ImageOptimisationPolicies { get; set; } 
         public List<PortalRole> PortalRoles { get; set; }
         public List<CustomerOriginStrategy> CustomerOriginStrategies { get; set; }
         public List<AuthService> AuthServices { get; set; }
@@ -39,6 +41,8 @@ namespace DLCS.Mock.ApiApp
             model.Customers = customers;
             model.OriginStrategies = CreateOriginStrategies();
             model.PortalRoles = CreatePortalRoles();
+            model.ImageOptimisationPolicies = CreateImageOptimisationPolicies();
+            model.ThumbnailPolicies = CreateThumbnailPolicies();
             model.PortalUserRoles = new Dictionary<string, List<string>>();
             model.PortalUsers = CreatePortalUsers(customers, model.PortalRoles, model.PortalUserRoles);
             model.NamedQueries = CreateNamedQueries(customers);
@@ -55,12 +59,28 @@ namespace DLCS.Mock.ApiApp
             model.Spaces = spaces;
             model.Queues = CreateQueues(customers);
             model.ImageRoles = new Dictionary<string, List<string>>();
-            var images = CreateImages(spaces, model.SpaceDefaultRoles, model.ImageRoles);
+            var images = CreateImages(spaces, model.SpaceDefaultRoles, model.ImageRoles, model.ImageOptimisationPolicies, model.ThumbnailPolicies);
             model.Images = images;
             model.BatchImages = new Dictionary<string, List<string>>();
             model.Batches = CreateBatches(images, model.BatchImages);
             RecalculateCounters(model);
             return model;
+        }
+
+        private static List<ThumbnailPolicy> CreateThumbnailPolicies()
+        {
+            return new List<ThumbnailPolicy>
+            {
+                new ThumbnailPolicy("standard", "standard DLCS thumbs", new[] {1024, 400, 200, 100})
+            };
+        }
+
+        private static List<ImageOptimisationPolicy> CreateImageOptimisationPolicies()
+        {
+            return new List<ImageOptimisationPolicy>
+            {
+                new ImageOptimisationPolicy("fast_lossy", "Fast lossy", "kdu_1")
+            };
         }
 
         private static List<PortalRole> CreatePortalRoles()
@@ -118,17 +138,21 @@ namespace DLCS.Mock.ApiApp
             return batches;
         }
         
-        private static List<Image> CreateImages(List<Space> spaces, Dictionary<string, List<string>> spaceDefaultRoles, Dictionary<string, List<string>> imageRoles)
+        private static List<Image> CreateImages(List<Space> spaces, 
+            Dictionary<string, List<string>> spaceDefaultRoles, Dictionary<string, List<string>> imageRoles,
+            List<ImageOptimisationPolicy> imageOptimisationPolicies, List<ThumbnailPolicy> thumbnailPolicies  )
         {
             var images = new List<Image>();
             foreach (var space in spaces)
             {
-                images.AddRange(MakeImagesForSpace(20, space, spaceDefaultRoles, imageRoles));
+                images.AddRange(MakeImagesForSpace(20, space, spaceDefaultRoles, imageRoles, imageOptimisationPolicies, thumbnailPolicies));
             }
             return images;
         }
 
-        private static List<Image> MakeImagesForSpace(int howMany, Space space, Dictionary<string, List<string>> spaceDefaultRoles, Dictionary<string, List<string>> imageRoles)
+        private static List<Image> MakeImagesForSpace(int howMany, Space space, 
+            Dictionary<string, List<string>> spaceDefaultRoles, Dictionary<string, List<string>> imageRoles,
+            List<ImageOptimisationPolicy> imageOptimisationPolicies, List<ThumbnailPolicy> thumbnailPolicies)
         {
             Random r = new Random();
             var images = new List<Image>();
@@ -145,7 +169,8 @@ namespace DLCS.Mock.ApiApp
                     DateTime.Now, "https://customer.com/images/" + id + ".tiff", null,
                     r.Next(2000,11000), r.Next(3000,11000), space.DefaultMaxUnauthorised,
                     queued, dequeued, finished, !finished.HasValue, null,
-                    space.DefaultTags, "b12345678", null, null, i, 0, 0);
+                    space.DefaultTags, "b12345678", null, null, i, 0, 0,
+                    imageOptimisationPolicies.First().Id, thumbnailPolicies.First().Id);
                 images.Add(image);
                 if (spaceDefaultRoles.ContainsKey(space.Id))
                 {

@@ -47,14 +47,26 @@
 </table>
 
 
-<h3>role</h3>
+<h3>roles (🔗)</h3>
 
-<p>List of Role URIs that the user has. (List of possible roles to be provided). These roles should not be confused with the roles associated with images and authservices, which govern the interactions that end users can have with your image resources. These PortalUser roles govern the actions that your handful of registered DLCS back end users can perform in the portal. </p>
+<p>Collection of Role resources that the user has. These roles should not be confused with the roles associated with images and authservices, which govern the interactions that end users can have with your image resources. These PortalUser roles govern the actions that your handful of registered DLCS back end users can perform in the portal. </p>
 
 <table><tr>
 <th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
 <tr>
-<td>vocab:PortalUser</td><td>xsd:string</td><td>False</td><td>False</td></tr>
+<td>vocab:PortalUser</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
+</table>
+
+
+<pre>/customers/{0}/portalUsers/{1}/roles</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Statuses</th></tr>
+<tr>
+<td>GET</td><td>Retrieves all Portal Role</td><td></td><td>hydra:Collection</td><td>200 OK</td></tr>
+<tr>
+<td>POST</td><td>Creates a new Portal Role</td><td>vocab:PortalRole</td><td>vocab:PortalRole</td><td>201 Portal Role created., 400 Bad Request</td></tr>
 </table>
 
 

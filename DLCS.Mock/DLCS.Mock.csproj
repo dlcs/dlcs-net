@@ -144,11 +144,13 @@
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\DlcsApiController.cs" />
     <Compile Include="Controllers\DocumentationController.cs" />
+    <Compile Include="Controllers\ImageOptimisationPoliciesController.cs" />
     <Compile Include="Controllers\MockController.cs" />
     <Compile Include="Controllers\OriginStrategiesController.cs" />
     <Compile Include="Controllers\PortalRolesController.cs" />
     <Compile Include="Controllers\QueueController.cs" />
     <Compile Include="Controllers\SpaceImagesController.cs" />
+    <Compile Include="Controllers\ThumbnailPoliciesController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

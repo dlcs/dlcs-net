@@ -14,7 +14,7 @@ A customer represents you, the API user. You only have access to one customer, s
 
 |Method|Label|Expects|Returns|Statuses|
 |--|--|--|--|--|
-|GET|Retrieve a Customer| |vocab:Customer|200 OK, 404 Not found|
+|GET|Retrieve a Portal Role| |vocab:Customer|200 OK, 404 Not found|
 
 
 ## Supported properties
@@ -55,12 +55,6 @@ Collection of user accounts that can log into the portal. Use this to grant acce
 ```
 
 
-|Method|Label|Expects|Returns|Statuses|
-|--|--|--|--|--|
-|GET|Retrieves all Portal User| |hydra:Collection|200 OK|
-|POST|Creates a new Portal User|vocab:PortalUser|vocab:PortalUser|201 Portal User created., 400 Bad Request|
-
-
 ### namedQueries (🔗)
 
 Collection of all the Named Queries you have configured (plus those provided 'out of the box'). See the NamedQuery topic for further information
@@ -74,12 +68,6 @@ Collection of all the Named Queries you have configured (plus those provided 'ou
 ```
 /customers/{0}/namedQueries
 ```
-
-
-|Method|Label|Expects|Returns|Statuses|
-|--|--|--|--|--|
-|GET|Retrieves all Named Query| |hydra:Collection|200 OK|
-|POST|Creates a new Named Query|vocab:NamedQuery|vocab:NamedQuery|201 Named Query created., 400 Bad Request|
 
 
 ### originStrategies (🔗)
@@ -97,12 +85,6 @@ Collection of configuration settings for retrieving your registered images from 
 ```
 
 
-|Method|Label|Expects|Returns|Statuses|
-|--|--|--|--|--|
-|GET|Retrieves all Origin Strategy| |hydra:Collection|200 OK|
-|POST|Creates a new Origin Strategy|vocab:OriginStrategy|vocab:OriginStrategy|201 Origin Strategy created., 400 Bad Request|
-
-
 ### authServices (🔗)
 
 Collection of IIIF Authentication services available for use with your images. The images are associated with the auth services via Roles. An AuthService is a means of acquirung a role.
@@ -116,12 +98,6 @@ Collection of IIIF Authentication services available for use with your images. T
 ```
 /customers/{0}/authServices
 ```
-
-
-|Method|Label|Expects|Returns|Statuses|
-|--|--|--|--|--|
-|GET|Retrieves all Auth Service| |hydra:Collection|200 OK|
-|POST|Creates a new Auth Service|vocab:AuthService|vocab:AuthService|201 Auth Service created., 400 Bad Request|
 
 
 ### roles (🔗)
@@ -139,12 +115,6 @@ Collection of the available roles you can assign to your images. In order for a 
 ```
 
 
-|Method|Label|Expects|Returns|Statuses|
-|--|--|--|--|--|
-|GET|Retrieves all Space| |hydra:Collection|200 OK|
-|POST|Creates a new Space|vocab:Space|vocab:Space|201 Space created., 400 Bad Request|
-
-
 ### queue (🔗)
 
 The Customer's view on the DLCS ingest queue. As well as allowing you to query the status of batches you have registered, you can POST new batches to the queue.
@@ -158,12 +128,6 @@ The Customer's view on the DLCS ingest queue. As well as allowing you to query t
 ```
 /customers/{0}/queue
 ```
-
-
-|Method|Label|Expects|Returns|Statuses|
-|--|--|--|--|--|
-|GET|Returns the queue resource| |vocab:Queue| |
-|POST|Submit an array of Image and get a batch back|hydra:Collection|vocab:Batch|201 Job has been accepted - Batch created and returned|
 
 
 ### spaces (🔗)

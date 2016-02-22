@@ -43,14 +43,25 @@ Create date
 |vocab:PortalUser|xsd:dateTime|False|False|
 
 
-### role
+### roles (🔗)
 
-List of Role URIs that the user has. (List of possible roles to be provided). These roles should not be confused with the roles associated with images and authservices, which govern the interactions that end users can have with your image resources. These PortalUser roles govern the actions that your handful of registered DLCS back end users can perform in the portal. 
+Collection of Role resources that the user has. These roles should not be confused with the roles associated with images and authservices, which govern the interactions that end users can have with your image resources. These PortalUser roles govern the actions that your handful of registered DLCS back end users can perform in the portal. 
 
 
 |domain|range|readonly|writeonly|
 |--|--|--|--|
-|vocab:PortalUser|xsd:string|False|False|
+|vocab:PortalUser|hydra:Collection|True|False|
+
+
+```
+/customers/{0}/portalUsers/{1}/roles
+```
+
+
+|Method|Label|Expects|Returns|Statuses|
+|--|--|--|--|--|
+|GET|Retrieves all Portal Role| |hydra:Collection|200 OK|
+|POST|Creates a new Portal Role|vocab:PortalRole|vocab:PortalRole|201 Portal Role created., 400 Bad Request|
 
 
 ### enabled

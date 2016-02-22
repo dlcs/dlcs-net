@@ -24,7 +24,8 @@ namespace DLCS.Client.Model
             int width, int height, int maxUnauthorised,
             DateTime? queued, DateTime? dequeued, DateTime? finished, bool ingesting, string error,
             string[] tags, string string1, string string2, string string3,
-            long number1, long number2, long number3)
+            long number1, long number2, long number3,
+            string imageOptimsationPolicy, string thumbnailPolicy)
         {
             string mockDlcsPathTemplate = string.Format("/{0}/{1}/{2}", customerId, space, imageId);
             ModelId = imageId;
@@ -53,6 +54,8 @@ namespace DLCS.Client.Model
             Number1 = number1;
             Number2 = number2;
             Number3 = number3;
+            ImageOptimisationPolicy = imageOptimsationPolicy;
+            ThumbnailPolicy = thumbnailPolicy;
         }
 
 
@@ -195,6 +198,16 @@ namespace DLCS.Client.Model
             Range = "vocab:Batch", ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 71, PropertyName = "batch")]
         public string Batch { get; set; }
+        
+        [HydraLink(Description = "The image optimisation policy used when this image was last processed (e.g., registered)",
+            Range = "vocab:ImageOptimisationPolicy", ReadOnly = true, WriteOnly = false)]
+        [JsonProperty(Order = 80, PropertyName = "imageOptimisationPolicy")]
+        public string ImageOptimisationPolicy { get; set; }
+
+        [HydraLink(Description = "The thumbnail settings used when this image was last processed (e.g., registered)",
+            Range = "vocab:ThumbnailPolicy", ReadOnly = true, WriteOnly = false)]
+        [JsonProperty(Order = 81, PropertyName = "thumbnailPolicy")]
+        public string ThumbnailPolicy { get; set; }
 
     }
 

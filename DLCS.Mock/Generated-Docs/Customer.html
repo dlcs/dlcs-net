@@ -12,7 +12,7 @@
 <table><tr>
 <th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Statuses</th></tr>
 <tr>
-<td>GET</td><td>Retrieve a Customer</td><td></td><td>vocab:Customer</td><td>200 OK, 404 Not found</td></tr>
+<td>GET</td><td>Retrieve a Portal Role</td><td></td><td>vocab:Customer</td><td>200 OK, 404 Not found</td></tr>
 </table>
 
 
@@ -55,15 +55,6 @@
 <pre>/customers/{0}/portalUsers</pre><br/>
 
 
-<table><tr>
-<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Statuses</th></tr>
-<tr>
-<td>GET</td><td>Retrieves all Portal User</td><td></td><td>hydra:Collection</td><td>200 OK</td></tr>
-<tr>
-<td>POST</td><td>Creates a new Portal User</td><td>vocab:PortalUser</td><td>vocab:PortalUser</td><td>201 Portal User created., 400 Bad Request</td></tr>
-</table>
-
-
 <h3>namedQueries (🔗)</h3>
 
 <p>Collection of all the Named Queries you have configured (plus those provided 'out of the box'). See the NamedQuery topic for further information</p>
@@ -76,15 +67,6 @@
 
 
 <pre>/customers/{0}/namedQueries</pre><br/>
-
-
-<table><tr>
-<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Statuses</th></tr>
-<tr>
-<td>GET</td><td>Retrieves all Named Query</td><td></td><td>hydra:Collection</td><td>200 OK</td></tr>
-<tr>
-<td>POST</td><td>Creates a new Named Query</td><td>vocab:NamedQuery</td><td>vocab:NamedQuery</td><td>201 Named Query created., 400 Bad Request</td></tr>
-</table>
 
 
 <h3>originStrategies (🔗)</h3>
@@ -101,15 +83,6 @@
 <pre>/customers/{0}/originStrategies</pre><br/>
 
 
-<table><tr>
-<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Statuses</th></tr>
-<tr>
-<td>GET</td><td>Retrieves all Origin Strategy</td><td></td><td>hydra:Collection</td><td>200 OK</td></tr>
-<tr>
-<td>POST</td><td>Creates a new Origin Strategy</td><td>vocab:OriginStrategy</td><td>vocab:OriginStrategy</td><td>201 Origin Strategy created., 400 Bad Request</td></tr>
-</table>
-
-
 <h3>authServices (🔗)</h3>
 
 <p>Collection of IIIF Authentication services available for use with your images. The images are associated with the auth services via Roles. An AuthService is a means of acquirung a role.</p>
@@ -122,15 +95,6 @@
 
 
 <pre>/customers/{0}/authServices</pre><br/>
-
-
-<table><tr>
-<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Statuses</th></tr>
-<tr>
-<td>GET</td><td>Retrieves all Auth Service</td><td></td><td>hydra:Collection</td><td>200 OK</td></tr>
-<tr>
-<td>POST</td><td>Creates a new Auth Service</td><td>vocab:AuthService</td><td>vocab:AuthService</td><td>201 Auth Service created., 400 Bad Request</td></tr>
-</table>
 
 
 <h3>roles (🔗)</h3>
@@ -147,15 +111,6 @@
 <pre>/customers/{0}/roles</pre><br/>
 
 
-<table><tr>
-<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Statuses</th></tr>
-<tr>
-<td>GET</td><td>Retrieves all Space</td><td></td><td>hydra:Collection</td><td>200 OK</td></tr>
-<tr>
-<td>POST</td><td>Creates a new Space</td><td>vocab:Space</td><td>vocab:Space</td><td>201 Space created., 400 Bad Request</td></tr>
-</table>
-
-
 <h3>queue (🔗)</h3>
 
 <p>The Customer's view on the DLCS ingest queue. As well as allowing you to query the status of batches you have registered, you can POST new batches to the queue.</p>
@@ -168,15 +123,6 @@
 
 
 <pre>/customers/{0}/queue</pre><br/>
-
-
-<table><tr>
-<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Statuses</th></tr>
-<tr>
-<td>GET</td><td>Returns the queue resource</td><td></td><td>vocab:Queue</td><td></td></tr>
-<tr>
-<td>POST</td><td>Submit an array of Image and get a batch back</td><td>hydra:Collection</td><td>vocab:Batch</td><td>201 Job has been accepted - Batch created and returned</td></tr>
-</table>
 
 
 <h3>spaces (🔗)</h3>
