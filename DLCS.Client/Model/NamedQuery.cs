@@ -2,7 +2,7 @@
 using Hydra.Model;
 using Newtonsoft.Json;
 
-namespace DLCS.Client.Model
+namespace DLCS.HydraModel.Model
 {
     [HydraClass(typeof(NamedQueryClass),
         Description = "A named query is a URI pattern available on dlcs.io (i.e., not this API) that will return a IIIF resource " +

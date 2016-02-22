@@ -3,7 +3,7 @@ using Hydra;
 using Hydra.Model;
 using Newtonsoft.Json;
 
-namespace DLCS.Client.Model
+namespace DLCS.HydraModel.Model
 {
     [HydraClass(typeof(PortalUserClass),
         Description = "A user of the portal. Represents an account for use by a person, rather than by a machine. You can create " +

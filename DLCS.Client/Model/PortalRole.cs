@@ -2,7 +2,7 @@
 using Hydra.Model;
 using Newtonsoft.Json;
 
-namespace DLCS.Client.Model
+namespace DLCS.HydraModel.Model
 {
     [HydraClass(typeof (PortalRoleClass),
         Description = "A role that can be assigned to a user of the DLCS portal (not an end user) for the customer to allow control over permissions.",

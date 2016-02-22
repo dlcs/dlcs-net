@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using DLCS.Client.Model;
+using DLCS.HydraModel.Model;
 using Hydra.Collections;
 
 namespace DLCS.Mock.Controllers

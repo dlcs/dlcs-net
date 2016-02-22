@@ -3,7 +3,7 @@ using Hydra;
 using Hydra.Model;
 using Newtonsoft.Json;
 
-namespace DLCS.Client.Model
+namespace DLCS.HydraModel.Model
 {
     [HydraClass(typeof(BatchClass),
            Description = "Represents a submitted job of images. Typically you'd interact with this while it is being processed, " +

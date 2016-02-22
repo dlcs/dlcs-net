@@ -3,7 +3,7 @@ using Hydra;
 using Hydra.Model;
 using Newtonsoft.Json;
 
-namespace DLCS.Client.Model
+namespace DLCS.HydraModel.Model
 {
     [HydraClass(typeof(ImageClass),
         Description = "The Image resource is the DLCS view of an image that you have registered. The job of the DLCS is to offer services on that image, " +

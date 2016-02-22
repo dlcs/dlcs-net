@@ -2,7 +2,7 @@
 using Hydra.Model;
 using Newtonsoft.Json;
 
-namespace DLCS.Client.Model
+namespace DLCS.HydraModel.Model
 {
     [HydraClass(typeof(CustomerOriginStrategyClass),
         Description = "As a customer you can provide information to the DLCS to allow it to fetch your images " +

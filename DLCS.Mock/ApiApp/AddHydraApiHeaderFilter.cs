@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Net.Http.Headers;
 using System.Web.Http.Filters;
-using DLCS.Client.Config;
+using DLCS.HydraModel.Config;
 
 namespace DLCS.Mock.ApiApp
 {

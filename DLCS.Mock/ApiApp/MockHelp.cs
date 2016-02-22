@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DLCS.Client.Model;
+using DLCS.HydraModel.Model;
 
 namespace DLCS.Mock.ApiApp
 {

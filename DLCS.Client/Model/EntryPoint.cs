@@ -1,9 +1,8 @@
-﻿using DLCS.Client.Config;
-using Hydra;
+﻿using Hydra;
 using Hydra.Model;
 using Newtonsoft.Json;
 
-namespace DLCS.Client.Model
+namespace DLCS.HydraModel.Model
 {
     [HydraClass(typeof(EntryPointClass), 
         Description = "The main entry point or homepage of the API.",

@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DLCS.HydraModel")]
+[assembly: AssemblyTitle("DLCS.WebClient")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("DLCS.HydraModel")]
-[assembly: AssemblyCopyright("Copyright © Wellcome Trust 2016")]
+[assembly: AssemblyProduct("DLCS.WebClient")]
+[assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d51bc7fe-0f4e-4dc0-9e36-70e88271b6c4")]
+[assembly: Guid("f569beb5-cf7d-47a5-992c-bce480eb0b8a")]
 
 // Version information for an assembly consists of the following four values:
 //

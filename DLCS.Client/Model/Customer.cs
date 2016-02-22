@@ -2,7 +2,7 @@
 using Hydra.Model;
 using Newtonsoft.Json;
 
-namespace DLCS.Client.Model
+namespace DLCS.HydraModel.Model
 {
     [HydraClass(typeof(CustomerClass), 
         Description = "A customer represents you, the API user. You only have access to one customer, " +

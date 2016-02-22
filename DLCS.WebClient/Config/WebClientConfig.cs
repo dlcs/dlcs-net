@@ -1,4 +1,4 @@
-﻿namespace DLCS.Client.Config
+﻿namespace DLCS.WebClient.Config
 {
     public class WebClientConfig
     {

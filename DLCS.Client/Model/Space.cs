@@ -3,7 +3,7 @@ using Hydra;
 using Hydra.Model;
 using Newtonsoft.Json;
 
-namespace DLCS.Client.Model
+namespace DLCS.HydraModel.Model
 {
     [HydraClass(typeof(SpaceClass),
            Description = "Spaces allow you to partition images into groups. You can use them to organise your " +

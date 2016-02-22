@@ -1,10 +1,10 @@
 ﻿using System.Linq;
-using DLCS.Client.Config;
+using DLCS.HydraModel.Config;
 using Hydra;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace DLCS.Client.Model
+namespace DLCS.HydraModel.Model
 {
     public class DlcsResource : JSONLDBase
     {

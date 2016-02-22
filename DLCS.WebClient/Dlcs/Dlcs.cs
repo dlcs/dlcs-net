@@ -1,18 +1,15 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System;
+﻿using System;
 using System.Collections.Specialized;
 using System.Net;
 using System.Text;
-using DLCS.Client.Config;
-using DLCS.Client.Interface;
-using DLCS.Client.Model;
-using DLCS.Client.Model.Images;
-using DLCS.Client.PDFs;
-using DLCS.Client.Util;
-using Image = DLCS.Client.Model.Images.Image;
+using DLCS.WebClient.Config;
+using DLCS.WebClient.Interface;
+using DLCS.WebClient.Util;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Image = DLCS.WebClient.Model.Images.Image;
 
-namespace DLCS.Client.Dlcs
+namespace DLCS.WebClient.Dlcs
 {
     public class Dlcs : IDlcs
     {
@@ -21,7 +18,6 @@ namespace DLCS.Client.Dlcs
         private readonly JsonSerializerSettings _jsonSerializerSettings;
 
         private readonly Queue _queue;
-        private readonly Customer _customer;
 
         public Dlcs(
             DlcsConfig dlcsConfig,
@@ -42,18 +38,13 @@ namespace DLCS.Client.Dlcs
             };
 
             _queue = new Queue(this);
-            _customer = new Customer(this);
         }
 
         public IQueue Queue
         {
             get { return _queue; }
         }
-
-        public ICustomer Customer
-        {
-            get { return _customer; }
-        }
+        
 
         private string _basicAuthHeader;
 
@@ -69,7 +60,7 @@ namespace DLCS.Client.Dlcs
             return _basicAuthHeader;
         }
 
-        private void AddHeaders(WebClient wc)
+        private void AddHeaders(System.Net.WebClient wc)
         {
             wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
             wc.Headers.Add(HttpRequestHeader.Authorization, GetBasicAuthHeader());
@@ -181,14 +172,5 @@ namespace DLCS.Client.Dlcs
                 Message = ex.Message
             };
         }
-
-
-
-
-        public MakePdfResponse MakePdf(MakePdfRequest pdfRequest)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }

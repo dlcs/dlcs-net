@@ -4,7 +4,7 @@ using System.Linq;
 using Hydra;
 using Hydra.Model;
 
-namespace DLCS.Client.Model
+namespace DLCS.HydraModel.Model
 {
     public static class CommonOperations
     {

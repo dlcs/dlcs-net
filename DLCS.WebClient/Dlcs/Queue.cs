@@ -1,8 +1,8 @@
 ﻿using System;
-using DLCS.Client.Interface;
-using DLCS.Client.Model.Images;
+using DLCS.WebClient.Interface;
+using DLCS.WebClient.Model.Images;
 
-namespace DLCS.Client.Dlcs
+namespace DLCS.WebClient.Dlcs
 {
     public class Queue : IQueue
     {

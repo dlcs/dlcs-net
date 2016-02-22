@@ -3,7 +3,7 @@ using Hydra;
 using Hydra.Model;
 using Newtonsoft.Json;
 
-namespace DLCS.Client.Model
+namespace DLCS.HydraModel.Model
 {
     [HydraClass(typeof(AuthServiceClass),
         Description = "IIIF Authentication Service configuration. The services configured here are exposed by the DLCS " +

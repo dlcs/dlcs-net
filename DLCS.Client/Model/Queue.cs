@@ -2,7 +2,7 @@
 using Hydra.Model;
 using Newtonsoft.Json;
 
-namespace DLCS.Client.Model
+namespace DLCS.HydraModel.Model
 {
     [HydraClass(typeof (QueueClass),
         Description = "The Queue resource allows the DLCS to process very large number of image registration requests." +

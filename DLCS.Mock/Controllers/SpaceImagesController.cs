@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Security.Policy;
 using System.Web;
 using System.Web.Http;
-using DLCS.Client.Model;
+using DLCS.HydraModel.Model;
 using Hydra.Collections;
 using Newtonsoft.Json.Linq;
 

@@ -2,7 +2,7 @@
 using Hydra.Model;
 using Newtonsoft.Json;
 
-namespace DLCS.Client.Model
+namespace DLCS.HydraModel.Model
 {
     [HydraClass(typeof(ThumbnailPolicyClass),
        Description = "The settings used to create thumbnails for the image at registration time.",

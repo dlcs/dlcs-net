@@ -1,6 +1,7 @@
-﻿using DLCS.Client.Model.Images;
+﻿using DLCS.WebClient.Dlcs;
+using DLCS.WebClient.Model.Images;
 
-namespace DLCS.Client.Interface
+namespace DLCS.WebClient.Interface
 {
     public interface IQueue
     {

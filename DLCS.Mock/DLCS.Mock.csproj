@@ -170,9 +170,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DLCS.Client\DLCS.Client.csproj">
+    <ProjectReference Include="..\DLCS.Client\DLCS.HydraModel.csproj">
       <Project>{D51BC7FE-0F4E-4DC0-9E36-70E88271B6C4}</Project>
-      <Name>DLCS.Client</Name>
+      <Name>DLCS.HydraModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\Hydra\Hydra.csproj">
       <Project>{38882B8A-B0D2-4795-A62F-D099B905E2F2}</Project>

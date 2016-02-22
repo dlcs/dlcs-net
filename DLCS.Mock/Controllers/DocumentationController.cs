@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
-using DLCS.Client.Config;
+using DLCS.HydraModel.Config;
 using Hydra;
 using DLCS.Mock.ApiApp;
 using Hydra.Model;

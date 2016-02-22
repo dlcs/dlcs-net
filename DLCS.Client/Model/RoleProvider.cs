@@ -2,7 +2,7 @@
 using Hydra.Model;
 using Newtonsoft.Json;
 
-namespace DLCS.Client.Model
+namespace DLCS.HydraModel.Model
 {
     [HydraClass(typeof(RoleProviderClass),
         Description = "Resource that represents the means by which the DLCS acquires roles to enforce "

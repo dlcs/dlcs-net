@@ -2,7 +2,7 @@
 using Hydra.Model;
 using Newtonsoft.Json;
 
-namespace DLCS.Client.Model
+namespace DLCS.HydraModel.Model
 {
     [HydraClass(typeof(ImageOptimisationPolicyClass),
        Description = "An internal record of how the DLCS optimised your image for tile delivery. Provides " +

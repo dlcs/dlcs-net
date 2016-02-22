@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Net;
-using DLCS.Client.Config;
+using DLCS.WebClient.Config;
 
-namespace DLCS.Client.Util
+namespace DLCS.WebClient.Util
 {
     public class WebClientProvider
     {
-        public static WebClient GetWebClient(WebClientConfig config, Uri uri, int timeout = 60000, bool withProxy = true)
+        public static System.Net.WebClient GetWebClient(WebClientConfig config, Uri uri, int timeout = 60000, bool withProxy = true)
         {
             var pxCfg = config.ProxyConfig;
             if (string.IsNullOrWhiteSpace(pxCfg.Address))
@@ -43,7 +43,7 @@ namespace DLCS.Client.Util
             return new WebClientWithTimeout(timeout) {Proxy = proxy};
         }
 
-        private class WebClientWithTimeout : WebClient
+        private class WebClientWithTimeout : System.Net.WebClient
         {
             /// <summary>
             /// Time in milliseconds
