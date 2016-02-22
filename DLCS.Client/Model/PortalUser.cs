@@ -19,13 +19,12 @@ namespace DLCS.Client.Model
 
         public PortalUser() { }
 
-        public PortalUser(int customerId, string userId, string email, DateTime created, string[] roles, bool enabled)
+        public PortalUser(int customerId, string userId, string email, DateTime created, bool enabled)
         {
             CustomerId = customerId;
             ModelId = userId;
             Email = email;
             Created = created;
-            Role = roles;
             Enabled = enabled;
             Init(true, customerId, ModelId);
         }
@@ -41,13 +40,13 @@ namespace DLCS.Client.Model
         [JsonProperty(Order = 12, PropertyName = "created")]
         public DateTime Created { get; set; }
 
-        [RdfProperty(Description = "List of Role URIs that the user has. (List of possible roles to be provided). These roles should not" +
+        [HydraLink(Description = "Collection of Role resources that the user has. These roles should not" +
                                    " be confused with the roles associated with images and authservices, which govern the interactions that" +
                                    " end users can have with your image resources. These PortalUser roles govern the actions that your handful" +
                                    " of registered DLCS back end users can perform in the portal. ",
-            Range = Names.XmlSchema.String, ReadOnly = false, WriteOnly = false)]
-        [JsonProperty(Order = 13, PropertyName = "role")]
-        public string[] Role { get; set; }
+            Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]
+        [JsonProperty(Order = 13, PropertyName = "roles")]
+        public string Roles { get; set; }
 
         [RdfProperty(Description = "Whether the user can log in - for temporary or permanent rescinding of access.",
             Range = Names.XmlSchema.Boolean, ReadOnly = false, WriteOnly = false)]
@@ -67,6 +66,10 @@ namespace DLCS.Client.Model
             SupportedOperations = CommonOperations.GetStandardResourceOperations(
                 "_:customer_portalUser_", "Portal User", Id, 
                 "GET", "PUT", "PATCH", "DELETE");
+
+
+            GetHydraLinkProperty("roles").SupportedOperations = CommonOperations
+                .GetStandardCollectionOperations("_:customer_portalUser_portalRole_", "Portal Role", "vocab:PortalRole");
         }
     }
 }

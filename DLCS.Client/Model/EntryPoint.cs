@@ -14,6 +14,19 @@ namespace DLCS.Client.Model
             Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 11, PropertyName = "customers")]
         public string Customers { get; set; }
+
+
+        [HydraLink(Description = "List of available origin strategies that the DLCS can use to fetch your images.",
+            Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]
+        [JsonProperty(Order = 12, PropertyName = "originStrategies")]
+        public string OriginStrategies { get; set; }
+
+
+        [HydraLink(Description = "List of all the different roles available to portal users - i.e., the small number of people who log into the portal." +
+                                 " These are not the same as the roles end users acquire for accessing protected image services.",
+            Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]
+        [JsonProperty(Order = 13, PropertyName = "portalRoles")]
+        public string PortalRoles { get; set; }
     }
 
     public class EntryPointClass : Class
@@ -44,6 +57,31 @@ namespace DLCS.Client.Model
                     Id = "_:customer_collection_retrieve",
                     Method = "GET",
                     Label = "Retrieves all Customer entities",
+                    Returns = Names.Hydra.Collection
+                }
+            };
+
+
+            var originStrategies = GetHydraLinkProperty("originStrategies");
+            originStrategies.SupportedOperations = new[]
+            {
+                new Operation
+                {
+                    Id = "_:originStrategy_collection_retrieve",
+                    Method = "GET",
+                    Label = "Retrieves all availabe origin strategies. You must use one of these @id URIs as the OriginStrategy property of any CustomerOriginStrategy resources you create.",
+                    Returns = Names.Hydra.Collection
+                }
+            };
+
+            var portalRoles = GetHydraLinkProperty("portalRoles");
+            portalRoles.SupportedOperations = new[]
+            {
+                new Operation
+                {
+                    Id = "_:portalRole_collection_retrieve",
+                    Method = "GET",
+                    Label = "Retrieves all availabe portal roles. You can add these to the 'roles' collection of any portal users you create.",
                     Returns = Names.Hydra.Collection
                 }
             };

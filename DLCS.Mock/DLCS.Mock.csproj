@@ -128,6 +128,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Generated-Docs\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\OriginStrategies\" />
     <Folder Include="Views\SpaceImages\" />
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +145,8 @@
     <Compile Include="Controllers\DlcsApiController.cs" />
     <Compile Include="Controllers\DocumentationController.cs" />
     <Compile Include="Controllers\MockController.cs" />
+    <Compile Include="Controllers\OriginStrategiesController.cs" />
+    <Compile Include="Controllers\PortalRolesController.cs" />
     <Compile Include="Controllers\QueueController.cs" />
     <Compile Include="Controllers\SpaceImagesController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />

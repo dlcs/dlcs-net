@@ -58,6 +58,13 @@ namespace DLCS.Mock
                 defaults: new {controller = "SpaceImages", action = "Image", id = UrlParameter.Optional}
                 );
 
+
+            config.Routes.MapHttpRoute(
+                name: "PortalUserRoles",
+                routeTemplate: "customers/{customerId}/portalUsers/{portalUserId}/roles",
+                defaults: new { controller = "PortalRoles", action = "RolesForUser" }
+                );
+
             // Routing for customer and its operations
             config.Routes.MapHttpRoute(
                 name: "CustomerProperties",
@@ -70,18 +77,20 @@ namespace DLCS.Mock
                 );
 
 
-            config.Routes.MapHttpRoute(
-                name: "DlcsApiRoot",
-                routeTemplate: "{controller}/{action}/{id}",
-                defaults: new { controller = "DlcsApi", action = "EntryPoint", id = RouteParameter.Optional }
-            );
-
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                routeTemplate: "{controller}/{id}",
+                defaults: new { action = "Index", id = RouteParameter.Optional }
             );
+
+            config.Routes.MapHttpRoute(
+                name: "DlcsApiRoot",
+                routeTemplate: "{controller}/{action}/{id}",
+                defaults: new { controller = "DlcsApi", action = "Index", id = RouteParameter.Optional }
+            );
+
+            
         }
     }
 }

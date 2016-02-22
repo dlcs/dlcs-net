@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http;
 using DLCS.Client.Model;
 using Hydra.Collections;
@@ -69,6 +66,34 @@ namespace DLCS.Mock.Controllers
             return Ok(user);
         }
 
+
+        [HttpGet]
+        public Collection<CustomerOriginStrategy> OriginStrategies(int customerId)
+        {
+            var customerOriginStrategies = GetModel().CustomerOriginStrategies
+                .Where(os => os.CustomerId == customerId)
+                .ToArray();
+
+            return new Collection<CustomerOriginStrategy>
+            {
+                IncludeContext = true,
+                Members = customerOriginStrategies,
+                TotalItems = customerOriginStrategies.Length,
+                Id = Request.RequestUri.ToString()
+            };
+
+        }
+
+        [HttpGet]
+        public IHttpActionResult OriginStrategies(int customerId, int propertyId)
+        {
+            var cos = GetModel().CustomerOriginStrategies.SingleOrDefault(u => u.CustomerId == customerId && u.ModelId == propertyId);
+            if (cos == null)
+            {
+                return NotFound();
+            }
+            return Ok(cos);
+        }
 
         [HttpGet]
         public Collection<JObject> Spaces(int customerId)

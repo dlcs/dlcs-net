@@ -70,7 +70,9 @@
     <Compile Include="Interface\IQueue.cs" />
     <Compile Include="Model\DlcsResource.cs" />
     <Compile Include="Model\NamedQuery.cs" />
+    <Compile Include="Model\CustomerOriginStrategy.cs" />
     <Compile Include="Model\OriginStrategy.cs" />
+    <Compile Include="Model\PortalRole.cs" />
     <Compile Include="Model\PortalUser.cs" />
     <Compile Include="Model\Queue.cs" />
     <Compile Include="Model\RoleProvider.cs" />

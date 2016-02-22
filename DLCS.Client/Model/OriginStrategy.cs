@@ -6,50 +6,34 @@ namespace DLCS.Client.Model
 {
     [HydraClass(typeof(OriginStrategyClass),
         Description = "As a customer you can provide information to the DLCS to allow it to fetch your images " +
-                      "from their origin endpoints. Every customer has a default origin strategy, which is for the " +
+                      "from their origin endpoints. Every customer is given a default origin strategy, which is for the " +
                       "DLCS to attempt to fetch the image from its origin URL without presenting credentials. " +
                       "This is fine for images that are publicly available, but is unlikely to be appropriate for " +
                       "images you are exposing from your asset management system. You might have a service that is " +
-                      "available only to the DLCS, or an FTP site.",
-        UriTemplate = "/customers/{0}/originStrategies/{1}")]
+                      "available only to the DLCS, or an FTP site. The ",
+        UriTemplate = "/originStrategies/{0}")]
     public class OriginStrategy : DlcsResource
     {
         [JsonIgnore]
         public string ModelId { get; set; }
-        [JsonIgnore]
-        public int CustomerId { get; set; }
 
-        public OriginStrategy() { }
-
-        public OriginStrategy(int customerId, string strategyId, string regex, string protocol, string credentials)
+        public OriginStrategy()
         {
-            CustomerId = customerId;
-            ModelId = strategyId;
-            Regex = regex;
-            Protocol = protocol;
-            Credentials = credentials;
-            Init(true, customerId, ModelId);
         }
 
-        [RdfProperty(Description = "Regex for matching origin. When the DLCS tries to work out how to fetch " +
-                                   "from your origin, it uses this regex to match to find the correct strategy.",
-            Range = Names.XmlSchema.String, ReadOnly = false, WriteOnly = false)]
-        [JsonProperty(Order = 11, PropertyName = "regex")]
-        public string Regex { get; set; }
+        public OriginStrategy(string originStrategyId, string name)
+        {
+            ModelId = originStrategyId;
+            Name = name;
+            Init(true, originStrategyId);
+        }
 
-        [RdfProperty(Description = "The protocol to use. This may not be obvious from the regex. We have overloaded this slightly to convey" +
-                                   " information such as 'https+basic' to signify basic authentication over https. A list of supported" +
-                                   " protocols is provided HERE.",
+        [RdfProperty(Description = "The human readable name of the origin strategy",
             Range = Names.XmlSchema.String, ReadOnly = false, WriteOnly = false)]
-        [JsonProperty(Order = 12, PropertyName = "protocol")]
-        public string Protocol { get; set; }
-
-        [RdfProperty(Description = "JSON object - credentials appropriate to the protocol, will vary. " +
-                                   "These are stored in S3 and are not available via the API.",
-            Range = Names.XmlSchema.String, ReadOnly = false, WriteOnly = false)]
-        [JsonProperty(Order = 13, PropertyName = "credentials")]
-        public string Credentials { get; set; }
+        [JsonProperty(Order = 11, PropertyName = "name")]
+        public string Name { get; set; }
     }
+
 
     public class OriginStrategyClass : Class
     {
@@ -61,8 +45,8 @@ namespace DLCS.Client.Model
         public override void DefineOperations()
         {
             SupportedOperations = CommonOperations.GetStandardResourceOperations(
-                "_:customer_originStrategy_", "Origin Strategy", Id,
-                "GET", "PUT", "PATCH", "DELETE");
+                "_:originStrategy_", "Origin Strategy", Id,
+                "GET");
         }
     }
 }

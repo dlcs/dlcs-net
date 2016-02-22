@@ -12,6 +12,8 @@ namespace DLCS.Mock.ApiApp
         public List<PortalUser> PortalUsers { get; set; }
         public List<NamedQuery> NamedQueries { get; set; }
         public List<OriginStrategy> OriginStrategies { get; set; }
+        public List<PortalRole> PortalRoles { get; set; }
+        public List<CustomerOriginStrategy> CustomerOriginStrategies { get; set; }
         public List<AuthService> AuthServices { get; set; }
         public List<RoleProvider> RoleProviders { get; set; }
         public List<Role> Roles { get; set; }
@@ -25,7 +27,8 @@ namespace DLCS.Mock.ApiApp
         public Dictionary<string, string> RoleAuthService { get; set; } 
         public Dictionary<string, List<string>> SpaceDefaultRoles { get; set; }
         public Dictionary<string, List<string>> ImageRoles { get; set; }
-        public Dictionary<string, List<string>> BatchImages { get; set; } 
+        public Dictionary<string, List<string>> BatchImages { get; set; }
+        public Dictionary<string, List<string>> PortalUserRoles { get; set; }
 
 
 
@@ -34,9 +37,12 @@ namespace DLCS.Mock.ApiApp
             var model = new MockModel();
             var customers = CreateCustomers();
             model.Customers = customers;
-            model.PortalUsers = CreatePortalUsers(customers);
+            model.OriginStrategies = CreateOriginStrategies();
+            model.PortalRoles = CreatePortalRoles();
+            model.PortalUserRoles = new Dictionary<string, List<string>>();
+            model.PortalUsers = CreatePortalUsers(customers, model.PortalRoles, model.PortalUserRoles);
             model.NamedQueries = CreateNamedQueries(customers);
-            model.OriginStrategies = CreateOriginStrategies(customers);
+            model.CustomerOriginStrategies = CreateCustomerOriginStrategies(customers, model.OriginStrategies);
             model.AuthServiceParentChild = new Dictionary<string, List<string>>();
             var authServices = CreateAuthServices(customers, model.AuthServiceParentChild);
             model.AuthServices = authServices;
@@ -55,6 +61,27 @@ namespace DLCS.Mock.ApiApp
             model.Batches = CreateBatches(images, model.BatchImages);
             RecalculateCounters(model);
             return model;
+        }
+
+        private static List<PortalRole> CreatePortalRoles()
+        {
+            return new List<PortalRole>
+            {
+                new PortalRole("admin", "Administrator"),
+                new PortalRole("readonly", "Read only"),
+                new PortalRole("samplerole", "Another example role")
+            };
+        }
+
+        private static List<OriginStrategy> CreateOriginStrategies()
+        {
+            return new List<OriginStrategy>
+            {
+                new OriginStrategy("default", "No credentials over http/s"),
+                new OriginStrategy("basic_https", "Basic Auth over https"),
+                new OriginStrategy("ftps_creds", "FTPS with credentials"),
+                new OriginStrategy("s3", "Fetch from s3 bucket presenting DLCS identity"),
+            };
         }
 
         private static List<Batch> CreateBatches(List<Image> images, Dictionary<string, List<string>> batchImages)
@@ -144,19 +171,26 @@ namespace DLCS.Mock.ApiApp
             };
         }
 
-        private static List<PortalUser> CreatePortalUsers(List<Customer> customers)
+        private static List<PortalUser> CreatePortalUsers(List<Customer> customers, List<PortalRole> portalRoles, Dictionary<string, List<string>> portalUserRoles)
         {
-            return new List<PortalUser>
+            var portalUsers = new List<PortalUser>
             {
                 new PortalUser(customers.GetByName("admin").ModelId, 
-                    "8b083aee", "adam.christie@digirati.co.uk", new DateTime(2005, 10, 31), new string[0], true),
+                    "8b083aee", "adam.christie@digirati.co.uk", new DateTime(2005, 10, 31), true),
                 new PortalUser(customers.GetByName("admin").ModelId,
-                    "e3afdce8", "admin@dlcs.io", new DateTime(2016, 1, 1), new string[0], true),
+                    "e3afdce8", "admin@dlcs.io", new DateTime(2016, 1, 1), true),
                 new PortalUser(customers.GetByName("wellcome").ModelId,
-                    "ef132a3f", "r.kiley@wellcome.ac.uk", new DateTime(1961, 10, 31), new string[0], true),
+                    "ef132a3f", "r.kiley@wellcome.ac.uk", new DateTime(1961, 10, 31), true),
                 new PortalUser(customers.GetByName("iiifly").ModelId,
-                    "9cee79e8", "tom.crane@digirati.co.uk", new DateTime(2010, 6, 21), new string[0], true)
+                    "9cee79e8", "tom.crane@digirati.co.uk", new DateTime(2010, 6, 21), true)
             };
+
+            portalUserRoles.Add(portalUsers[0].Id, new List<string> { portalRoles.Single(pr => pr.ModelId == "admin").Id });
+            portalUserRoles.Add(portalUsers[1].Id, new List<string> { portalRoles.Single(pr => pr.ModelId == "admin").Id });
+            portalUserRoles.Add(portalUsers[2].Id, new List<string> { portalRoles.Single(pr => pr.ModelId == "samplerole").Id });
+            portalUserRoles.Add(portalUsers[3].Id, new List<string> { portalRoles.Single(pr => pr.ModelId == "readonly").Id });
+
+            return portalUsers;
         }
 
         private static List<NamedQuery> CreateNamedQueries(List<Customer> customers)
@@ -169,16 +203,19 @@ namespace DLCS.Mock.ApiApp
         }
 
 
-        private static List<OriginStrategy> CreateOriginStrategies(List<Customer> customers)
+        private static List<CustomerOriginStrategy> CreateCustomerOriginStrategies(List<Customer> customers, List<OriginStrategy> originStrategies)
         {
-            return new List<OriginStrategy>
+            return new List<CustomerOriginStrategy>
             {
-                new OriginStrategy(customers.GetByName("wellcome").ModelId, 
-                    "basic", "https://wellcomelibrary.org/service/asset(.+)", "https", "s3://wellcome/path-to-origin-creds"),
-                new OriginStrategy(customers.GetByName("iiifly").ModelId,
-                    "basic", "https://example.org/images/(.+)", "https", "s3://test/path-to-origin-creds"),
-                new OriginStrategy(customers.GetByName("iiifly").ModelId,
-                    "ftps", "ftps://example.org/images/(.+)", "ftps", "s3://test/path-to-ftp-creds")
+                new CustomerOriginStrategy(customers.GetByName("wellcome").ModelId, 
+                    101, "https://wellcomelibrary.org/service/asset(.+)", "s3://wellcome/path-to-origin-creds", 
+                    originStrategies.Single(os => os.ModelId == "basic_https").Id),
+                new CustomerOriginStrategy(customers.GetByName("iiifly").ModelId,
+                    102, "https://example.org/images/(.+)", "s3://test/path-to-origin-creds", 
+                    originStrategies.Single(os => os.ModelId == "basic_https").Id),
+                new CustomerOriginStrategy(customers.GetByName("iiifly").ModelId,
+                    103, "ftps://example.org/images/(.+)", "s3://test/path-to-ftp-creds",
+                    originStrategies.Single(os => os.ModelId == "ftps_creds").Id)
             };
         }
         
