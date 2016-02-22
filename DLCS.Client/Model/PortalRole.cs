@@ -32,7 +32,7 @@ namespace DLCS.Client.Model
     {
         public PortalRoleClass()
         {
-            BootstrapViaReflection(typeof (Customer));
+            BootstrapViaReflection(typeof (PortalRole));
         }
 
         public override void DefineOperations()
