@@ -34,6 +34,7 @@ namespace Hydra
         public bool ReadOnly { get; set; }
         public bool WriteOnly { get; set; }
         public string Range { get; set; }
+        public bool SetManually { get; set; }
     }
 
     /// <summary>
@@ -46,5 +47,7 @@ namespace Hydra
     /// Indicates that the property is a link to another resource, rather than a field of the current resource.
     /// </summary>
     public class HydraLinkAttribute : SupportedPropertyAttribute { }
+
+
     
 }

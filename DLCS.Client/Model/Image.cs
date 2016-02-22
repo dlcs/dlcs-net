@@ -195,17 +195,17 @@ namespace DLCS.Client.Model
         public string Roles { get; set; }
 
         [HydraLink(Description = "The batch this image was ingested in (most recently). Might be blank if the batch has been archived or the image as ingested in immediate mode.",
-            Range = "vocab:Batch", ReadOnly = true, WriteOnly = false)]
+            Range = "vocab:Batch", ReadOnly = true, WriteOnly = false, SetManually = false)]
         [JsonProperty(Order = 71, PropertyName = "batch")]
         public string Batch { get; set; }
         
         [HydraLink(Description = "The image optimisation policy used when this image was last processed (e.g., registered)",
-            Range = "vocab:ImageOptimisationPolicy", ReadOnly = true, WriteOnly = false)]
+            Range = "vocab:ImageOptimisationPolicy", ReadOnly = true, WriteOnly = false, SetManually = true)]
         [JsonProperty(Order = 80, PropertyName = "imageOptimisationPolicy")]
         public string ImageOptimisationPolicy { get; set; }
 
         [HydraLink(Description = "The thumbnail settings used when this image was last processed (e.g., registered)",
-            Range = "vocab:ThumbnailPolicy", ReadOnly = true, WriteOnly = false)]
+            Range = "vocab:ThumbnailPolicy", ReadOnly = true, WriteOnly = false, SetManually = true)]
         [JsonProperty(Order = 81, PropertyName = "thumbnailPolicy")]
         public string ThumbnailPolicy { get; set; }
 

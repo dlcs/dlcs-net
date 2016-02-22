@@ -97,10 +97,10 @@ namespace DLCS.Mock.ApiApp
         {
             return new List<OriginStrategy>
             {
-                new OriginStrategy("default", "No credentials over http/s"),
-                new OriginStrategy("basic_https", "Basic Auth over https"),
-                new OriginStrategy("ftps_creds", "FTPS with credentials"),
-                new OriginStrategy("s3", "Fetch from s3 bucket presenting DLCS identity"),
+                new OriginStrategy("default", "No credentials over http/s", false),
+                new OriginStrategy("basic_https", "Basic Auth over https", true),
+                new OriginStrategy("ftps_creds", "FTPS with credentials", true),
+                new OriginStrategy("s3", "Fetch from s3 bucket presenting DLCS identity", true),
             };
         }
 
@@ -132,6 +132,7 @@ namespace DLCS.Mock.ApiApp
                     imagesInBatch = new List<string>();
                 }
                 imagesInBatch.Add(image.Id);
+                image.Batch = currentBatch.Id;
             }
             batches.Add(currentBatch);
             batchImages.Add(currentBatch.Id, imagesInBatch);

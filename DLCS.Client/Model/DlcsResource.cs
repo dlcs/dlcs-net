@@ -32,7 +32,7 @@ namespace DLCS.Client.Model
                 if (jsonProp != null)
                 {
                     var hydraLink = attrs.OfType<HydraLinkAttribute>().SingleOrDefault();
-                    if (hydraLink != null)
+                    if (hydraLink != null && hydraLink.SetManually == false)
                     {
                         property.SetValue(this, Id + "/" + jsonProp.PropertyName);
                     }

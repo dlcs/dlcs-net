@@ -42,7 +42,7 @@ namespace DLCS.Client.Model
 
 
         [HydraLink(Description = "Link to the origin strategy definition that will be used if the regex is matched.",
-            Range = "vocab:OriginStrategy", ReadOnly = true, WriteOnly = false)]
+            Range = "vocab:OriginStrategy", ReadOnly = true, WriteOnly = false, SetManually = true)]
         [JsonProperty(Order = 17, PropertyName = "originStrategy")]
         public string OriginStrategy { get; set; }
 
@@ -50,7 +50,7 @@ namespace DLCS.Client.Model
         [RdfProperty(Description = "JSON object - credentials appropriate to the protocol, will vary. " +
                                    "These are stored in S3 and are not available via the API.",
             Range = Names.XmlSchema.String, ReadOnly = false, WriteOnly = false)]
-        [JsonProperty(Order = 13, PropertyName = "credentials")]
+        [JsonProperty(Order = 20, PropertyName = "credentials")]
         public string Credentials { get; set; }
     }
 
