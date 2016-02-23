@@ -1,6 +1,5 @@
 ﻿using DLCS.WebClient.Dlcs;
 using DLCS.WebClient.Model;
-using DLCS.WebClient.Model.Images;
 
 namespace DLCS.WebClient
 {

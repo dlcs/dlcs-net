@@ -1,5 +1,4 @@
-﻿using DLCS.WebClient.Model.Images;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace DLCS.WebClient.Model
 {

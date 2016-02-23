@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace DLCS.WebClient.Model.Images
+namespace DLCS.WebClient.Model
 {
     public class Image : JSONLDBase
     {

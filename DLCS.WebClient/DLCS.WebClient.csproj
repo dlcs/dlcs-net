@@ -53,16 +53,10 @@
     <Compile Include="Model\HydraCollection.cs" />
     <Compile Include="IDlcs.cs" />
     <Compile Include="Model\Batch.cs" />
-    <Compile Include="Model\Images\Image.cs" />
-    <Compile Include="Model\Images\ImageBatchRegistrationResponse.cs" />
-    <Compile Include="Model\Images\ImageRegistrationResponse.cs" />
-    <Compile Include="Model\Images\ImageState.cs" />
-    <Compile Include="Model\Images\ImageStateEnum.cs" />
-    <Compile Include="Model\Images\ImageStateQueryResponse.cs" />
+    <Compile Include="Model\Image.cs" />
     <Compile Include="Model\JSONLDBase.cs" />
     <Compile Include="Operation.cs" />
-    <Compile Include="PartialCollectionView.cs" />
-    <Compile Include="ProcessingStatus.cs" />
+    <Compile Include="Model\PartialCollectionView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\WebClientProvider.cs" />
   </ItemGroup>

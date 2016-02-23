@@ -1,7 +1,6 @@
-﻿using DLCS.WebClient.Model;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace DLCS.WebClient
+namespace DLCS.WebClient.Model
 {
     public class PartialCollectionView : JSONLDBase
     {

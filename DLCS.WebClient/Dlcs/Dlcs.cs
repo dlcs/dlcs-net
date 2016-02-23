@@ -4,11 +4,10 @@ using System.Net;
 using System.Text;
 using DLCS.WebClient.Config;
 using DLCS.WebClient.Model;
-using DLCS.WebClient.Model.Images;
 using DLCS.WebClient.Util;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using Image = DLCS.WebClient.Model.Images.Image;
+using Image = DLCS.WebClient.Model.Image;
 
 namespace DLCS.WebClient.Dlcs
 {
