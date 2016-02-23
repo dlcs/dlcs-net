@@ -3,7 +3,8 @@ using System.Collections.Specialized;
 using System.Net;
 using System.Text;
 using DLCS.WebClient.Config;
-using DLCS.WebClient.Interface;
+using DLCS.WebClient.Model;
+using DLCS.WebClient.Model.Images;
 using DLCS.WebClient.Util;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -16,8 +17,6 @@ namespace DLCS.WebClient.Dlcs
         internal readonly DlcsConfig DlcsConfig;
         internal readonly WebClientConfig WebClientConfig;
         private readonly JsonSerializerSettings _jsonSerializerSettings;
-
-        private readonly Queue _queue;
 
         public Dlcs(
             DlcsConfig dlcsConfig,
@@ -36,13 +35,6 @@ namespace DLCS.WebClient.Dlcs
                 NullValueHandling = NullValueHandling.Ignore,
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
             };
-
-            _queue = new Queue(this);
-        }
-
-        public IQueue Queue
-        {
-            get { return _queue; }
         }
         
 
@@ -92,9 +84,12 @@ namespace DLCS.WebClient.Dlcs
             {
                 try
                 {
-                    operation.RequestObject = requestObject;
-                    operation.RequestJson = JsonConvert.SerializeObject(
-                        operation.RequestObject, Formatting.Indented, _jsonSerializerSettings);
+                    if (requestObject != null)
+                    {
+                        operation.RequestObject = requestObject;
+                        operation.RequestJson = JsonConvert.SerializeObject(
+                            operation.RequestObject, Formatting.Indented, _jsonSerializerSettings);
+                    }
                     AddHeaders(wc);
                     switch (operation.HttpMethod)
                     {
@@ -102,7 +97,10 @@ namespace DLCS.WebClient.Dlcs
                             operation.ResponseJson = wc.UploadString(operation.Uri, "POST", operation.RequestJson);
                             break;
                         case "GET":
-                            wc.QueryString = new NameValueCollection { { "q", operation.RequestJson } };
+                            if (requestObject != null)
+                            {
+                                wc.QueryString = new NameValueCollection {{"q", operation.RequestJson}};
+                            }
                             operation.ResponseJson = wc.DownloadString(operation.Uri);
                             break;
                         case "PUT":
@@ -115,7 +113,6 @@ namespace DLCS.WebClient.Dlcs
                         default:
                             throw new NotImplementedException("Unknown HTTP Method " + operation.HttpMethod);
                     }
-                    operation.ResponseJson = wc.UploadString(operation.Uri, "POST", operation.RequestJson);
                     operation.ResponseObject = JsonConvert.DeserializeObject<TResponse>(operation.ResponseJson);
                 }
                 catch (Exception ex)
@@ -128,24 +125,20 @@ namespace DLCS.WebClient.Dlcs
 
 
 
-        public Operation<ImageQuery, Image[]> GetImages(ImageQuery query)
+        public Operation<ImageQuery, HydraImageCollection> GetImages(ImageQuery query, int defaultSpace)
         {
-            // can you do a query across spaces? Should be able to.
-            // If so, where do you submit the GET to?
-            // GET /customer returns a customer model; should it return the first page of images from across the spaces?
-            // doesn't feel right - but what do you send the GET to?
-            // GET /customer/allImages maybe (another reserved word that spaces can't be called)
-
-            // If space is specified then it's just GET /customer/space?q={...imageQuery...}
-            // TODO- this is temporary, talk over with Adam
-            var imageQueryUri = DlcsConfig.ApiEntryPoint + DlcsConfig.CustomerId;
-            if (query.Space.HasValue)
-            {
-                imageQueryUri += "/" + query.Space.Value;
-            }
-            return GetOperation<ImageQuery, Image[]>(query, new Uri(imageQueryUri));
+            int space = defaultSpace;
+            if (query.Space.HasValue) space = query.Space.Value;
+            var imageQueryUri = string.Format("{0}customers/{1}/spaces/{2}/images", 
+                DlcsConfig.ApiEntryPoint, DlcsConfig.CustomerId, space);
+            return GetOperation<ImageQuery, HydraImageCollection>(query, new Uri(imageQueryUri));
         }
 
+        public Operation<ImageQuery, HydraImageCollection> GetImages(string nextUri)
+        {
+            return GetOperation<ImageQuery, HydraImageCollection>(null, new Uri(nextUri));
+        }
+        
         private static Error GetError(Exception ex)
         {
             if (ex is WebException)
@@ -171,6 +164,54 @@ namespace DLCS.WebClient.Dlcs
                 Status = 0,
                 Message = ex.Message
             };
+        }
+
+
+        private static Uri _imageQueueUri;
+        private void InitQueue()
+        {
+            if (_imageQueueUri == null)
+            {
+                // TODO: At this point we would work out RESTfully where the queue for this customer is
+                // and cache that for a bit - we assume the API stays reasonably stable.
+                _imageQueueUri = new Uri(string.Format("{0}customers/{1}/queue", DlcsConfig.ApiEntryPoint, DlcsConfig.CustomerId));
+            }
+        }
+
+
+
+        public Operation<HydraImageCollection, Batch> RegisterImages(HydraImageCollection images)
+        {
+            InitQueue();
+            return PostOperation<HydraImageCollection, Batch>(images, _imageQueueUri);
+        }
+
+        
+        public string GetRoleUri(string accessCondition)
+        {
+            // https://api.dlcs.io/customers/1/roles/requiresRegistration
+            return string.Format("{0}customers/{1}/roles/{2}", DlcsConfig.ApiEntryPoint, DlcsConfig.CustomerId, ToCamelCase(accessCondition.Trim()));
+        }
+
+
+        /// <summary>
+        /// converts "Some list of strings" to "someListOfStrings"
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static string ToCamelCase(string s)
+        {
+            var sb = new StringBuilder();
+            bool previousWasSpace = false;
+            foreach (char c in s.Trim())
+            {
+                if (Char.IsLetterOrDigit(c))
+                {
+                    sb.Append(previousWasSpace ? Char.ToUpperInvariant(c) : c);
+                }
+                previousWasSpace = Char.IsWhiteSpace(c);
+            }
+            return sb.ToString();
         }
     }
 }
