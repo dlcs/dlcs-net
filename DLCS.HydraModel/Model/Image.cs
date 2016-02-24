@@ -189,10 +189,11 @@ namespace DLCS.HydraModel.Model
 
         // Hydra Link properties
         
-        [HydraLink(Description = "The role or roles that a user must possess to view this image above maxUnauthorised",
-            Range = Names.Hydra.Collection, ReadOnly = false, WriteOnly = false)]
+        [HydraLink(Description = "The role or roles that a user must possess to view this image above maxUnauthorised. " +
+                                 "These are URIs of roles e.g., https://api.dlcs.io/customers/1/roles/requiresRegistration",
+            Range = "vocab:Role", ReadOnly = false, WriteOnly = false)]
         [JsonProperty(Order = 70, PropertyName = "roles")]
-        public string Roles { get; set; }
+        public string[] Roles { get; set; }
 
         [HydraLink(Description = "The batch this image was ingested in (most recently). Might be blank if the batch has been archived or the image as ingested in immediate mode.",
             Range = "vocab:Batch", ReadOnly = true, WriteOnly = false, SetManually = false)]
