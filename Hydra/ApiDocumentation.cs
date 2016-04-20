@@ -27,6 +27,7 @@ namespace Hydra
             Id = id;
             Context = new Dictionary<string, object>
             {
+                {"hydra", "http://www.w3.org/ns/hydra/core#"},
                 {"vocab", vocab},
                 {"ApiDocumentation", "hydra:ApiDocumentation"},
                 {"property", new Link {Id = "hydra:property"}},

@@ -191,7 +191,7 @@ namespace DLCS.HydraModel.Model
         
         [HydraLink(Description = "The role or roles that a user must possess to view this image above maxUnauthorised. " +
                                  "These are URIs of roles e.g., https://api.dlcs.io/customers/1/roles/requiresRegistration",
-            Range = "vocab:Role", ReadOnly = false, WriteOnly = false)]
+            Range = "vocab:Role", ReadOnly = false, WriteOnly = false, SetManually = true)]
         [JsonProperty(Order = 70, PropertyName = "roles")]
         public string[] Roles { get; set; }
 
