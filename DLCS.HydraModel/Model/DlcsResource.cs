@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using DLCS.HydraModel.Config;
 using Hydra;
 using Newtonsoft.Json;
@@ -11,7 +12,21 @@ namespace DLCS.HydraModel.Model
         public void Init(bool setLinks, params object[] urlParams)
         {
             var hydraClassAttr = GetType().GetCustomAttributes(true).OfType<HydraClassAttribute>().Single();
-            Id = BaseUrl + string.Format(hydraClassAttr.UriTemplate, urlParams);
+            string[] uriTemplates = hydraClassAttr.UriTemplate.Split(new [] {',', ' '},
+                StringSplitOptions.RemoveEmptyEntries);
+            string uriTemplate = "";
+            if (uriTemplates.Length > 0)
+            {
+                foreach (var template in uriTemplates)
+                {
+                    if (template.Count(c => c == '{') == urlParams.Length)
+                    {
+                        uriTemplate = template;
+                        break;
+                    }
+                }
+            }
+            Id = BaseUrl + string.Format(uriTemplate, urlParams);
             if (setLinks)
             {
                 SetHydraLinkProperties();

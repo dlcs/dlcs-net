@@ -21,5 +21,8 @@ namespace Hydra.Model
 
         [JsonProperty(Order = 12, PropertyName = "writeonly")]
         public bool? WriteOnly { get; set; }
+
+        [JsonIgnore]
+        public string UnstableNote { get; set; }
     }
 }

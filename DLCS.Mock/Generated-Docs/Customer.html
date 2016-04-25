@@ -192,3 +192,42 @@
 
 <pre>/customers/{0}/spaces</pre><br/>
 
+
+<h3>keys (🔗)</h3>
+
+<p>Api keys allocated to this customer. The accompanying secret is only available at creation time. To obtain a key and a secret, make an empty POST to this collection with administrator privileges and the returned Key object will include the generates secret.</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Customer</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
+</table>
+
+
+<pre>/customers/{0}/keys</pre><br/>
+
+
+<h3>storage (🔗)</h3>
+
+<p>Storage policy for the Customer</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Customer</td><td>vocab:CustomerStorage</td><td>True</td><td>False</td></tr>
+</table>
+
+
+<pre>/customers/{0}/storage</pre><br/>
+
+
+<h3>acceptedAgreement </h3>
+
+<p>Has the customer accepted the EULA?</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Customer</td><td>xsd:boolean</td><td>True</td><td>False</td></tr>
+</table>
+

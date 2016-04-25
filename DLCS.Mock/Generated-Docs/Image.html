@@ -36,17 +36,6 @@
 </table>
 
 
-<h3>space</h3>
-
-<p>The identifier for the space within the customer - its URI component</p>
-
-<table><tr>
-<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
-<tr>
-<td>vocab:Image</td><td>xsd:integer</td><td>False</td><td>False</td></tr>
-</table>
-
-
 <h3>infoJson</h3>
 
 <p>info.json URI - where the IIIF Image API is exposed for this image</p>
@@ -291,12 +280,12 @@
 
 <h3>roles (🔗)</h3>
 
-<p>The role or roles that a user must possess to view this image above maxUnauthorised</p>
+<p>The role or roles that a user must possess to view this image above maxUnauthorised. These are URIs of roles e.g., https://api.dlcs.io/customers/1/roles/requiresRegistration</p>
 
 <table><tr>
 <th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
 <tr>
-<td>vocab:Image</td><td>hydra:Collection</td><td>False</td><td>False</td></tr>
+<td>vocab:Image</td><td>vocab:Role</td><td>False</td><td>False</td></tr>
 </table>
 
 

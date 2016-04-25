@@ -47,7 +47,7 @@ namespace DLCS.HydraModel.Model
         public string OriginStrategy { get; set; }
 
 
-        [RdfProperty(Description = "JSON object - credentials appropriate to the protocol, will vary. " +
+        [HydraLink(Description = "JSON object - credentials appropriate to the protocol, will vary. " +
                                    "These are stored in S3 and are not available via the API.",
             Range = Names.XmlSchema.String, ReadOnly = false, WriteOnly = false)]
         [JsonProperty(Order = 20, PropertyName = "credentials")]
@@ -66,6 +66,17 @@ namespace DLCS.HydraModel.Model
             SupportedOperations = CommonOperations.GetStandardResourceOperations(
                 "_:customer_originStrategy_", "Origin Strategy", Id,
                 "GET", "PUT", "PATCH", "DELETE");
+
+
+            GetHydraLinkProperty("credentials").SupportedOperations = new Operation[] {new Operation()
+            {
+                Id = "_:customer_originStrategy_credentials_upsert",
+                Method = "PUT",
+                Label = "create or replace customer credential objedt",
+                Expects = "vocab:Credentials",
+                Returns = "vocab:Credentials",
+                StatusCodes =new[] {new Status { StatusCode = 201, Description = "Created"} }
+            } };
         }
     }
 }

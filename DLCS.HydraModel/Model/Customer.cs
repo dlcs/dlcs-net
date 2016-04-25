@@ -80,6 +80,25 @@ namespace DLCS.HydraModel.Model
             Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 18, PropertyName = "spaces")]
         public string Spaces { get; set; }
+
+
+        [HydraLink(Description = "Api keys allocated to this customer. The accompanying secret is only available at creation time. " +
+                                 "To obtain a key and a secret, make an empty POST to this collection with administrator privileges and the returned " +
+                                 "Key object will include the generates secret.",
+            Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]
+        [JsonProperty(Order = 19, PropertyName = "keys")]
+        public string Keys { get; set; }
+
+
+        [HydraLink(Description = "Storage policy for the Customer",
+            Range = "vocab:CustomerStorage", ReadOnly = true, WriteOnly = false)]
+        [JsonProperty(Order = 28, PropertyName = "storage")]
+        public string Storage { get; set; }
+
+        [RdfProperty(Description = "Has the customer accepted the EULA?",
+            Range = Names.XmlSchema.Boolean, ReadOnly = true, WriteOnly = false)]
+        [JsonProperty(Order = 33, PropertyName = "acceptedAgreement ")]
+        public bool AcceptedAgreement { get; set; }
     }
     
     public class CustomerClass : Class

@@ -180,3 +180,43 @@ Collection of all the Space resources associated with your customer. A space all
 /customers/{0}/spaces
 ```
 
+
+### keys (🔗)
+
+Api keys allocated to this customer. The accompanying secret is only available at creation time. To obtain a key and a secret, make an empty POST to this collection with administrator privileges and the returned Key object will include the generates secret.
+
+
+|domain|range|readonly|writeonly|
+|--|--|--|--|
+|vocab:Customer|hydra:Collection|True|False|
+
+
+```
+/customers/{0}/keys
+```
+
+
+### storage (🔗)
+
+Storage policy for the Customer
+
+
+|domain|range|readonly|writeonly|
+|--|--|--|--|
+|vocab:Customer|vocab:CustomerStorage|True|False|
+
+
+```
+/customers/{0}/storage
+```
+
+
+### acceptedAgreement 
+
+Has the customer accepted the EULA?
+
+
+|domain|range|readonly|writeonly|
+|--|--|--|--|
+|vocab:Customer|xsd:boolean|True|False|
+

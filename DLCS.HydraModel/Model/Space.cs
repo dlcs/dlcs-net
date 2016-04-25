@@ -73,6 +73,11 @@ namespace DLCS.HydraModel.Model
             Range = "vocab:Metadata", ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 24, PropertyName = "metadata")]
         public string Metadata { get; set; }
+
+        [HydraLink(Description = "Storage policy for the space", 
+            Range = "vocab:CustomerStorage", ReadOnly = true, WriteOnly = false)]
+        [JsonProperty(Order = 28, PropertyName = "storage")]
+        public string Storage { get; set; }
     }
 
     public class SpaceClass : Class

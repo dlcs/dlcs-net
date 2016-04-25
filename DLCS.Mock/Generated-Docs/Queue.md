@@ -70,3 +70,43 @@ Collection (paged). Merged view of images on the queue, across batches. Typicall
 |--|--|--|--|--|
 |GET|Retrieves all images across batches for customer| |hydra:Collection| |
 
+
+### recent (🔗)
+
+Collection (paged) of finished batches which are not marked as superseded. Most recent first.
+
+
+|domain|range|readonly|writeonly|
+|--|--|--|--|
+|vocab:Queue|hydra:Collection|True|False|
+
+
+```
+/customers/{0}/queue/recent
+```
+
+
+|Method|Label|Expects|Returns|Statuses|
+|--|--|--|--|--|
+|GET|Retrieves the recent (non superseded) batches for customer.| |hydra:Collection| |
+
+
+### active (🔗)
+
+Collection (paged) of batches that are currently in process.
+
+
+|domain|range|readonly|writeonly|
+|--|--|--|--|
+|vocab:Queue|hydra:Collection|True|False|
+
+
+```
+/customers/{0}/queue/active
+```
+
+
+|Method|Label|Expects|Returns|Statuses|
+|--|--|--|--|--|
+|GET|Retrieves the customer's currently running batches.| |hydra:Collection| |
+

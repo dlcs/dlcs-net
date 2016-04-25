@@ -15,6 +15,9 @@ namespace DLCS.HydraModel.Model
         [JsonIgnore]
         public int CustomerId { get; set; }
 
+        [JsonIgnore]
+        public int Space { get; set; }
+
         public Image()
         {
         }
@@ -64,10 +67,6 @@ namespace DLCS.HydraModel.Model
         [JsonProperty(Order = 10, PropertyName = "modelId")]
         public string ModelId { get; set; }
 
-        [RdfProperty(Description = "The identifier for the space within the customer - its URI component",
-            Range = Names.XmlSchema.Integer, ReadOnly = false, WriteOnly = false)]
-        [JsonProperty(Order = 10, PropertyName = "space")]
-        public int Space { get; set; }
 
         [RdfProperty(Description = "info.json URI - where the IIIF Image API is exposed for this image",
             Range = Names.XmlSchema.String, ReadOnly = false, WriteOnly = false)]

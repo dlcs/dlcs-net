@@ -50,7 +50,7 @@
 <pre>/customers/{0}/originStrategies/{1}/originStrategy</pre><br/>
 
 
-<h3>credentials</h3>
+<h3>credentials (🔗)</h3>
 
 <p>JSON object - credentials appropriate to the protocol, will vary. These are stored in S3 and are not available via the API.</p>
 
@@ -58,5 +58,15 @@
 <th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
 <tr>
 <td>vocab:CustomerOriginStrategy</td><td>xsd:string</td><td>False</td><td>False</td></tr>
+</table>
+
+
+<pre>/customers/{0}/originStrategies/{1}/credentials</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Statuses</th></tr>
+<tr>
+<td>PUT</td><td>create or replace customer credential objedt</td><td>vocab:Credentials</td><td>vocab:Credentials</td><td>201 Created</td></tr>
 </table>
 

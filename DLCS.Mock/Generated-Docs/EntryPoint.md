@@ -119,3 +119,23 @@ List of all the different roles available to portal users - i.e., the small numb
 |--|--|--|--|--|
 |GET|Retrieves available thumbnail polices - a record of the thumbnails created for an image.| |hydra:Collection| |
 
+
+### storagePolicies (🔗)
+
+Available storage policies that can be associated with a Customer or a Space. They determine the number of images and storage capacity permitted to the Customer or Space.
+
+
+|domain|range|readonly|writeonly|
+|--|--|--|--|
+|vocab:EntryPoint|hydra:Collection|True|False|
+
+
+```
+/storagePolicies
+```
+
+
+|Method|Label|Expects|Returns|Statuses|
+|--|--|--|--|--|
+|GET|Retrieves available storage polices - maximum image count and storage usage.| |hydra:Collection| |
+

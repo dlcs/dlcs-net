@@ -48,7 +48,7 @@ Link to the origin strategy definition that will be used if the regex is matched
 ```
 
 
-### credentials
+### credentials (🔗)
 
 JSON object - credentials appropriate to the protocol, will vary. These are stored in S3 and are not available via the API.
 
@@ -56,4 +56,14 @@ JSON object - credentials appropriate to the protocol, will vary. These are stor
 |domain|range|readonly|writeonly|
 |--|--|--|--|
 |vocab:CustomerOriginStrategy|xsd:string|False|False|
+
+
+```
+/customers/{0}/originStrategies/{1}/credentials
+```
+
+
+|Method|Label|Expects|Returns|Statuses|
+|--|--|--|--|--|
+|PUT|create or replace customer credential objedt|vocab:Credentials|vocab:Credentials|201 Created|
 

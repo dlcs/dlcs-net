@@ -41,6 +41,12 @@ namespace DLCS.HydraModel.Model
             Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 15, PropertyName = "thumbnailPolicies")]
         public string ThumbnailPolicies { get; set; }
+
+        [HydraLink(Description = "Available storage policies that can be associated with a Customer or a Space. They determine the " +
+                                 "number of images and storage capacity permitted to the Customer or Space.",
+            Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]
+        [JsonProperty(Order = 18, PropertyName = "storagePolicies")]
+        public string StoragePolicies { get; set; }
     }
 
     public class EntryPointClass : Class
@@ -120,6 +126,18 @@ namespace DLCS.HydraModel.Model
                     Id = "_:thumbnailPolicy_collection_retrieve",
                     Method = "GET",
                     Label = "Retrieves available thumbnail polices - a record of the thumbnails created for an image.",
+                    Returns = Names.Hydra.Collection
+                }
+            };
+
+            var storagePolicies = GetHydraLinkProperty("storagePolicies");
+            storagePolicies.SupportedOperations = new[]
+            {
+                new Operation
+                {
+                    Id = "_:storagePolicy_collection_retrieve",
+                    Method = "GET",
+                    Label = "Retrieves available storage polices - maximum image count and storage usage.",
                     Returns = Names.Hydra.Collection
                 }
             };

@@ -50,11 +50,14 @@
     <Compile Include="Model\Batch.cs" />
     <Compile Include="Model\CommonOperations.cs" />
     <Compile Include="Model\Customer.cs" />
+    <Compile Include="Model\CustomerStorage.cs" />
     <Compile Include="Model\DlcsClassContext.cs" />
     <Compile Include="Model\EntryPoint.cs" />
     <Compile Include="Model\Image.cs" />
     <Compile Include="Model\ImageOptimisationPolicy.cs" />
     <Compile Include="Model\DlcsResource.cs" />
+    <Compile Include="Model\ImageStorage.cs" />
+    <Compile Include="Model\Key.cs" />
     <Compile Include="Model\Query\ImageQuery.cs" />
     <Compile Include="Model\NamedQuery.cs" />
     <Compile Include="Model\CustomerOriginStrategy.cs" />
@@ -64,6 +67,7 @@
     <Compile Include="Model\Queue.cs" />
     <Compile Include="Model\RoleProvider.cs" />
     <Compile Include="Model\Space.cs" />
+    <Compile Include="Model\StoragePolicy.cs" />
     <Compile Include="Model\ThumbnailPolicy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Role.cs" />

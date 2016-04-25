@@ -40,6 +40,18 @@ namespace DLCS.HydraModel.Model
         [JsonProperty(Order = 13, PropertyName = "images")]
         public string Images { get; set; }
 
+
+        [HydraLink(Description = "Collection (paged) of finished batches which are not marked as superseded. Most recent first.",
+            Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]
+        [JsonProperty(Order = 14, PropertyName = "recent")]
+        public string Recent { get; set; }
+
+
+        [HydraLink(Description = "Collection (paged) of batches that are currently in process.",
+            Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]
+        [JsonProperty(Order = 15, PropertyName = "active")]
+        public string Active { get; set; }
+
     }
 
 
@@ -63,6 +75,29 @@ namespace DLCS.HydraModel.Model
                     Id = "_:customer_queue_batch_collection_retrieve",
                     Method = "GET",
                     Label = "Retrieves all batches for customer",
+                    Returns = Names.Hydra.Collection
+                }
+            };
+
+            GetHydraLinkProperty("recent").SupportedOperations = new[]
+            {
+                new Operation
+                {
+                    Id = "_:customer_queue_recent_collection_retrieve",
+                    Method = "GET",
+                    Label = "Retrieves the recent (non superseded) batches for customer.",
+                    Returns = Names.Hydra.Collection
+                }
+            };
+
+
+            GetHydraLinkProperty("active").SupportedOperations = new[]
+            {
+                new Operation
+                {
+                    Id = "_:customer_queue_active_collection_retrieve",
+                    Method = "GET",
+                    Label = "Retrieves the customer's currently running batches.",
                     Returns = Names.Hydra.Collection
                 }
             };

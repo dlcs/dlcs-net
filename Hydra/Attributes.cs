@@ -15,6 +15,11 @@ namespace Hydra
         }
     }
 
+    public class UnstableAttribute : Attribute
+    {
+        public string Note { get; set; }
+    }
+
     /// <summary>
     /// Indicates that the class is fully described as a Hydra resource by the referenced Class
     /// </summary>

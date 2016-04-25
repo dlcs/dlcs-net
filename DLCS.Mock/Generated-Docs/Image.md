@@ -33,16 +33,6 @@ The identifier for the image within the space - its URI component. TODO - this s
 |vocab:Image|xsd:string|False|False|
 
 
-### space
-
-The identifier for the space within the customer - its URI component
-
-
-|domain|range|readonly|writeonly|
-|--|--|--|--|
-|vocab:Image|xsd:integer|False|False|
-
-
 ### infoJson
 
 info.json URI - where the IIIF Image API is exposed for this image
@@ -265,12 +255,12 @@ Number reference 3
 
 ### roles (🔗)
 
-The role or roles that a user must possess to view this image above maxUnauthorised
+The role or roles that a user must possess to view this image above maxUnauthorised. These are URIs of roles e.g., https://api.dlcs.io/customers/1/roles/requiresRegistration
 
 
 |domain|range|readonly|writeonly|
 |--|--|--|--|
-|vocab:Image|hydra:Collection|False|False|
+|vocab:Image|vocab:Role|False|False|
 
 
 ```

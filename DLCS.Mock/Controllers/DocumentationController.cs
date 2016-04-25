@@ -45,7 +45,7 @@ namespace DLCS.Mock.Controllers
                 {
                     if (_supportedClasses == null)
                     {
-                        _supportedClasses = AttributeUtil.GetAttributeMap("DLCS.Client", typeof(HydraClassAttribute));
+                        _supportedClasses = AttributeUtil.GetAttributeMap("DLCS.HydraModel", typeof(HydraClassAttribute));
                     }
                 }
             }
@@ -85,6 +85,10 @@ namespace DLCS.Mock.Controllers
                 var sb = new StringBuilder();
                 sb.Heading(format, 1, clazz.Label);
                 sb.Para(format, clazz.Description);
+                if (!string.IsNullOrWhiteSpace(clazz.UnstableNote))
+                {
+                    sb.Para(format, clazz.UnstableNote, true);
+                }
                 sb.Code(format, clazz.UriTemplate);
                 if (clazz.SupportedOperations != null && clazz.SupportedOperations.Length > 0)
                 {
@@ -107,6 +111,10 @@ namespace DLCS.Mock.Controllers
                             sb.Heading(format, 3, prop.Title);
                         }
                         sb.Para(format, prop.Description);
+                        if (!string.IsNullOrWhiteSpace(prop.UnstableNote))
+                        {
+                            sb.Para(format, prop.UnstableNote, true);
+                        }
                         sb.StartTable(format, "domain", "range", "readonly", "writeonly");
                         sb.TableRow(format, NameSpace(prop.Property.Domain), NameSpace(prop.Property.Range), prop.ReadOnly.ToString(), prop.WriteOnly.ToString());
                         sb.EndTable(format);
@@ -187,15 +195,30 @@ namespace DLCS.Mock.Controllers
             sb.AppendLine();
         }
 
-        public static void Para(this StringBuilder sb, string format, string text)
+        public static void Para(this StringBuilder sb, string format, string text, bool bold=false)
         {
             if (format == Markdown)
             {
-                sb.AppendLine(text);
+                if (bold)
+                {
+                    sb.AppendFormat("**{0}**", text);
+                    sb.AppendLine();
+                }
+                else
+                {
+                    sb.AppendLine(text);
+                }
             }
             else
             {
-                sb.AppendFormat("<p>{0}</p>", text);
+                if (bold)
+                {
+                    sb.AppendFormat("<p><b>{0}</b></p>", text);
+                }
+                else
+                {
+                    sb.AppendFormat("<p>{0}</p>", text);
+                }
             }
             sb.AppendLine();
         }

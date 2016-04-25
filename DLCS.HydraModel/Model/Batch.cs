@@ -10,6 +10,7 @@ namespace DLCS.HydraModel.Model
                          "or to update your internal systems with the status of images on the DLCS." +
                          " The DLCS might clear out old batches after a specific time interval.",
            UriTemplate = "/customers/{0}/queue/batches/{1}")]
+    [Unstable(Note = "Still under development")]
     public class Batch : DlcsResource
     {
         [JsonIgnore]
@@ -58,6 +59,13 @@ namespace DLCS.HydraModel.Model
         [JsonProperty(Order = 14, PropertyName = "errors")]
         public int Errors { get; set; }
 
+        [RdfProperty(Description = "Has this batch been superseded by another? An image can only be associated with one active batch at a time. " +
+                                   "If no images are associated with this batch, then it has been superseded by one or more later batches. The DLCS does not" +
+                                   "update this property automatically, you can force an update by POSTing to the /test resource of a batch.",
+            Range = Names.XmlSchema.Boolean, ReadOnly = true, WriteOnly = false)]
+        [JsonProperty(Order = 14, PropertyName = "superseded")]
+        public bool Superseded { get; set; }
+
         [RdfProperty(Description = "Estimated Completion (best guess as to when this batch might be finished)",
             Range = Names.XmlSchema.DateTime, ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 15, PropertyName = "estCompletion")]
@@ -77,6 +85,13 @@ namespace DLCS.HydraModel.Model
             Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 20, PropertyName = "errorImages")]
         public string ErrorImages { get; set; }
+
+        [HydraLink(Description = "POST to this to force an update of the batch's superseded property. " +
+                                 "Returns JSON object with single success property (boolean). ",
+            Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]
+        [JsonProperty(Order = 22, PropertyName = "test")]
+        [Unstable(Note = "Be careful out there")]
+        public string Test { get; set; }
     }
 
     public class BatchClass : Class

@@ -17,12 +17,12 @@ namespace DLCS.HydraModel.Model
         {
         }
 
-        public ThumbnailPolicy(string imageOptimisationPolicyId, string name, int[] sizes)
+        public ThumbnailPolicy(string thumbnailPolicyId, string name, int[] sizes)
         {
-            ModelId = imageOptimisationPolicyId;
+            ModelId = thumbnailPolicyId;
             Name = name;
             Sizes = sizes;
-            Init(true, imageOptimisationPolicyId);
+            Init(true, thumbnailPolicyId);
         }
 
         [RdfProperty(Description = "The human readable name of the image policy",

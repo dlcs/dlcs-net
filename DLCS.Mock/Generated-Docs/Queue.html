@@ -73,3 +73,45 @@
 <td>GET</td><td>Retrieves all images across batches for customer</td><td></td><td>hydra:Collection</td><td></td></tr>
 </table>
 
+
+<h3>recent (🔗)</h3>
+
+<p>Collection (paged) of finished batches which are not marked as superseded. Most recent first.</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Queue</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
+</table>
+
+
+<pre>/customers/{0}/queue/recent</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Statuses</th></tr>
+<tr>
+<td>GET</td><td>Retrieves the recent (non superseded) batches for customer.</td><td></td><td>hydra:Collection</td><td></td></tr>
+</table>
+
+
+<h3>active (🔗)</h3>
+
+<p>Collection (paged) of batches that are currently in process.</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:Queue</td><td>hydra:Collection</td><td>True</td><td>False</td></tr>
+</table>
+
+
+<pre>/customers/{0}/queue/active</pre><br/>
+
+
+<table><tr>
+<th>Method</th><th>Label</th><th>Expects</th><th>Returns</th><th>Statuses</th></tr>
+<tr>
+<td>GET</td><td>Retrieves the customer's currently running batches.</td><td></td><td>hydra:Collection</td><td></td></tr>
+</table>
+

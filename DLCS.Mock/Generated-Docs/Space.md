@@ -134,3 +134,18 @@ Metadata options for the space
 |--|--|--|--|--|
 |GET|Retrieve the metadata| |vocab:Metadata|200 OK|
 
+
+### storage (🔗)
+
+Storage policy for the space
+
+
+|domain|range|readonly|writeonly|
+|--|--|--|--|
+|vocab:Space|vocab:CustomerStorage|True|False|
+
+
+```
+/customers/{0}/spaces/{1}/storage
+```
+

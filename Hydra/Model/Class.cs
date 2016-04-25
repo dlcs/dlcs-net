@@ -24,6 +24,9 @@ namespace Hydra.Model
         [JsonProperty(Order = 13, PropertyName = "description")]
         public string Description { get; set; }
 
+        [JsonIgnore]
+        public string UnstableNote { get; set; }
+
         [JsonProperty(Order = 20, PropertyName = "supportedOperation")]
         public Operation[] SupportedOperations { get; set; }
 
@@ -44,6 +47,27 @@ namespace Hydra.Model
         [JsonIgnore]
         public string UriTemplate { get; set; }
 
+        private string GetUnstableNote(Type resourceType)
+        {
+            var attr = (UnstableAttribute)resourceType
+                .GetCustomAttributes(typeof(UnstableAttribute), true).FirstOrDefault();
+            return GetUnstableNote(attr);
+        }
+
+        private static string GetUnstableNote(UnstableAttribute attr)
+        {
+            if (attr != null)
+            {
+                string s = "UNSTABLE";
+                if (!string.IsNullOrWhiteSpace(attr.Note))
+                {
+                    s += " " + attr.Note;
+                }
+                return s;
+            }
+            return null;
+        }
+
         /// <summary>
         /// I'm trying to strike a balance between excessive reflection and ease of coding
         /// </summary>
@@ -56,6 +80,7 @@ namespace Hydra.Model
             Label = resourceType.Name;
             Description = classAttr.Description;
             UriTemplate = classAttr.UriTemplate;
+            UnstableNote = GetUnstableNote(resourceType);
 
             // We won't get Supported Operations by reflecting on attributes - hard to read
             // Requring it there does not involve any duplication, which is the main reason
@@ -95,6 +120,11 @@ namespace Hydra.Model
                         prop.Property.Description = propAttribute.Description;
                         prop.Property.Domain = Id;
                         prop.Property.Range = propAttribute.Range;
+                        var unstableAttr = attrs.OfType<UnstableAttribute>().SingleOrDefault();
+                        if (unstableAttr != null)
+                        {
+                            prop.UnstableNote = GetUnstableNote(unstableAttr);
+                        }
                         supportedProperties.Add(prop);
                     }
                 }
