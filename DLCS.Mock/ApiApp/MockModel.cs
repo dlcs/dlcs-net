@@ -223,8 +223,8 @@ namespace DLCS.Mock.ApiApp
         {
             return new List<NamedQuery>
             {
-                new NamedQuery(customers.GetByName("iiifly").ModelId, "bob", "{ \"data\": \"data\" }"),
-                new NamedQuery(customers.GetByName("iiifly").ModelId, "manifest", "{ \"data\": \"data\" }"),
+                new NamedQuery(customers.GetByName("iiifly").ModelId, "nq1", "bob", false, "template1-here"),
+                new NamedQuery(customers.GetByName("iiifly").ModelId, "nq2", "manifest", false, "template2-here")
             };
         }
 

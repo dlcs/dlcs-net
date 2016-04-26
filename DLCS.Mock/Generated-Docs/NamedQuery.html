@@ -14,6 +14,7 @@ https://dlcs.io/resources/{customer}/{named-query}/{space}/{string1}
 ```
 
 This customer (iiifly) has a named query called 'manifest' that takes two parameters - the space and the string1 metadata field. The query is internally defined to use an additional field - number1 -  and to generate a manifest with one sequence, with each canvas in the sequence having one image. The images selected by the query must all have string1=ae678999 in this case, and are ordered by number1.  An image query against the dlcs API returns a collection of DLCS Image objects. a Named Query uses an DLCS image query but then projects these images and  constructs a IIIF resource from them, using the parameters provided. Information on designing and configuring named queries is provided in a special topic.</p>
+<p><b>UNSTABLE Currently the named query implementation is a placeholder,</b></p>
 
 <pre>/customers/{0}/namedQueries/{1}</pre><br/>
 
@@ -37,9 +38,31 @@ This customer (iiifly) has a named query called 'manifest' that takes two parame
 <h2>Supported properties</h2>
 
 
-<h3>data</h3>
+<h3>name</h3>
 
-<p>The configuration information for the query. JSON object.</p>
+<p>The name that appears for the query in the path on https://dlcs.io, e.g., 'manifest'</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:NamedQuery</td><td>xsd:string</td><td>False</td><td>False</td></tr>
+</table>
+
+
+<h3>global</h3>
+
+<p>The named query is available to all customers</p>
+
+<table><tr>
+<th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>
+<tr>
+<td>vocab:NamedQuery</td><td>xsd:boolean</td><td>False</td><td>False</td></tr>
+</table>
+
+
+<h3>template</h3>
+
+<p>URI template</p>
 
 <table><tr>
 <th>domain</th><th>range</th><th>readonly</th><th>writeonly</th></tr>

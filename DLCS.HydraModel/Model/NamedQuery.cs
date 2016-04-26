@@ -1,4 +1,5 @@
-﻿using Hydra;
+﻿using System;
+using Hydra;
 using Hydra.Model;
 using Newtonsoft.Json;
 
@@ -23,6 +24,7 @@ namespace DLCS.HydraModel.Model
                       " constructs a IIIF resource from them, using the parameters provided. Information on designing and configuring named queries is" +
                       " provided in a special topic.",
         UriTemplate = "/customers/{0}/namedQueries/{1}")]
+    [Unstable(Note = "Currently the named query implementation is a placeholder,")]
     public class NamedQuery : DlcsResource
     {
         [JsonIgnore]
@@ -32,18 +34,31 @@ namespace DLCS.HydraModel.Model
 
         public NamedQuery() { }
 
-        public NamedQuery(int customerId, string queryName, string data)
+        public NamedQuery(int customerId, string modelId, string name, bool global, string template)
         {
             CustomerId = customerId;
-            ModelId = queryName;
-            Data = data;
+            ModelId = modelId;
+            Name = name;
+            Global = global;
+            Template = template;
             Init(true, customerId, ModelId);
         }
 
-        [RdfProperty(Description = "The configuration information for the query. JSON object.",
+
+        [RdfProperty(Description = "The name that appears for the query in the path on https://dlcs.io, e.g., 'manifest'",
             Range = Names.XmlSchema.String, ReadOnly = false, WriteOnly = false)]
-        [JsonProperty(Order = 11, PropertyName = "data")]
-        public string Data { get; set; }
+        [JsonProperty(Order = 10, PropertyName = "name")]
+        public string Name { get; set; }
+
+        [RdfProperty(Description = "The named query is available to all customers",
+            Range = Names.XmlSchema.Boolean, ReadOnly = false, WriteOnly = false)]
+        [JsonProperty(Order = 11, PropertyName = "global")]
+        public bool Global { get; set; }
+
+        [RdfProperty(Description = "URI template",
+            Range = Names.XmlSchema.String, ReadOnly = false, WriteOnly = false)]
+        [JsonProperty(Order = 11, PropertyName = "template")]
+        public string Template { get; set; }
 
     }
 
