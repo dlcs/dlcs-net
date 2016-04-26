@@ -12,6 +12,7 @@ namespace DLCS.HydraModel.Model
                       "images you are exposing from your asset management system. You might have a service that is " +
                       "available only to the DLCS, or an FTP site.  ",
         UriTemplate = "/originStrategies/{0}")]
+    [Unstable(Note = "Under active development")]
     public class OriginStrategy : DlcsResource
     {
         [JsonIgnore]

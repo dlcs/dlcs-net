@@ -12,6 +12,7 @@ namespace DLCS.HydraModel.Model
                     "interact with a customer's endpoint. "
                     + "The credentials used during the interaction are stored in S3 and not returned via the API.",
         UriTemplate = "/customers/{0}/authServices/{1}/roleProvider")]
+    [Unstable(Note = "Under active development")]
     public class RoleProvider : DlcsResource
     {
         [JsonIgnore]

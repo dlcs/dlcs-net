@@ -1,6 +1,8 @@
 
 # PortalRole
 
+**UNSTABLE Under consideration.**
+
 A role that can be assigned to a user of the DLCS portal (not an end user) for the customer to allow control over permissions.
 
 

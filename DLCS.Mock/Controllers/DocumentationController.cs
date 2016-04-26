@@ -84,11 +84,11 @@ namespace DLCS.Mock.Controllers
             {
                 var sb = new StringBuilder();
                 sb.Heading(format, 1, clazz.Label);
-                sb.Para(format, clazz.Description);
                 if (!string.IsNullOrWhiteSpace(clazz.UnstableNote))
                 {
                     sb.Para(format, clazz.UnstableNote, true);
                 }
+                sb.Para(format, clazz.Description);
                 sb.Code(format, clazz.UriTemplate);
                 if (clazz.SupportedOperations != null && clazz.SupportedOperations.Length > 0)
                 {

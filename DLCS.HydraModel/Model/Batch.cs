@@ -10,7 +10,6 @@ namespace DLCS.HydraModel.Model
                          "or to update your internal systems with the status of images on the DLCS." +
                          " The DLCS might clear out old batches after a specific time interval.",
            UriTemplate = "/customers/{0}/queue/batches/{1}")]
-    [Unstable(Note = "Still under development")]
     public class Batch : DlcsResource
     {
         [JsonIgnore]
@@ -90,7 +89,6 @@ namespace DLCS.HydraModel.Model
                                  "Returns JSON object with single success property (boolean). ",
             Range = Names.Hydra.Collection, ReadOnly = true, WriteOnly = false)]
         [JsonProperty(Order = 22, PropertyName = "test")]
-        [Unstable(Note = "Be careful out there")]
         public string Test { get; set; }
     }
 

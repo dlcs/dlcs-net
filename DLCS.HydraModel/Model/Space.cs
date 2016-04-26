@@ -12,6 +12,7 @@ namespace DLCS.HydraModel.Model
                          "images in a space, or default tags. These can be overridden for individual images. " +
                          "There is no limit to the number of images you can register in a space.",
            UriTemplate = "/customers/{0}/spaces/{1}")]
+    [Unstable(Note = "Under active development")]
     public class Space : DlcsResource
     {
         [JsonIgnore]
