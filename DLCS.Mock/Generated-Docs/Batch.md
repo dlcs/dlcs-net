@@ -3,7 +3,7 @@
 
 Represents a submitted job of images. Typically you'd interact with this while it is being processed, or to update your internal systems with the status of images on the DLCS. The DLCS might clear out old batches after a specific time interval.
 
-**UNSTABLE slightly unstable**
+**UNSTABLE Still under development**
 
 
 ```
@@ -156,7 +156,7 @@ Collection of images that encountered errors
 
 POST to this to force an update of the batch's superseded property. Returns JSON object with single success property (boolean). 
 
-**UNSTABLE very unstable**
+**UNSTABLE Be careful out there**
 
 
 |domain|range|readonly|writeonly|
